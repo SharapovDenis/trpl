@@ -384,7 +384,9 @@
     \end{tikzpicture}
     \end{center} \qed
 
-\section*{Задача 3} Постройте по НКА $\mathcal{A}$ из предыдущей задачи эквивалентный ДКА $\mathcal{B}$ по алгоритму НКА --- ДКА.
+\section*{Задача 3} 
+
+Постройте по НКА $\mathcal{A}$ из предыдущей задачи эквивалентный ДКА $\mathcal{B}$ по алгоритму НКА --- ДКА.
 
 \bigskip
 
@@ -477,7 +479,9 @@
             \end{center} \qed
 
 
-\section*{Задача 4} $L$ -- конечный язык. Выполняется для него лемма о накачке?
+\section*{Задача 4} 
+
+$L$ -- конечный язык. Выполняется для него лемма о накачке?
 
 \bigskip
 
@@ -485,5 +489,48 @@
 
 Регулярные языки замкнуты относительно операции объединения, а значит они замкнуты относительно конечного числа объединений. Любой конечный язык --- конечное объединение слов, а каждое слово --- регулярный язык. Поэтому конечный язык --- регулярный язык. Следовательно, для него выполняется лемма о накачке (<<\textit{Если $L$ --- регулярный язык, то существует такая константа \ldots}>>). \qed
 
+\section*{Задача 5}
+
+Будут ли регулярными следующие языки?
+
+\begin{enumerate}
+    \item $L = \{ a^{2019n+5} \; | \; n = 0, 1, 2,\ldots \} \cap \{ a^{503k+29} \; | \; k = 401, 402, \ldots \} \subseteq \{a^*\}$;
+    \item $L = \{ a^{200n^2+1} \; | \; n = 1000, 1001, \ldots \} \subseteq \{a^*\}$.
+\end{enumerate}
+
+\noindent \textbf{Решение.} \bigskip
+
+\begin{enumerate}
+    \item Пусть $A = \{ a^{2019n+5} \; | \; n = 0, 1, 2,\ldots \}$, $B = \{ a^{503k+29} \; | \; k = 401, 402, \ldots \} \subseteq \{a^*\}$. Тогда $$A = \{ a^{2019n} \; | \; n = 0, 1, 2,\ldots \} \cdot \{a^5\},$$ $\{a^5\} \in \text{REG}$, \; $\{ a^{2019} \} \in \text{REG} \Rightarrow \{ a^{2019} \}^* \in \text{REG}$. Следовательно, $A \in \text{REG}$. 
+    
+    Теперь представим $B$ в следующем виде: $$B = \{ a^{503(401 + m)+29} \; | \; m = 0, 1, 2,\ldots \} = \{ a^{503m} \; | \; m = 0, 1, 2,\ldots \} \cdot \{a^{503 \cdot 401 + 29}\},$$ $\{a^{503 \cdot 401 + 29}\} \in \text{REG}, \; \{ a^{503} \} \in \text{REG} \Rightarrow \{ a^{503} \}^* \in \text{REG}$. Следовательно, $B \in \text{REG}$.
+
+    Пересечение регулярных языков --- регулярный язык. Поэтому $L = A \cap B \in \text{REG}.$
+
+    \item 
+\end{enumerate}
+
+\noindent    \textbf{Ответ:} 1) Да, будет; 2) нет, не будет.
+
+
+\section*{Задача 6}
+
+Пусть $R$ --- регулярный язык. Верно ли, что $F$ --- регулярный язык, если
+
+\begin{enumerate}
+    \item $F \cap R$ --- регулярный язык;
+    \item языки $F \cap R$ и $F \cap \bar R$ являются регулярными?
+\end{enumerate}
+
+\noindent \textbf{Решение.} \bigskip
+
+\begin{enumerate}
+    \item Нет, неверно. Рассмотрим $R = \varnothing \in \text{REG}$. Тогда $$F \cap R = F \cap \varnothing = \varnothing \in \text{REG}.$$ Но при этом $F$ может быть и нерегулярным языком: $F \notin \text{REG}$.
+    
+    \item Да, верно. Проведём серию преобразований: $$F \cap R \in \text{REG}, \quad F \cap \bar R \in \text{REG},$$ $$(F \cap R) \cup (F \cap \bar R) \in \text{REG},$$ $$F \cap (R \cup \bar R) \in \text{REG},$$ $$F \cap U \in \text{REG},$$ $$F \in \text{REG},$$ где $U = R \cup \bar R$ --- юниверсум.
+\end{enumerate}
+
+
+\noindent    \textbf{Ответ:} 1) Нет, неверно; 2) да, верно.
 
 \end{document}
