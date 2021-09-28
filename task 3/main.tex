@@ -1,0 +1,240 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{amsfonts, amssymb, amsmath, latexsym}
+\usepackage{nicefrac}
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage[colorinlistoftodos,bordercolor=orange,backgroundcolor=orange!20,linecolor=orange,textsize=scriptsize]{todonotes}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}       % hyperlinks
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{nameref}
+\usepackage{booktabs}       % professional-quality tables
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{xcolor, colortbl}
+\usepackage{etoolbox}
+
+% \graphicspath{ {./} }
+
+\usepackage[verbose=true,letterpaper]{geometry}
+
+\newgeometry{
+    textheight=9.5in,
+    textwidth=6in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+\usepackage{epigraph}
+
+%
+
+\newcommand{\argmin}{\mathop{\arg\!\min}}
+\newcommand{\argmax}{\mathop{\arg\!\max}}
+
+\newcommand{\Var}{\mathbb{V}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\makebold}[1]{\boldsymbol{#1}}
+\newcommand{\mean}[1]{\overline{#1}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\partfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\term}[1]{\textbf{#1}}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lf}{\left\{}
+\newcommand{\rf}{\right\}}
+\newcommand{\ls}{\left[}
+\newcommand{\rs}{\right]}
+\newcommand{\lv}{\left|}
+\newcommand{\rv}{\right|}
+
+\newcommand*{\affaddr}[1]{#1} % No op here. Customize it for different styles.
+\newcommand*{\affmark}[1][*]{\textsuperscript{#1}}
+
+
+\usepackage{subcaption}
+%\usepackage[font={small}]{caption}
+
+\usepackage{amsthm}
+\usepackage{tikz}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+
+\newtheorem{exercise}{Задача}[section]
+
+\newtheorem*{solution}{Решение}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{0em}{2.1em}}
+\makeatother
+
+% \setlength\epigraphwidth{.8\textwidth}
+\setlength\epigraphrule{0pt}
+
+\title{ТРЯП. Домашнее задание № 3}
+\author{Шарапов Денис, Б05-005}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Задача 1}
+
+Заменим в конструкции произведения для пересечения регулярных языков последний пункт на $$F_{\mathcal{C}} = F_{\mathcal{A}} \times Q_{\mathcal{B}} \cup Q_{\mathcal{A}} \times F_{\mathcal{B}}.$$ Верно ли, что автомат $\mathcal{C}$ распознает объединение $L(\mathcal{A}) \cup L(\mathcal{B})$?
+
+\bigskip
+
+\noindent \textbf{Решение.} \bigskip
+
+Нет, неверно. Рассмотрим автоматы $\mathcal{A}$ и $\mathcal{B}$. \\
+
+Автомат $\mathcal{A}$:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (6.2,-7) circle (3);
+\draw (6.2,-7) node {$q_0^{\mathcal{A}}$};
+\draw [black] (18.8,-7) circle (3);
+\draw (18.8,-7) node {$q_1^{\mathcal{A}}$};
+\draw [black] (18.8,-7) circle (2.4);
+\draw [black] (0.2,-7) -- (3.2,-7);
+\fill [black] (3.2,-7) -- (2.4,-6.5) -- (2.4,-7.5);
+\draw [black] (9.2,-7) -- (15.8,-7);
+\fill [black] (15.8,-7) -- (15,-6.5) -- (15,-7.5);
+\draw (12.5,-6.5) node [above] {$a$};
+\draw [black] (19.845,-4.2) arc (187.2643:-100.7357:2.25);
+\draw (24.25,-0.91) node [right] {$a,b$};
+\fill [black] (21.66,-6.13) -- (22.51,-6.52) -- (22.39,-5.53);
+\end{tikzpicture}
+\end{center}
+
+Автомат $\mathcal{B}$:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (6.2,-7) circle (3);
+\draw (6.2,-7) node {$q_0^{\mathcal{B}}$};
+\draw [black] (18.8,-7) circle (3);
+\draw (18.8,-7) node {$q_1^{\mathcal{B}}$};
+\draw [black] (18.8,-7) circle (2.4);
+\draw [black] (0.2,-7) -- (3.2,-7);
+\fill [black] (3.2,-7) -- (2.4,-6.5) -- (2.4,-7.5);
+\draw [black] (9.2,-7) -- (15.8,-7);
+\fill [black] (15.8,-7) -- (15,-6.5) -- (15,-7.5);
+\draw (12.5,-6.5) node [above] {$b$};
+\draw [black] (19.845,-4.2) arc (187.2643:-100.7357:2.25);
+\draw (24.25,-0.91) node [right] {$a,b$};
+\fill [black] (21.66,-6.13) -- (22.51,-6.52) -- (22.39,-5.53);
+\end{tikzpicture}
+\end{center}
+
+Теперь построим автомат $C$ по заданным правилам: \\
+
+Автомат $\mathcal{C}$:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (6.2,-4) circle (3.8);
+\draw (6.2,-4) node {$q_0^{\mathcal{A}},\mbox{ }q_0^{\mathcal{B}}$};
+\draw [black] (19.9,-4) circle (3.8);
+\draw (19.9,-4) node {$q_0^{\mathcal{A}},\mbox{ }q_1^{\mathcal{B}}$};
+\draw [black] (19.9,-4) circle (3.2);
+\draw [black] (6.2,-14.7) circle (3.8);
+\draw (6.2,-14.7) node {$q_1^{\mathcal{A}},\mbox{ }q_0^{\mathcal{B}}$};
+\draw [black] (6.2,-14.7) circle (3.2);
+\draw [black] (19.9,-14.7) circle (3.8);
+\draw (19.9,-14.7) node {$q_1^{\mathcal{A}},\mbox{ }q_1^{\mathcal{B}}$};
+\draw [black] (19.9,-14.7) circle (3.2);
+\draw [black] (0.2,-4) -- (2.4,-4);
+\fill [black] (2.4,-4) -- (1.6,-3.5) -- (1.6,-4.5);
+\draw [black] (22.304,-11.776) arc (168.30085:-119.69915:2.85);
+\draw (28.41,-10.17) node [right] {$a,b$};
+\fill [black] (23.68,-14.83) -- (24.36,-15.48) -- (24.57,-14.5);
+\draw [black] (17.371,-11.945) arc (-155.10905:-204.89095:6.165);
+\fill [black] (17.37,-11.94) -- (17.49,-11.01) -- (16.58,-11.43);
+\draw (16.3,-9.35) node [left] {$a$};
+\draw [black] (17.176,-17.3) arc (-59.66314:-120.33686:8.169);
+\fill [black] (17.18,-17.3) -- (16.23,-17.27) -- (16.74,-18.14);
+\draw (13.05,-18.92) node [below] {$b$};
+\end{tikzpicture}
+\end{center}
+
+Видно, что слово $w = ab$, распознаваемое автоматом $\mathcal{A}$, не распознается автоматом $\mathcal{C}$.
+
+    \bigskip
+    
+\noindent  \textbf{Ответ:} Нет, не верно.
+
+\section*{Задача 2}
+
+Обозначим через $S_w$ язык слов с суффиксом $w$. Докажите или опровергните следующие утверждения: 
+
+\begin{enumerate}
+    \item ДКА, распознающий язык $S_w$, имеет не менее $|w| + 1$ состояний.
+    \item Для каждого $w$ существует ДКА с $|w|+1$ состоянием, распознающий язык $S_w$.
+\end{enumerate}
+
+\noindent \textbf{Решение.}
+
+\begin{enumerate}
+    \item Утверждение верно. Докажем его по индукции числа $n$ букв в суффиксе $w$.
+    
+    База индукции $n\geq 1$: представим слово $v \in S_w$ в виде $v = xw$, где $x$ --- некоторое слово. 
+    
+    Для данного случая потребуется автомат с двумя состояниями. Действительно, eсли автомат не может распознать слово $w$ одним единственным состоянием, то он не сможет распознать и слово $v$ этим состоянием. Но не всякое слово длины 1 ($w$) можно распознать автоматом c одним состоянием: например, автомат ничего не принимает, либо принимает пустое слово и ещё некоторые слова, если есть переход в это состояние, и оно является принимающим. Таким образом, автомат с одним состоянием не сможет принять все слова $v \in S_w$. Откуда следует, что состояний не менее $|w|+1 = 2$.
+    
+    Предположение индукции $n=k-1$: пусть слово с суффиксом $w$ длины $|w|=k-1$ распознается автоматом, который имеет не менее $k$ состояний.
+    
+    Переход индукции $n=k$: покажем, что для распознания слова с суффиксом $w = w_1w_2\ldots w_{k}$ необходимо ещё одно состояние.
+    
+    В автомате для распознавания слова $w = w_1w_2\ldots w_{k-1}$ единственным принимающим состоянием является состояние под номером $k$ (иначе принимались бы слова, являющиеся префиксами слова $w$, и тогда принимались бы не все слова из $S_w$). Тогда переход из состояния $n$ возможен только в новое состояние, которое должно быть принимающим (конструктивно это выглядит так: берётся последняя буква и по ней берётся переход в последнее состояние, которое является принимающим). Отсюда следует, что необходимо ещё одно состояние. \qed
+    
+    \item Утверждение верно. Приведём конструктивное доказательство.
+    
+    
+\end{enumerate}
+
+
+\section*{Задача 3}
+
+Зафиксируем последовательность языков $R_i$ над алфавитом $\Sigma = \{a,b\}$, состоящих из слов, в которых на $i$-ом месте от конца стоит $a$. Докажите, что любой ДКА $\mathcal{A}_n$, распознающий язык $R_n$ имеет не менее $2^n$ состояний.
+
+\bigskip
+
+\noindent \textbf{Решение.} \bigskip
+
+\noindent От противного. Пусть существует ДКА $\mathcal{A}_n$ меньшего размера. Пусть в результате обработки произвольного слова $w$ автомат $\mathcal{A}_n$ окажется в некотором состоянии $q_w$ (слово $wab^{n-1}$ должно было быть принято). По принципу Дирихле среди всех слов длины $n$ найдётся хотя бы два различных слова, для которых $q_u = q_v$. \\
+
+\noindent Слова различаются, следовательно, $$\exists i : u[i] \neq v[i].$$ Без ограничения общности пусть $u[i] = a$, $v[i] = b$. Автомат $\mathcal{A}_n$ принимает слово $ub^{n-i+1}$, т.~к. оно принадлежит языку $R_n$. Тогда существует последовательность конфигураций: $$(q_u, \sigma) \vdash^* (q_f, \epsilon),$$ где $q_f \in F_{\mathcal{A}_n}$. \\
+
+\noindent Но при этом автомат $\mathcal{A}_n$ принимает слово $vb^{n-i+1}$, т.~к. существует последовательность конфигураций: $$(q_v, \sigma) \vdash^* (q_f, \epsilon).$$ Но в этом слове на $n$-ом месте от конца стоит символ $b$, поэтому $vb^{n-i+1} \notin R_n$. Противоречие. \qed
+
+\end{document}

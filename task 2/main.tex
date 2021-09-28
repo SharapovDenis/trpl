@@ -1,0 +1,551 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{amsfonts, amssymb, amsmath, latexsym}
+\usepackage{nicefrac}
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage[colorinlistoftodos,bordercolor=orange,backgroundcolor=orange!20,linecolor=orange,textsize=scriptsize]{todonotes}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}       % hyperlinks
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{nameref}
+\usepackage{booktabs}       % professional-quality tables
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{xcolor, colortbl}
+\usepackage{etoolbox}
+
+% \graphicspath{ {./} }
+
+\usepackage[verbose=true,letterpaper]{geometry}
+
+\newgeometry{
+    textheight=9.5in,
+    textwidth=6in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+\usepackage{epigraph}
+
+%
+
+\newcommand{\argmin}{\mathop{\arg\!\min}}
+\newcommand{\argmax}{\mathop{\arg\!\max}}
+
+\newcommand{\Var}{\mathbb{V}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\makebold}[1]{\boldsymbol{#1}}
+\newcommand{\mean}[1]{\overline{#1}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\partfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\term}[1]{\textbf{#1}}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lf}{\left\{}
+\newcommand{\rf}{\right\}}
+\newcommand{\ls}{\left[}
+\newcommand{\rs}{\right]}
+\newcommand{\lv}{\left|}
+\newcommand{\rv}{\right|}
+
+\newcommand*{\affaddr}[1]{#1} % No op here. Customize it for different styles.
+\newcommand*{\affmark}[1][*]{\textsuperscript{#1}}
+
+
+\usepackage{subcaption}
+%\usepackage[font={small}]{caption}
+
+\usepackage{amsthm}
+\usepackage{tikz}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+
+\newtheorem{exercise}{Задача}[section]
+
+\newtheorem*{solution}{Решение}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{0em}{2.1em}}
+\makeatother
+
+% \setlength\epigraphwidth{.8\textwidth}
+\setlength\epigraphrule{0pt}
+
+\title{ТРЯП. Домашнее задание № 2}
+\author{Шарапов Денис, Б05-005}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Задача 1}
+
+Язык $T \subseteq \{a, b\}^*$ состоит из всех слов, в которых нет трёх букв $b$ подряд. Построить конечный автомат, принимающий $T$.
+
+\bigskip
+
+\noindent \textbf{Решение.} \bigskip
+
+\noindent Построим ДКА $L(\mathcal{A})$, принимающий язык $T$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (33.6,-8.5) circle (3);
+\draw (33.6,-8.5) node {$q_1$};
+\draw [black] (33.6,-8.5) circle (2.4);
+\draw [black] (18.8,-22.4) circle (3);
+\draw (18.8,-22.4) node {$q_2$};
+\draw [black] (18.8,-22.4) circle (2.4);
+\draw [black] (9,-8.5) circle (3);
+\draw (9,-8.5) node {$q_0$};
+\draw [black] (9,-8.5) circle (2.4);
+\draw [black] (34,-25.3) circle (3);
+\draw (34,-25.3) node {$q_3$};
+\draw [black] (11.402,-6.708) arc (122.11873:57.88127:18.617);
+\fill [black] (31.2,-6.71) -- (30.79,-5.86) -- (30.25,-6.71);
+\draw (21.3,-3.36) node [above] {$b$};
+\draw [black] (31.311,-10.434) arc (-54.76214:-125.23786:17.351);
+\fill [black] (11.29,-10.43) -- (11.65,-11.3) -- (12.23,-10.49);
+\draw (21.3,-14.11) node [below] {$a$};
+\draw [black] (33.361,-11.484) arc (-10.92225:-82.67004:13.541);
+\fill [black] (21.79,-22.35) -- (22.65,-22.74) -- (22.52,-21.75);
+\draw (30.35,-19.27) node [below] {$b$};
+\draw [black] (15.813,-22.369) arc (-99.62233:-190.00724:9.524);
+\fill [black] (8.03,-11.32) -- (7.39,-12.03) -- (8.38,-12.2);
+\draw (9.03,-19.83) node [left] {$a$};
+\draw [black] (7.082,-6.208) arc (247.66234:-40.33766:2.25);
+\draw (6.74,-1.37) node [above] {$a$};
+\fill [black] (9.65,-5.58) -- (10.42,-5.03) -- (9.49,-4.65);
+\draw [black] (32.133,-27.626) arc (-49.35768:-152.24556:8.106);
+\fill [black] (32.13,-27.63) -- (31.2,-27.77) -- (31.85,-28.53);
+\draw (24.81,-30.03) node [below] {$b$};
+\draw [black] (35.469,-22.698) arc (178.28688:-109.71312:2.25);
+\draw (40.18,-20.15) node [right] {$a,b$};
+\fill [black] (36.96,-24.88) -- (37.74,-25.41) -- (37.77,-24.41);
+\draw [black] (0.2,-8.5) -- (6,-8.5);
+\fill [black] (6,-8.5) -- (5.2,-8) -- (5.2,-9);
+\end{tikzpicture}
+\end{center}
+\textbf{Утверждение.} $T \subseteq L(\mathcal{A})$. \medskip
+
+\noindent\textbf{Доказательство.} Рассмотрим произвольное слово $w \in T$. Докажем утверждение по индукции числа $n$ букв $a$ в слове $w$. База индукции $n=0$:
+
+\begin{itemize}
+    \item $w = \epsilon$: $(q_0, w) = (q_0, \epsilon)$;
+    \item $w = b$: $(q_0, w) = (q_0, b) \vdash (q_1, \epsilon)$;
+    \item $w = bb$: $(q_0, w) = (q_0, bb) \vdash (q_2, \epsilon)$;
+\end{itemize}
+
+\noindent Предположение индукции: пусть верно для $n=k$: $|x|_a = k$, $x \in T$, $x \in L(\mathcal{A})$. Переход индукции $n = k+1$: рассмотрим слово $w \in T$, $|w|_a = k+1$. \\
+
+\noindent Без ограничения общности, пусть слово $x$ заканчивается на букву $a$ (это можно потребовать, т. к., если оно заканчивается на $b$ или $bb$, то по построению автомата попадём в состояния $q_1$ или $q_2$ соответственно, а они являются принимающими, и поэтому для них рассуждения аналогичные). Представим слово $w$ следующими способами:
+
+\begin{enumerate}
+    \item $w = xa$: $(q_0, w) = (q_0, xa) \vdash^* (q_0, a) \vdash (q_0, \epsilon) \Rightarrow w \in L(\mathcal{A})$;
+    \item $w = xab$: $(q_0, w) = (q_0, xab) \vdash^* (q_0, ab) \vdash (q_0, b) \vdash (q_1, \epsilon) \Rightarrow w \in L(\mathcal{A})$;
+    \item $w = xabb$: $(q_0, w) = (q_0, xabb) \vdash^* (q_0, abb) \vdash (q_0, bb) \vdash (q_1, b) \vdash (q_2, \epsilon) \Rightarrow w \in L(\mathcal{A})$.
+\end{enumerate}
+
+\noindent Таким образом, требуемое утверждение доказано. \qed
+
+\medskip\noindent\textbf{Утверждение.} $L(\mathcal{A}) \subseteq T$.
+
+\medskip\noindent\textbf{Доказательство.} От противного. Рассмотрим слово $w \in L(\mathcal{A})$. Пусть в слове $w$ встретилась непрерывная последовательность из $k > 2$ букв $b$ подряд. Заметим, что построенный автомат~--- ДКА, поэтому путь по графу определён однозначно. \\
+
+\noindent Представим слово $w$ в виде $w = uv$, где $u$ --- слово, в котором нет трёх букв $b$ подряд (т.~е. $u \in T$); $v$ --- суффикс слова $w$, в котором есть непрерывная последовательность из трёх букв~$b$.
+
+\noindent Без ограничения общности, пусть $u$ заканчивается на букву $a$ (можно потребовать по тем же причинам, что и в доказательстве прошлого утверждения). Тогда $$(q_0, w) = (q_0, uv) \vdash (q_0, v).$$ На следующих тактах автомат дойдёт до непрерывной последовательности букв $b$. Пусть, без ограничения общности, последовательность букв $b$ началась в состоянии $q_0$. Тогда на следующих трёх тактах автомат перейдёт в состояние $q_3$, где и завершит свою работу после обработки оставшейся части слова. Поэтому слово $w$ не принимается автоматом. \\
+
+\noindent В других случаях (если число букв $b$, идущих подряд, меньше трёх) автомат перейдёт в одно из принимающих состояний: $q_0, q_1, q_2 \in F$. \\
+
+\noindent Таким образом, требуемое утверждение доказано. \qed
+
+
+\section*{Задача 2}
+
+Автоматы $\mathcal{A}$ и $\mathcal{B}$ заданы диаграммами. Выполнить следующие задания.
+
+\begin{enumerate}
+    \item Автомат задан через граф переходов. Запишите определение автомата в виде $(Q, \Sigma, \delta, q_0, F)$. Опишите элементы каждого множества.
+    \item Является ли автомат детерминированным?
+    \item Описать последовательность конфигураций автомата  $\mathcal{A}$ при обработке слова $w = 011001$. Верно ли, что $w \in L(\mathcal{A})$?
+    \item Принимает ли автомат $\mathcal{B}$ слово $v = 0101001$?
+    \item Укажите по одному слову, принадлежащему $L(\mathcal{A})$, $L(\mathcal{B})$ и по одному слову, не принадлежащему $L(\mathcal{A})$, $L(\mathcal{B})$. Все 4 слова должны быть различными.
+\end{enumerate}
+
+\noindent \textbf{Решение.} \bigskip
+
+\begin{enumerate}
+    \item \begin{itemize}
+        \item[$\mathcal{A}$:]  \begin{itemize}
+            \item[(Q)] $Q = \{q_0, q_1, q_2\}$ --- множество состояний;
+            \item[($\Sigma$)] $\Sigma = \{0, 1\}$ --- алфавит;
+            \item[($\delta$) ] $\delta(q_0, 0) = q_0$, $\delta(q_0, 1) = q_1$; \\ $\delta(q_1, 0) = q_2$, $\delta(q_1, 1) = q_0$; \\ $\delta(q_2, 0) = q_1$, $\delta(q_2, 1) = q_2$;
+            \item[($q_0)$] $q_0$ --- начальное состояние;
+            \item[($F$)] $F = \{q_1\}$ --- множество принимающих состояний.
+        \end{itemize}
+      \item[$\mathcal{B}$:]  \begin{itemize}
+            \item[(Q)] $Q = \{q_0, q_1, q_2\}$ --- множество состояний;
+            \item[($\Sigma$)] $\Sigma = \{0, 1\}$ --- алфавит;
+            \item[($\delta$) ] $\delta(q_0, 0) = q_0$, $\delta(q_0, 1) = q_1$; \\ $\delta(q_1, 0) = \{q_0, q_2\}$, $\delta(q_1, 1) = \varnothing$; \\ $\delta(q_2, 0) = q_1$, $\delta(q_2, 1) = q_2$;
+            \item[($q_0)$] $q_0$ --- начальное состояние;
+            \item[($F$)] $F = \{q_1\}$ --- множество принимающих состояний.
+        \end{itemize}
+    \end{itemize}
+    
+    \item \begin{itemize}
+        \item[$\mathcal{A}$:] Да, является по определению детерминированного автомата, т. к. нет переходов по $\epsilon$--слову и для каждого состояния и для каждой буквы алфавита переход по этой букве осуществляется не более одного раза.
+        
+        \item [$\mathcal{B}$:] Нет, не является по определению детерминированного автомата, т. к. есть более одного перехода по одному состоянию: $\delta(q_1, 0) = \{q_0, q_2\}$.
+    \end{itemize}
+    
+    \item $w = 011001$, автомат $\mathcal{A}$: $$(q_0, 011001) \vdash (q_0, 11001) \vdash (q_1, 1001) \vdash (q_0, 001) \vdash (q_0, 01) \vdash (q_0, 1) \vdash (q_1, \epsilon),$$ $q_1$ --- принимающее состояние, поэтому $w \in L(\mathcal{A})$.
+    
+    \item По определению автомат $\mathcal{B}$ принимает слово, если существует последовательность конфигураций такая, что автомат $\mathcal{B}$ при обработке данного слова заканчивает работу в принимающем состоянии и с пустой лентой. Рассмотрим слово $v = 0101001$ и автомат $\mathcal{B}$: $$(q_0, 0101001) \vdash (q_0, 101001) \vdash (q_1, 01001) \vdash (q_0, 1001) \vdash (q_1, 001) \vdash (q_0, 01) \vdash (q_0, 1) \vdash (q_1, \epsilon),$$ $q_1$ --- принимающее, поэтому автомат $\mathcal{B}$ принимает слово $v$.
+    
+    \item $w_1 = 0001 \in L(\mathcal{A}), w_2 = 101 \notin L(\mathcal{A})$, $w_3 = 10101 \in L(\mathcal{B})$, $w_4 = 10 \notin L(\mathcal{B})$.
+    
+\end{enumerate} \qed
+
+\section*{Задача 3}
+
+Построить ДКА, распознающий язык $\Sigma^*aab \Sigma^*$.
+
+\bigskip
+
+\noindent \textbf{Решение.} \bigskip
+
+Воспользуемся алгоритмом построения ДКА по РВ. Вычисления приведены на рисунке ниже:
+
+\begin{figure}[h!]
+    \centering
+        \begin{center}
+    \includegraphics[width = 295pt]{image/graph.jpg}
+    \caption*{Рисунок к задаче 3}
+        \end{center}
+\end{figure}
+
+Теперь построим ДКА по полученной таблице (на рисунке):
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (13.7,-12.4) circle (7.5);
+\draw (13.7,-12.4) node {$1_a2_b3_a$};
+\draw [black] (7.7,-33.2) circle (7.5);
+\draw (7.7,-33.2) node {$1_a2_b3_a4_a$};
+\draw [black] (29.6,-33.2) circle (7.5);
+\draw (29.6,-33.2) node {$1_a2_b3_a4_a5_b$};
+\draw [black] (35.3,-13.8) circle (7.5);
+\draw (35.3,-13.8) node {$1_a2_b3_a6_a7_b8_{\triangleleft}$};
+\draw [black] (35.3,-13.8) circle (6.9);
+\draw [black] (56.8,-12.4) circle (7.5);
+\draw (56.8,-12.4) node {$1_a2_b3_a4_a6_a7_b8_{\triangleleft}$};
+\draw [black] (56.8,-12.4) circle (6.9);
+\draw [black] (48,-33.2) circle (7.5);
+\draw (48,-33.2) node {$1_a2_b3_a4_a5_b6_a7_b8_{\triangleleft}$};
+\draw [black] (48,-33.2) circle (6.9);
+\draw [black] (1.1,-12.4) -- (6.2,-12.4);
+\fill [black] (6.2,-12.4) -- (5.4,-11.9) -- (5.4,-12.9);
+\draw [black] (12.042,-5.115) arc (220.55138:-67.44862:5.625);
+\draw (18.31,4.59) node [above] {$b$};
+\fill [black] (18.47,-6.65) -- (19.41,-6.51) -- (18.76,-5.75);
+\draw [black] (3.683,-27.018) arc (-165.31378:-226.86785:11.721);
+\fill [black] (3.68,-27.02) -- (3.96,-26.12) -- (3,-26.37);
+\draw (2.99,-20.23) node [left] {$a$};
+\draw [black] (17.691,-18.6) arc (14.47967:-46.66131:11.745);
+\fill [black] (17.69,-18.6) -- (17.41,-19.5) -- (18.38,-19.25);
+\draw (18.37,-25.36) node [right] {$b$};
+\draw [black] (22.821,-36.288) arc (-77.05475:-102.94525:18.617);
+\fill [black] (22.82,-36.29) -- (21.93,-35.98) -- (22.15,-36.95);
+\draw (18.65,-37.26) node [below] {$a$};
+\draw [black] (32.906,-39.899) arc (54:-234:5.625);
+\draw (29.6,-50.58) node [below] {$a$};
+\fill [black] (26.29,-39.9) -- (25.42,-40.25) -- (26.23,-40.84);
+\draw [black] (29.4,-9.217) arc (259.89675:-28.10325:5.625);
+\draw (26.94,1.89) node [above] {$b$};
+\fill [black] (35.35,-6.33) -- (35.98,-5.63) -- (35,-5.45);
+\draw [black] (24.116,-28.336) arc (-152.77318:-239.97392:10.135);
+\fill [black] (28.06,-14.92) -- (27.11,-14.89) -- (27.61,-15.76);
+\draw (22.64,-20.25) node [left] {$b$};
+\draw [black] (51.591,-17.642) arc (-61.81651:-110.73224:12.641);
+\fill [black] (51.59,-17.64) -- (50.65,-17.58) -- (51.12,-18.46);
+\draw (46.52,-19.67) node [below] {$a$};
+\draw [black] (40.326,-8.389) arc (119.70536:67.74589:12.341);
+\fill [black] (40.33,-8.39) -- (41.27,-8.43) -- (40.77,-7.56);
+\draw (45.55,-6.23) node [above] {$b$};
+\draw [black] (51.306,-39.899) arc (54:-234:5.625);
+\draw (48,-50.58) node [below] {$a$};
+\fill [black] (44.69,-39.9) -- (43.82,-40.25) -- (44.63,-40.84);
+\draw [black] (57.913,-19.747) arc (-4.84:-41.0242:15.97);
+\fill [black] (54.05,-28.88) -- (54.95,-28.61) -- (54.2,-27.95);
+\draw (57.44,-25.56) node [right] {$a$};
+\draw [black] (42.689,-27.921) arc (-140.41428:-153.16506:38.438);
+\fill [black] (38.01,-20.78) -- (37.93,-21.72) -- (38.82,-21.27);
+\draw (39.54,-25.8) node [left] {$b$};
+\end{tikzpicture}
+\end{center}
+
+\section*{Задача 4}
+
+Порождает ли регулярное выражение $(ab)^*(ba)^*$ тот же язык, что распознаёт ДКА $M = \{\{A,B,C,D,E\}, \{a,b\}, \delta, A, \{A, D, E\}\}$, где функция переходов задана следующим образом: $$\delta(A,a) = B, \; \delta(A,b) = C,\; \delta(B,b) = D, \;\delta(C,a) = E,$$ $$\delta(D,a) = B, \; \delta(D,b) = C,\;  \delta(E,b) = C.$$
+
+\bigskip
+
+\noindent \textbf{Решение.} \bigskip
+
+Пусть $R = (ab)^*(ba)^*$. Построим заданный ДКА $\mathcal{A}$:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (9.2,-11.8) circle (3);
+\draw (9.2,-11.8) node {$A$};
+\draw [black] (9.2,-11.8) circle (2.4);
+\draw [black] (20.8,-3.2) circle (3);
+\draw (20.8,-3.2) node {$B$};
+\draw [black] (21.4,-15.6) circle (3);
+\draw (21.4,-15.6) node {$C$};
+\draw [black] (32.6,-10.5) circle (3);
+\draw (32.6,-10.5) node {$D$};
+\draw [black] (32.6,-10.5) circle (2.4);
+\draw [black] (14.7,-23.6) circle (3);
+\draw (14.7,-23.6) node {$E$};
+\draw [black] (14.7,-23.6) circle (2.4);
+\draw [black] (9.758,-8.866) arc (159.84558:93.25936:9.154);
+\fill [black] (17.83,-2.88) -- (17,-2.43) -- (17.06,-3.43);
+\draw (11.95,-4.17) node [above] {$a$};
+\draw [black] (12.112,-11.126) arc (94.60997:50.78898:10.207);
+\fill [black] (19.39,-13.39) -- (19.08,-12.5) -- (18.45,-13.27);
+\draw (16.83,-11.01) node [above] {$b$};
+\draw [black] (23.742,-2.691) arc (90.16287:26.35161:8.9);
+\fill [black] (31.74,-7.64) -- (31.84,-6.7) -- (30.94,-7.15);
+\draw (29.45,-3.52) node [above] {$b$};
+\draw [black] (14.228,-20.671) arc (-185.6376:-254.25474:5.81);
+\fill [black] (14.23,-20.67) -- (14.8,-19.92) -- (13.81,-19.83);
+\draw (15,-16.07) node [left] {$a$};
+\draw [black] (29.614,-10.63) arc (-95.89779:-147.58773:10.245);
+\fill [black] (22.02,-5.93) -- (22.02,-6.87) -- (22.87,-6.34);
+\draw (24.33,-9.65) node [below] {$a$};
+\draw [black] (30.806,-12.891) arc (-45.29856:-85.73647:10.213);
+\fill [black] (24.38,-15.82) -- (25.22,-16.26) -- (25.14,-15.26);
+\draw (28.84,-15.44) node [below] {$b$};
+\draw [black] (22.836,-18.187) arc (12.61706:-92.50941:5.234);
+\fill [black] (22.84,-18.19) -- (22.52,-19.08) -- (23.5,-18.86);
+\draw (22.29,-24.13) node [right] {$b$};
+\draw [black] (0.2,-11.8) -- (6.2,-11.8);
+\fill [black] (6.2,-11.8) -- (5.4,-11.3) -- (5.4,-12.3);
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\medskip\noindent\textbf{Утверждение.} $R \subseteq L(\mathcal{A})$.
+
+\medskip\noindent\textbf{Доказательство.} Рассмотрим произвольное слово $w \in R$. Оно имеет вид: $$w = (ab)^i(ba)^j, \; i,j \geq 0.$$ Рассмотрим конфигурации автомата: 
+$$(A, (ba)^j)  \vdash^* (A, \epsilon), \eqno{(i=0, j \neq 0)}$$
+$$(A, (ab)^i) \vdash^* (D, \epsilon), \eqno{(i \neq 0, j=0)}$$
+$$(A, (ab)^i(ba)^j) \vdash^* (D, (ba)^j) \vdash^* (E, \epsilon), \eqno{(i \neq 0, j \neq 0)}$$
+где $A, D, E$ --- принимающие состояния. Поэтому $$\forall w \in R \hookrightarrow w \in L(\mathcal{A}) \overset{\textit{def}}{\Longleftrightarrow} R \subseteq L(\mathcal{A}).$$ \qed
+    
+\medskip\noindent\textbf{Утверждение.} $L(\mathcal{A}) \subseteq R$.
+
+\medskip\noindent\textbf{Доказательство.} По контрапозиции. Рассмотрим конфигурации автомата при обработке слова $w = a^ub^i(ab)^k(ba)^lb^ja^v$ ($u$ и $i$, а также $j$ и $v$ одновременно не могут быть равны 1 (иначе получим слово, распознаваемое автоматом)): $$(A, (ab)^k(ba)^la^v) \vdash^* (B, a^{v-1}). \eqno{(j=0, v\neq 0)}$$ $$(A, a^ub^i(ab)^k(ba)^lb^ja^v) \vdash (B, a^{u-1}b^i(ab)^k(ba)^lb^ja^v), \eqno{(u\neq0)}$$  $$(A, (ab)^k(ba)^lb^ja^v) \vdash^* (C, b^{j-1}a^v), \eqno{(u=1,i=1,j\neq 0)}$$ $$(A, b^i(ab)^k(ba)^lb^ja^v) \vdash^* (C, b^{i-1}(ab)^k(ba)^lb^ja^v), \eqno{(u=0, i\neq 1)}$$ Без ограничения общности были выбраны состояния $B$ и $C$. При переходах в другие состояния рассуждения аналогичные. \\
+
+\noindent Таким образом удалось показать, что другие слова, отличные от тех, которые задаются РВ $R$, не принимаются автоматом. Следовательно, если автоматом принимается слово, то оно из~$R$. \qed
+
+
+
+
+
+
+
+\section*{Задача 5}
+
+Постройте ДКА, который
+
+\begin{enumerate}
+    \item распознаёт язык, все слова которого содержат четное число нулей.
+    \item распознает язык, все слова которого содержат нечётное число единиц.
+    \item распознает язык, все слова которого содержат четное число нулей и нечетное число единиц.
+\end{enumerate}
+
+\noindent \textbf{Решение.} \bigskip
+
+\begin{enumerate}
+
+\item Пусть $L=$ <<язык, все слова которого содержат четное число нулей.>> Построим ДКА:
+    
+    \begin{center}
+    \begin{tikzpicture}[scale=0.2]
+    \tikzstyle{every node}+=[inner sep=0pt]
+    \draw [black] (7.1,-8.7) circle (3);
+    \draw (7.1,-8.7) node {$q_0$};
+    \draw [black] (7.1,-8.7) circle (2.4);
+    \draw [black] (21.9,-8.7) circle (3);
+    \draw (21.9,-8.7) node {$q_1$};
+    \draw [black] (4.931,-6.645) arc (254.27765:-33.72235:2.25);
+    \draw (3.83,-1.84) node [above] {$1$};
+    \fill [black] (7.41,-5.73) -- (8.11,-5.09) -- (7.15,-4.82);
+    \draw [black] (9.1,-6.483) arc (128.12301:51.87699:8.748);
+    \fill [black] (19.9,-6.48) -- (19.58,-5.6) -- (18.96,-6.38);
+    \draw (14.5,-4.12) node [above] {$0$};
+    \draw [black] (22.86,-5.87) arc (189:-99:2.25);
+    \draw (27.2,-2.45) node [right] {$1$};
+    \fill [black] (24.73,-7.74) -- (25.6,-8.11) -- (25.44,-7.12);
+    \draw [black] (19.972,-10.978) arc (-50.28491:-129.71509:8.563);
+    \fill [black] (9.03,-10.98) -- (9.32,-11.87) -- (9.96,-11.1);
+    \draw (14.5,-13.45) node [below] {$0$};
+    \draw [black] (0.2,-8.7) -- (4.1,-8.7);
+    \fill [black] (4.1,-8.7) -- (3.3,-8.2) -- (3.3,-9.2);
+    \end{tikzpicture}
+    \end{center}
+    
+    \medskip\noindent\textbf{Утверждение.} $L \subseteq L(\mathcal{A})$.
+
+    \medskip\noindent\textbf{Доказательство.} По индукции числа $n$ нулей в слове $w \in L$. База индукции $n=0$: $$w \in 1^*: (q_0,w) = (q_0,1^*) \vdash^* (q_0, \epsilon) \Rightarrow w \in L(\mathcal{A}).$$ Предположение индукции: пусть верно $$\forall x \in L, \; \forall k \in \mathbb{N} : |x|_{0} = 2k \hookrightarrow x \in L(\mathcal{A}).$$ Переход индукции: $w\in L, \; |w|_0 = 2k+2$: $$(q_0, w) = (q_0, x1^i01^j01^l) \vdash^* (q_0, 1^i01^j01^l) \vdash^*$$ $$\vdash^* (q_0, 01^j01^l) \vdash (q_1, 1^j01^l) \vdash^* (q_1, 01^l) \vdash (q_0,1^l) \vdash^* (q_0, \epsilon) \Rightarrow w \in L(\mathcal{A}).$$ \qed
+    
+    \medskip\noindent\textbf{Утверждение.} $L(\mathcal{A}) \subseteq L$.
+
+    \medskip\noindent\textbf{Доказательство.} По контрапозиции. Пусть $w$ такое, что $|w|_0 = 2k+1, \; k\in \mathbb{N}$. Представим слово $w$ в виде $w = x1^i01^j$ ($|x|_0 =2k$). Тогда: $$(q_0, x1^i01^j) \vdash^* (q_0, 1^i01^j) \vdash^* (q_0, 01^j) \vdash (q_1, 1^j) \vdash (q_1, \epsilon) \Rightarrow w \notin L(\mathcal{A}).$$ При этом заметим, что автомат --- детерминированный. Следовательно, путь по нему определён однозначно. \qed
+    
+\item Пусть $L = $ <<язык, все слова которого содержат нечетное число единиц.>> Построим ДКА:
+    
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (7.1,-8.7) circle (3);
+\draw (7.1,-8.7) node {$q_0$};
+\draw [black] (21.9,-8.7) circle (3);
+\draw (21.9,-8.7) node {$q_1$};
+\draw [black] (21.9,-8.7) circle (2.4);
+\draw [black] (4.931,-6.645) arc (254.27765:-33.72235:2.25);
+\draw (3.83,-1.84) node [above] {$0$};
+\fill [black] (7.41,-5.73) -- (8.11,-5.09) -- (7.15,-4.82);
+\draw [black] (9.1,-6.483) arc (128.12301:51.87699:8.748);
+\fill [black] (19.9,-6.48) -- (19.58,-5.6) -- (18.96,-6.38);
+\draw (14.5,-4.12) node [above] {$1$};
+\draw [black] (22.86,-5.87) arc (189:-99:2.25);
+\draw (27.2,-2.45) node [right] {$0$};
+\fill [black] (24.73,-7.74) -- (25.6,-8.11) -- (25.44,-7.12);
+\draw [black] (19.972,-10.978) arc (-50.28491:-129.71509:8.563);
+\fill [black] (9.03,-10.98) -- (9.32,-11.87) -- (9.96,-11.1);
+\draw (14.5,-13.45) node [below] {$1$};
+\draw [black] (0.2,-8.7) -- (4.1,-8.7);
+\fill [black] (4.1,-8.7) -- (3.3,-8.2) -- (3.3,-9.2);
+\end{tikzpicture}
+\end{center}
+
+\medskip\noindent\textbf{Утверждение.} $L \subseteq L(\mathcal{B})$.
+
+\medskip\noindent\textbf{Доказательство.} Докажем по индукции числа $n$ букв 1 в слове $w \in L$. База индукции $n=1$: $$(q_0, w) = (q_0, 0^i10^j) \vdash^* (q_0, 10^j) \vdash (q_1,0^j) \vdash^* (q_1, \epsilon) \Rightarrow w \in L(\mathcal{B}).$$ Предположение индукции $n=2k+1$: пусть верно $$\forall x\in L,\; \forall k \in\mathbb{N} : |x|_1 = 2k+1 \hookrightarrow x\in L(\mathcal{B}).$$ Переход индукции $n = 2k+3$: $$(q_0, w) = (q_0, x0^i10^j10^l) \vdash^* (q_1, 0^i10^j10^l) \vdash^* (q_1, 10^j10^l) \vdash$$ $$\vdash (q_0, 0^j10^l) \vdash^* (q_0,10^l) \vdash (q_1,0^l) \vdash^* (q_1, \epsilon) \Rightarrow w \in L(\mathcal{B}).$$ \qed
+    
+\medskip\noindent\textbf{Утверждение.} $L(\mathcal{B}) \subseteq L$.
+
+\medskip\noindent\textbf{Доказательство.} По контрапозиции. Рассмотрим слово $w$ такое, что $|w|_1 = 2k,$ где $k \in~\mathbb{N}$. Представим его в виде $w = x0^i10^j$, где $x \in L$. По доказанному ранее утверждению верно $$\forall x \in L \hookrightarrow x \in L(\mathcal{B}).$$
+
+Рассмотрим конфигурации автомата при обработке слова $w$: $$(q_0, w) = (q_0, x0^i10^j) \vdash^* (q_1, 0^i10^j) \vdash^* (q_1, 10^j) \vdash (q_0, 0^j) \vdash^* (q_0, \epsilon) \Rightarrow w \notin L(\mathcal{B}).$$ При этом автомат $\mathcal{B}$ --- детерминированный. Следовательно, путь по нему определен однозначно. \qed
+
+\item Пусть $L(\mathcal{C})$ --- искомый язык. Тогда $L(\mathcal{C}) = L(\mathcal{A}) \cap L(\mathcal{B})$. 
+
+\noindent Зафиксируем описание автоматов $\mathcal{A}$ и $\mathcal{B}$: $$\mathcal{A} = (Q_{\mathcal{A}}, \; \Sigma, \; q_0^{\mathcal{A}}, \; \delta_{\mathcal{A}}, \; F_{\mathcal{A}}),$$ $$\mathcal{B} = (Q_{\mathcal{B}}, \; \Sigma, \; q_0^{\mathcal{B}}, \; \delta_{\mathcal{B}}, \; F_{\mathcal{B}}).$$ Теперь построим автомат $\mathcal{C}$: $$\mathcal{C} = ((Q_{\mathcal{A}}\times Q_{\mathcal{B}}), \; \Sigma, \; (q_0^{\mathcal{A}}, \; q_0^{\mathcal{B}}), \; \delta_{\mathcal{C}}, \; F_{\mathcal{A}} \times F_{\mathcal{B}}),$$ где $$\delta_{\mathcal{C}}((q_{\mathcal{A}}, \; q_{\mathcal{B}}), \; \sigma) = (\delta_{\mathcal{A}}(q_{\mathcal{A}}, \sigma), \; \delta_{\mathcal{B}}(q_{\mathcal{B}}, \sigma)).$$ Опишем каждый элемент автомата: $$Q_{\mathcal{C}} = \{(q_0^{\mathcal{A}}, q_0^{\mathcal{B}}), \; (q_0^{\mathcal{A}}, q_1^{\mathcal{B}}), \; (q_1^{\mathcal{A}}, q_0^{\mathcal{B}}), \; (q_1^{\mathcal{A}}, q_1^{\mathcal{B}})\},$$ $$\Sigma = \{0, \; 1\},$$ $$q_0^{\mathcal{C}} = (q_0^{\mathcal{A}},  q_0^{\mathcal{B}}),$$ $$F_{\mathcal{C}} = (q_0^{\mathcal{A}}, q_1^{\mathcal{B}}).$$ Вычислим функциюю $\delta_{\mathcal{C}}$ для каждой буквы алфавита и введём обозначения:
+
+\begin{itemize}
+    \item $(q_0^{\mathcal{A}}, q_0^{\mathcal{B}}) = A$ --- начальное состояние,
+    \item $(q_0^{\mathcal{A}}, q_1^{\mathcal{B}}) = B$ --- принимающее состояние,
+    \item $(q_1^{\mathcal{A}}, q_0^{\mathcal{B}}) = C$,
+    \item $(q_1^{\mathcal{A}}, q_1^{\mathcal{B}}) = D$.
+\end{itemize}
+
+Теперь построим автомат: 
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (7.2,-16.8) circle (3);
+\draw (7.2,-16.8) node {$A$};
+\draw [black] (20.8,-3.2) circle (3);
+\draw (20.8,-3.2) node {$B$};
+\draw [black] (20.8,-3.2) circle (2.4);
+\draw [black] (20.8,-30.9) circle (3);
+\draw (20.8,-30.9) node {$C$};
+\draw [black] (32.9,-16.8) circle (3);
+\draw (32.9,-16.8) node {$D$};
+\draw [black] (0.2,-16.8) -- (4.2,-16.8);
+\fill [black] (4.2,-16.8) -- (3.4,-16.3) -- (3.4,-17.3);
+\draw [black] (7.529,-13.824) arc (-192.62661:-257.37339:13.596);
+\fill [black] (17.82,-3.53) -- (16.93,-3.22) -- (17.15,-4.19);
+\draw (10.66,-5.71) node [left] {$1$};
+\draw [black] (17.837,-30.469) arc (-104.34971:-167.7185:14.142);
+\fill [black] (17.84,-30.47) -- (17.19,-29.79) -- (16.94,-30.76);
+\draw (10.64,-28.06) node [left] {$0$};
+\draw [black] (10.031,-17.784) arc (66.26256:21.66923:18.771);
+\fill [black] (10.03,-17.78) -- (10.56,-18.56) -- (10.96,-17.65);
+\draw (16.51,-20.46) node [right] {$0$};
+\draw [black] (32.794,-19.792) arc (-8.58672:-72.68277:13.099);
+\fill [black] (32.79,-19.79) -- (32.18,-20.51) -- (33.17,-20.66);
+\draw (30.33,-27.81) node [right] {$1$};
+\draw [black] (23.772,-3.544) arc (76.29305:7.0263:12.087);
+\fill [black] (32.9,-13.81) -- (33.3,-12.95) -- (32.31,-13.07);
+\draw (30.48,-5.8) node [right] {$0$};
+\draw [black] (19.806,-6.027) arc (-23.84667:-66.15333:19.162);
+\fill [black] (10.03,-15.81) -- (10.96,-15.94) -- (10.56,-15.03);
+\draw (16.35,-13.31) node [right] {$1$};
+\draw [black] (30.093,-15.753) arc (-115.60486:-161.07578:16.699);
+\fill [black] (21.51,-6.11) -- (21.3,-7.03) -- (22.25,-6.7);
+\draw (24.29,-13.25) node [left] {$0$};
+\draw [black] (21.51,-27.989) arc (161.42019:117.31032:17.626);
+\fill [black] (21.51,-27.99) -- (22.24,-27.39) -- (21.29,-27.07);
+\draw (24.29,-20.68) node [left] {$1$};
+\end{tikzpicture}
+\end{center}
+
+Пусть $L=$ <<язык, все слова которого содержат четное число нулей и нечетное число единиц>>.
+
+\medskip\noindent\textbf{Утверждение.} $L \subseteq L(\mathcal{C})$.
+
+\medskip\noindent\textbf{Доказательство.} По индукции числа $n, \; t$ букв 0 и 1 соответственно в слове $w \in L$. База $n = 0,\; t = 1$: $$(A, w) = (A, 1) \vdash (B, \epsilon) \Rightarrow w \in L(\mathcal{C}).$$ Предположение индукции $n=2k, \; t=2p+1$: пусть верно $$\forall x\in L, \; \forall k,p \in \mathbb{N}: |x|_0 = 2k, \; |x|_1 = 2p+1 \hookrightarrow x \in L(\mathcal{C}).$$ Переход индукции $n=2k+2, \; t=2p+3$: 
+
+\begin{itemize}
+    \item $w = x1001: (A, x1001) \vdash^* (B, 1001) \vdash^* (B, \epsilon) \Rightarrow w \in L(\mathcal{C})$;
+    \item $w = x0101: (A, x0101) \vdash^* (B, 0101) \vdash^* (B, \epsilon) \Rightarrow w \in L(\mathcal{C})$;
+    \item $w = x0011: (A, x0011) \vdash^* (B, 0011) \vdash^* (B, \epsilon) \Rightarrow w \in L(\mathcal{C})$;
+    \item $w = x0110: (A, x0110) \vdash^* (B, 0110) \vdash^* (B, \epsilon) \Rightarrow w \in L(\mathcal{C})$;
+    \item $w = x0110: (A, x1010) \vdash^* (B, 1010) \vdash^* (B, \epsilon) \Rightarrow w \in L(\mathcal{C})$;
+    \item $w = x1100: (A, x1100) \vdash^* (B, 1100) \vdash^* (B, \epsilon) \Rightarrow w \in L(\mathcal{C})$.
+\end{itemize} \qed
+
+\medskip\noindent\textbf{Утверждение.} $L(\mathcal{C}) \subseteq L$.
+
+\medskip\noindent\textbf{Доказательство.} Опирается на доказательстве утверждений $L \subseteq L(\mathcal{A})$ и $L \subseteq L(\mathcal{B})$. При чётном количестве букв 1 в слове $w \in L(\mathcal{C})$ <<часть>> автомата $\mathcal{C}$, отвечающая за нечётность количества единиц (автомат $\mathcal{B}$), не перейдёт в принимающее состояние. Аналогичные рассуждения связаны с автоматом $\mathcal{A}$. \qed 
+
+\end{enumerate}
+
+\end{document}
+
