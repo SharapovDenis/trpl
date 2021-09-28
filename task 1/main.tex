@@ -1,0 +1,305 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{amsfonts, amssymb, amsmath, latexsym}
+\usepackage{nicefrac}
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage[colorinlistoftodos,bordercolor=orange,backgroundcolor=orange!20,linecolor=orange,textsize=scriptsize]{todonotes}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}       % hyperlinks
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{nameref}
+\usepackage{booktabs}       % professional-quality tables
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{xcolor, colortbl}
+\usepackage{etoolbox}
+
+% \graphicspath{ {./} }
+
+\usepackage[verbose=true,letterpaper]{geometry}
+
+\newgeometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+\usepackage{epigraph}
+
+%
+
+\newcommand{\argmin}{\mathop{\arg\!\min}}
+\newcommand{\argmax}{\mathop{\arg\!\max}}
+
+\newcommand{\Var}{\mathbb{V}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\makebold}[1]{\boldsymbol{#1}}
+\newcommand{\mean}[1]{\overline{#1}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\partfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\term}[1]{\textbf{#1}}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lf}{\left\{}
+\newcommand{\rf}{\right\}}
+\newcommand{\ls}{\left[}
+\newcommand{\rs}{\right]}
+\newcommand{\lv}{\left|}
+\newcommand{\rv}{\right|}
+
+\newcommand*{\affaddr}[1]{#1} % No op here. Customize it for different styles.
+\newcommand*{\affmark}[1][*]{\textsuperscript{#1}}
+
+
+\usepackage{amsthm}
+\usepackage{tikz}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+
+\newtheorem{exercise}{Задача}[section]
+
+\newtheorem*{solution}{Решение}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{0em}{2.1em}}
+\makeatother
+
+% \setlength\epigraphwidth{.8\textwidth}
+\setlength\epigraphrule{0pt}
+
+\title{ТРЯП. Домашнее задание № 1}
+\author{Шарапов Денис, Б05-005}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Задача 1}
+
+\begin{enumerate}
+    \item $(b, 1) \stackrel{?}{\in} \{1,2,3\}\times\{a,b\}$.
+    \item Пусть $A, B$ --- конечные множества. Найти $|A \times B|$ .
+    \item Описать множество $\mathbb{N} \times \varnothing$.
+\end{enumerate}
+
+\noindent    \textbf{Решение.}
+
+\begin{enumerate}
+    \item По определению декартова произведения $$\{1,2,3\}\times\{a,b\} = \{(1,a), \; (1,b), \; (2,a), \; (2,b), \; (3,a), \; (3,b)\}.$$ Поэтому пара $(b,1)$ не принадлежит указанному множеству: $$(b,1) \notin \{1,2,3\}\times\{a,b\}.$$
+    
+    \item По определению декартового произведения $$A \times B = \{(a, b) \; | \; a \in A, \; b \in B\}.$$ По правилу произведения (комбинаторика) число способов выбрать сперва произвольный элемент из $m$-элементного множества $A$, а затем для него выбрать произвольный элемент из $n$-элементного множества $B$ равно $m\cdot n$. Аналогично получим количество пар: $$|A \times B| = |A| \cdot |B|.$$
+    
+    \item Опишем множество по определению декартового произведения: $$\mathbb{N} \times \varnothing = \{(x, y) \; | \; x \in \mathbb{N}, \; y \in \varnothing\}.$$ В пустое множество $\varnothing$ не входит ни один элемент, поэтому множество $\mathbb{N} \times \varnothing$ не содержит ни одной пары. Поэтому $$\mathbb{N} \times \varnothing = \varnothing.$$
+\end{enumerate}
+
+\noindent    \textbf{Ответ:} 1) Нет; 2) $|A| \cdot |B|$; 3) $\varnothing$.
+
+\section*{Задача 2}
+
+Верно ли, что: 
+
+\medskip\textbf{a)} $\epsilon \in \{a, aab, aba\}$, \textbf{б)} $\varnothing \in \{a, aab, aba\}$?
+
+\bigskip
+
+\noindent \textbf{Решение.} \bigskip
+
+В обоих случаях утверждение неверно: множество задано явно --- перечислением его элементов. Элементы $\epsilon$ и $\varnothing$ не перечислены явно при задании множества $\{a, aab, aba\}$.
+
+    \bigskip
+    
+\noindent  \textbf{Ответ:} Нет, неверно в обоих случаях.
+
+\section*{Задача 3} Вычислить $\{a, a^3, a^5, \ldots\} \cdot \{a, a^3, a^5, \ldots\}$.
+
+\bigskip
+
+\noindent \textbf{Решение.} \bigskip
+
+Зададим множество $A = \{a, a^3, a^5, \ldots\}$ следующим (эквивалентным) образом: $$A = \{a^{2k+1} \; | \; k \in \mathbb{N}_{0}\}.$$ Тогда из определения степени $A$ получим следующее множество: $$A^2 = \{a^{2k+1} \cdot a^{2m+1} \; | \; k, \; m \in \mathbb{N}_{0}\} = \{a^{2(k+m+1)} \; | \; k, \; m \in \mathbb{N}_{0}\}.$$ Множество $A^2$ содержит в качестве элементов все чётные степени $a$ (это видно из определения множества $A^2$, если перебирать всевозможные пары $(k, m)$). Отсюда получим искомое регулярное выражение: $$\{a, a^3, a^5, \ldots\} \cdot \{a, a^3, a^5, \ldots\} = aa(aa)^*.$$
+
+    \bigskip
+    
+\noindent  \textbf{Ответ:} $aa(aa)^*$.
+
+\section*{Задача 4}
+
+Построить регулярное выражение (РВ) для 
+
+\begin{enumerate}
+    \item языка, который содержит все слова, в которых есть как буква $a$, так и буква $b$;
+    \item языка из слов, содержащих в качестве подслова ровно одно слово $ab$;
+    \item языка, слова которого не содержат подслово $ab$.
+\end{enumerate}
+
+\noindent \textbf{Решение.} \bigskip
+
+\begin{enumerate}
+    \item Пусть $L$ = <<язык, который содержит все слова, в которых есть как буква $a$, так~и буква $b$>>. Запишем регулярное выражение: $$R = (a \; | \; b)^* \cdot a \cdot (a \; | \; b)^*  \cdot b \cdot (a \; | \; b)^*\; + \;  (a \; | \; b)^* \cdot b \cdot (a \; | \; b)^* \cdot a \cdot (a \; | \; b)^*.$$
+    
+\textbf{Утверждение.} $R \subseteq L$. \medskip
+
+\textbf{Доказательство.} Рассмотрим произвольное слово $w \in R$. Оно имеет вид $$w = x \cdot a \cdot y \cdot b \cdot z \quad \text{или} \quad \; w = x \cdot b \cdot y \cdot a \cdot z,$$ где $x,y,z \in \Sigma^*$ --- произвольные слова над алфавитом $\Sigma$. Слово $w$ содержит как букву $a$, так и букву $b$ в обоих случаях. Поэтому верно утверждение $$\forall w \in R \hookrightarrow w \in L \Rightarrow R \subseteq L.$$ \qed
+    
+\textbf{Утверждение.} $L \subseteq R$. \medskip
+
+\textbf{Доказательство.} Рассмотрим произвольное слово $w \in L$. Оно имеет вид $$w = x \cdot a \cdot y \cdot b \cdot z \quad \text{или} \quad \; w = x \cdot b \cdot y \cdot a \cdot z,$$ где $x,y,z \in \Sigma^*$ --- произвольные слова над алфавитом $\Sigma$. Докажем утверждение индукцией по количеству букв $n$ в слове $w \in L$. База индукции $n = 2$: слово $w = ab$ или слово $w = ba$ $(x,y,z = \epsilon)$. Предположение индукции: пусть верно для $n = k$. Переход: рассмотрим слово $u$ длиной $|u| = |w| + 1 = k + 1$. Оно получено из слова $w$ путем приписывания буквы $a$ или $b$. Но подслово $w$ слова $u$ по предположению индукции уже содержало как букву $a$, так и букву $b$, поэтому приписывание новой произвольной буквы не поменяло <<содержания>> слова. \qed
+
+\item Пусть $L$ = <<язык из слов, содержащих в качестве подслова ровно одно слово $ab$>>. Запишем регулярное выражение: $$ R = b^*a^* \cdot ab \cdot b^*a^*.$$
+    
+\textbf{Утверждение.} $R \subseteq L$. \medskip
+
+\textbf{Доказательство.} Выберем произвольное слово $w \in R$. Рассмотрим его <<структуру>>: $$w = b^ia^j \cdot ab \cdot b^ka^l, \quad i, j, k, l \geq 0.$$ Видно, что слово $w \in R$ содержит ровно одно подслово $ab$. Поэтому верно утверждение $$\forall w \in R \hookrightarrow w \in L \Rightarrow R \subseteq L.$$ \qed
+
+\textbf{Утверждение.} $L \subseteq R$. \medskip
+
+\textbf{Доказательство.} Рассмотрим произвольное слово $w \in L$. Разберём его <<структуру>>. Для начала это слово содержит ровно одно подслово $ab$. После буквы $b$ может идти произвольное число букв $b$. Определим их количество как~$b^k, \; k \geq 0$. За ними может идти произвольное число букв $a$. Определим их количество как~$a^l, \; l \geq 0$. За ними может идти только пустое слово $\epsilon$, и только оно (букв $a$ произвольное количество, после них остаётся только добавить $b$ или~$\epsilon$). В противном случае придём к противоречию. Перед буквой $a$ (подсловом $ab$) может идти произвольное число букв $a$. Определим их количество как $a^j, \; j \geq 0$. Перед ними может идти произвольное число букв $b$. Определим их количество как $b^i, \; i \geq 0$. Перед произвольным количеством букв $b$ может идти только пустое слово $\epsilon$ (т. к. букв $b$ произвольное количество, можем взять столько, сколько потребуется). В противном случае придём к противоречию. 
+
+Возможные противоречия: 1) взять подслово $ab$, добавить произвольное число букв $b$ после него, добавить произвольное число букв $a$ после него, добавить хотя бы одну букву $b$ в конец. 2) взять подслово $ab$, добавить произвольное число букв~$a$ перед ним, добавить произвольное число букв $b$ перед буквами $a$, добавить хотя бы одну букву $a$ в начало. 
+
+Замечание: под <<добавить в начало>> подразумевается построение слова как конкатенация необходимого количества букв (начало) с подсловом $ab$ и необходимым количеством букв (конец).
+
+По построению произвольного слова $w \in L$ получим его в виде $$w = \epsilon \cdot b^ia^j \cdot ab \cdot b^ka^l \cdot \epsilon, \quad i, j, k, l \geq 0.$$ Откуда следует утверждение $$\forall w \in L \hookrightarrow w = b^ia^j \cdot ab \cdot b^ka^l \in b^*a^* \cdot ab \cdot b^*a^* = R \Rightarrow L \subseteq R.$$ \qed
+
+\item Пусть $L = $ <<язык, слова которого не содержат подслово $ab$>>. Запишем регулярное выражение: $$R = b^*a^*.$$
+
+\textbf{Утверждение.} $R \subseteq L$. \medskip
+
+\textbf{Доказательство.} Рассмотрим произвольное слово $w \in R$. Оно имеет вид $$w = b^i a^j, \; i,j \geq 0.$$ Для любых $i, j$ данное слово не содержит подслово $ab$. Поэтому верно утверждение: $$\forall w \in R \hookrightarrow w \in L \Rightarrow R \subseteq L.$$ \qed
+
+\textbf{Утверждение.} $L \subseteq R$. \medskip
+
+\textbf{Доказательство.} Рассмотрим произвольное слово $w \in L$, т. е. $w$ --- слово, которое не содержит подслово $ab$. Докажем утверждение по индукции числа $n$ букв $a$ в слове~$w$. База индукции $n = 0$: слово $w$ принимает вид $w = b^i, \; i \geq 0.$ Предположение индукции: пусть верно для $n = k$ букв $a$ (т. е. верно, что слово, в котором встретилось $k$ букв $a$, содержится в $R$). Переход индукции: докажем, что верно и для $n = k+1$. Слово, не содержащее подслова $ab$ имеет вид $$w = b^ia^k: \quad \text{$k$ букв $a$ ($k$-й шаг)}.$$ На следующем шаге $(k+1)$ припишем букву $a$ к слову $w$ и получим новое слово~$u$. Это возможно сделать двумя способами:
+
+\begin{enumerate}
+    \item $u = a \cdot w$ --- противоречие по построению слова $w$ при $i \neq 0$.
+    \item $u = w \cdot a = b^ia^k \cdot a^k = b^ia^{k+1}$ ($i \geq 0$).
+\end{enumerate}
+
+Осталось воспользоваться предположением индукции при переходе. По предположению верно $$w = b^ia^k \in R.$$ Теперь припишем букву $a$ одним из двух способов. В пункте (a) получим слово~$u_{(a)}$ вида $u_{(a)} = \epsilon \cdot a^{k+1}$, где $i = 0$. Заметим, что $u_{(a)} \in R$. В пункте (b) получим слово~$u_{(b)}$ вида $u_{(b)} =  b^ia^{k+1}$, где $i \geq 0$. Заметим, что $u_{(b)} \in R$. Других слов, кроме как построенного $w$, быть не может, так как приходим к противоречию (к примеру, это описано в пункте (a)). То есть, было доказано, что произвольное слово $w \in L$ также содержится и в $R$: $w \in R$. Это и доказывает требуемое утверждение. \qed
+
+\end{enumerate}
+
+\section*{Задача 5} 
+
+Определим язык $L \subseteq \{a,b\}^*$ индуктивными правилами:
+
+\begin{enumerate}
+    \item $\epsilon, b, bb \in L$;
+    \item вместе с любым словом $x \in L$ в $L$ также входят слова $ax, bax, bbax$;
+    \item никаких других слов в $L$ нет.
+\end{enumerate}
+
+Язык $T \subseteq \{a,b\}^*$ состоит из всех слов, в которых нет трёх букв $b$ подряд.
+
+\begin{enumerate}
+    \item Докажите или опровергните, что $L = T$.
+    \item Запишите язык $T$ в виде регулярного выражения.
+\end{enumerate}
+
+\noindent \textbf{Решение.}
+
+\begin{enumerate}
+    \item \textbf{Утверждение.} $L \subseteq T$. \medskip
+    
+    \textbf{Доказательство.} Рассмотрим произвольное слово $w \in L$. Докажем утверждение по индукции числа $n$ букв $a$ в слове $w$. База индукции $n = 0$: $w \in \{\epsilon, b, bb\}$. Предположение индукции: пусть будет верно для $n = k$. Переход индукции: докажем, что верно для $n = (k + 1)$. 
+    
+    На $k$-ом шаге слово $w$ имеет один из трёх видов:
+    
+    \begin{enumerate}
+        \item $w = ax \in T$,
+        \item $w = bax \in T$,
+        \item $w = bbax \in T$,
+    \end{enumerate}
+где $x$ --- подслово, содержащее $n = (k - 1)$ букв $a$. Заметим, что во всех случаях $x \in T$, т. к. слово $w$ во всех случаях разбивается на подслова, каждое их которых не содержит трёх букв $b$ подряд. 
+
+Теперь выполним переход индукции. По индуктивному правилу №2 построения языка $L$ получим новое слово $u \in L$ для каждого из трёх пунктов (a, b, c): $$u = aw \quad \text{или} \quad u = baw, \quad \text{или} \quad u = bbaw.$$ Во всех трёх случаях по предложению индукции $w \in T$ и полученное нa ($k~+~1$) шаге слово $u$ не содержит трёх букв $b$ подряд. Это и доказывает требуемое утверждение. \qed
+
+\textbf{Утверждение.} $T \subseteq L$. \medskip
+    
+\textbf{Доказательство.} Рассмотрим произвольное слово $w \in T$. Докажем утверждение по индукции числа $n$ букв $a$ в слове $w$. База индукции $n = 0$: $w \in \{\epsilon, b, bb\}$. Предположение индукции: пусть верно для $n = k$. Переход индукции: докажем, что верно для $n = (k+1)$.
+
+На $k$-м шаге индукции слово $w \in T$ имеет один из следующих видов: 
+
+\begin{enumerate}
+    \item $w = ax$, где $x$ --- слово, не содержащее трёх букв $b$ подряд. В этом случае на $(k+1)$ шаге воспользуемся индуктивным правилом №2 построения языка~$L$ и получим новое слово $u \in L$, содержащее в себе $n = (k+1)$ букв $a$ и не имеющее в себе трёх букв $b$ подряд.
+    \item $w = bax$, где $x$ --- слово, не содержащее трёх букв $b$ подряд. В этом случае на $(k+1)$ шаге воспользуемся индуктивным правилом №2 построения языка~$L$ и аналогично получим слово $u \in L$, которое содержит в себе  $n = (k+1)$ букв~$a$ и не имеет в себе трёх букв $b$ подряд.
+\end{enumerate} \qed
+
+Используя доказанные утверждения, получаем, что $L = T$.
+
+Примечание: на самом деле можно было использовать индукцию по количеству шагов построения языка $L$, но в данном случае выбранная индукция по числу~$n$ букв $a$ в слове эквивалентна числу шагов в построении, т. к. на каждом шаге количество букв $a$ в получившемся слове увеличивается на 1.
+
+\item $R = (a \; | \; ba \: | \; bba)^* \cdot (\epsilon \; | \; b \; | \; bb)$. \medskip
+
+\textbf{Утверждение.} $R \subseteq T$. \medskip
+    
+\textbf{Доказательство.} Индукцией по числу $n$ букв $a$ и по построению языка $R$ (в том числе по определению оператора *) получаем, что произвольное слово $w \in R$ не содержит трёх букв $b$ подряд. Т. е. $w \in T$. \qed
+
+\medskip\textbf{Утверждение.} $T \subseteq R$. \medskip
+    
+\textbf{Доказательство.} Рассмотрим произвольное слово $w \in T$. Докажем индукцией по числу $n$ букв $a$ в слове $w$. База индукции $n = 0$: $\epsilon, b, bb \in R$. Предположение индукции: пусть верно для $n = k$. Переход индукции; докажем, что верно для $n = (k+1)$.
+
+На $(k+1)$ шаге слово $w$ имеет один из видов:
+
+\begin{enumerate}
+    \item $w = ax, x \in T$,
+    \item $w = bax, x \in T$,
+    \item $w = bbax, x \in T$,
+\end{enumerate}
+где $x \in R$ по предложению индукции.
+
+По построению регулярного выражения $x \in (a \; | \: ba \; | \: bba)^k$. Умножение на $y\in~\{\epsilon, b, bb\}$ не меняет количество букв $a$ в слове $w$. Поэтому $x \in (a \; | \: ba \; | \: bba)^k \cdot (\epsilon \; | \: b \; | \: bb)$. И, следовательно, $ax \in (a \; | \: ba \; | \: bba)^{k+1} \cdot (\epsilon \; | \: b \; | \: bb) \subseteq (a \; | \; ba \: | \; bba)^* \cdot (\epsilon \; | \; b \; | \; bb) = R.$ \qed
+
+\end{enumerate}
+
+\section*{Задача 6} 
+
+\begin{enumerate}
+    \item Задать множество $\{a^n \; | \; n > 0\} \times \{b^n \: | \; n \geq 0\}$ формулой, которая не использует символ~$\times$.
+    \item Описать язык $\{a^{3n} \; | \; n > 0\} \cap \{a^{5n+1} \; | \; n \geq 0\}^*$ регулярным выражением.
+\end{enumerate}
+
+\noindent \textbf{Решение.}
+
+\begin{enumerate}
+    \item $\{a^n \; | \; n > 0\} \times \{b^n \: | \; n \geq 0\} = \{(a^n, b^m) \; | \; n > 0, m \geq 0\}$. 
+    \item Пусть $A = \{a^{3n} \; | \; n > 0\}$, $B = \{a^{5n+1} \; | \; n \geq 0\}^*$.
+
+Распишем множество $B$: $$B = \{a, a^6, a,^{11}, \ldots\}^*.$$
+
+Заметим, что ${a} \in B$, поэтому множество $B$ можно переписать в следующем виде: $$B = \{\epsilon, a^1, a^2, a^3, \ldots\},$$ т. е. множество $B$ --- это множество, содержащее все степени $a^i$ $(i = 0, 1, 2, \ldots)$. Поэтому пересечение множеств $A \cap B$ имеет следующий вид: $$A \cap B = \{a^{3n} \; | \; n > 0\} = A.$$
+
+Теперь запишем регулярное выражение для множества $A$: $$A = (aaa)^{+}.$$
+
+\end{enumerate}
+
+\noindent  \textbf{Ответ:} 1) $\{(a^n, b^m) \; | \; n > 0, m \geq 0\}$; 2) $(aaa)^{+}$.
+
+\end{document}
