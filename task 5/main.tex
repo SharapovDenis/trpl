@@ -1,0 +1,419 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{amsfonts, amssymb, amsmath, latexsym}
+\usepackage{nicefrac}
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage[colorinlistoftodos,bordercolor=orange,backgroundcolor=orange!20,linecolor=orange,textsize=scriptsize]{todonotes}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}       % hyperlinks
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{nameref}
+\usepackage{booktabs}       % professional-quality tables
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{xcolor, colortbl}
+\usepackage{etoolbox}
+
+% \graphicspath{ {./} }
+
+\usepackage[verbose=true,letterpaper]{geometry}
+
+\newgeometry{
+    textheight=9.5in,
+    textwidth=6in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+\usepackage{epigraph}
+
+%
+
+\newcommand{\argmin}{\mathop{\arg\!\min}}
+\newcommand{\argmax}{\mathop{\arg\!\max}}
+
+\newcommand{\Var}{\mathbb{V}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\makebold}[1]{\boldsymbol{#1}}
+\newcommand{\mean}[1]{\overline{#1}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\partfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\term}[1]{\textbf{#1}}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lf}{\left\{}
+\newcommand{\rf}{\right\}}
+\newcommand{\ls}{\left[}
+\newcommand{\rs}{\right]}
+\newcommand{\lv}{\left|}
+\newcommand{\rv}{\right|}
+
+\newcommand*{\affaddr}[1]{#1} % No op here. Customize it for different styles.
+\newcommand*{\affmark}[1][*]{\textsuperscript{#1}}
+
+
+\usepackage{subcaption}
+%\usepackage[font={small}]{caption}
+
+\usepackage{amsthm}
+\usepackage{tikz}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+
+\newtheorem{exercise}{Задача}[section]
+
+\newtheorem*{solution}{Решение}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{0em}{2.1em}}
+\makeatother
+
+% \setlength\epigraphwidth{.8\textwidth}
+\setlength\epigraphrule{0pt}
+
+\title{ТРЯП. Домашнее задание № 5}
+\author{Шарапов Денис, Б05-005}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Задача 1}
+
+\begin{enumerate}
+    \item Постройте КМП-автомат для слова $babbabab$ (на алфавитом $\{a,b\}$).
+    \item Постройте для того же слова КМП-автомат $\mathcal{A}^{exc}$ с суффиксными ссылками.
+    \item Продемонстрируйте работу автомата на словах:
+    а) $babbabbabab$; б) $babbabc$;
+\end{enumerate}
+
+\noindent \textbf{Решение.}
+
+\begin{enumerate}
+    \item Построим КМП-автомат для слова $babbabab$.
+    
+    \begin{figure}[h!]
+        \centering
+            \begin{center}
+        \includegraphics[width = 350pt]{image/picture1.png}
+            \end{center}
+    \end{figure}
+        
+    \item Построим КМП-автомат $\mathcal{A}^{exc}$ с суффиксными ссылками.
+        \begin{figure}[h!]
+            \centering
+                \begin{center}
+            \includegraphics[width = 350pt]{image/picture2.jpg}
+                \end{center}
+        \end{figure}
+    \item Названия состояний пометим чертой сверху, чтобы отличать их от слов при использовании функции переходов.
+    
+    \begin{enumerate}
+        \item Работа автомата $\mathcal{A}^{exc}$ на слове $w = babbabbabab, |w| = 11$: 
+            \begin{eqnarray*}
+                (\overline{\epsilon}, w[1,11]) \vdash (\overline{b}, w[2,11]) \vdash (\overline{ba}, w[3,11]) \vdash (\overline{bab}, w[4,11]) \vdash \\ \vdash (\overline{babb}, w[5,11]) \vdash (\overline{babba}, w[6,11]) \vdash (\overline{babbab}, w[7,11]) \vdash (\overline{babb}, w[8,11]) \vdash \\ \vdash (\overline{babba}, w[9,11]) \vdash (\overline{babbab}, w[10,11]) \vdash (\overline{babbaba}, w[11,11]) \vdash (\overline{babbabab}, \epsilon).
+            \end{eqnarray*}
+        \item Работа автомата $\mathcal{A}^{exc}$ на слове $w = babbabc, |w| = 7$:
+            \begin{eqnarray*}
+                (\overline{\epsilon}, w[1,6]c) \vdash (\overline{b}, w[2,6]c) \vdash (\overline{ba}, w[3,6]c) \vdash (\overline{bab}, w[4,6]c) \vdash \\ \vdash (\overline{babb}, w[5,6]c) \vdash (\overline{babba}, w[6,6]c) \vdash (\overline{babbab}, c) \vdash (\overline{bab}, c) \vdash (\overline{b}, c) \vdash (\overline{\epsilon}, c).
+            \end{eqnarray*}
+    \end{enumerate}
+\end{enumerate} \qed
+
+
+\section*{Задача 2}
+
+Построить ДКА для словаря $\{ac, acb, b, ba, c, cbb\}$. Добавьте в полученный словарь слово $ab$ и удалите слово $ac$.
+
+\bigskip
+
+\noindent \textbf{Решение.} \bigskip
+
+Построим ДКА для словаря $\{ac, acb, b, ba, c, cbb\}$:
+
+\begin{center}
+    \begin{tikzpicture}[scale=0.2]
+    \tikzstyle{every node}+=[inner sep=0pt]
+    \draw [black] (5.4,-10.6) circle (2.6);
+    \draw (5.4,-10.6) node {$\epsilon$};
+    \draw [black] (14.4,-2.8) circle (2.6);
+    \draw (14.4,-2.8) node {$a$};
+    \draw [black] (14.4,-10.6) circle (2.6);
+    \draw (14.4,-10.6) node {$b$};
+    \draw [black] (14.4,-10.6) circle (2);
+    \draw [black] (14.4,-18.3) circle (2.6);
+    \draw (14.4,-18.3) node {$c$};
+    \draw [black] (14.4,-18.3) circle (2);
+    \draw [black] (23.2,-2.8) circle (2.6);
+    \draw (23.2,-2.8) node {$ac$};
+    \draw [black] (23.2,-2.8) circle (2);
+    \draw [black] (31.7,-2.8) circle (2.6);
+    \draw (31.7,-2.8) node {$acb$};
+    \draw [black] (31.7,-2.8) circle (2);
+    \draw [black] (23.2,-10.6) circle (2.6);
+    \draw (23.2,-10.6) node {$ba$};
+    \draw [black] (23.2,-10.6) circle (2);
+    \draw [black] (23.2,-18.3) circle (2.6);
+    \draw (23.2,-18.3) node {$cb$};
+    \draw [black] (31.7,-18.3) circle (2.6);
+    \draw (31.7,-18.3) node {$cbb$};
+    \draw [black] (31.7,-18.3) circle (2);
+    \draw [black] (0.2,-10.6) -- (2.8,-10.6);
+    \fill [black] (2.8,-10.6) -- (2,-10.1) -- (2,-11.1);
+    \draw [black] (6.371,-8.195) arc (150.99991:110.82886:10.617);
+    \fill [black] (11.88,-3.42) -- (10.96,-3.24) -- (11.31,-4.17);
+    \draw (7.75,-4.83) node [above] {$a$};
+    \draw [black] (8,-10.6) -- (11.8,-10.6);
+    \fill [black] (11.8,-10.6) -- (11,-10.1) -- (11,-11.1);
+    \draw (9.9,-10.1) node [above] {$b$};
+    \draw [black] (11.815,-18.161) arc (-102.22355:-158.8741:8.151);
+    \fill [black] (11.81,-18.16) -- (11.14,-17.5) -- (10.93,-18.48);
+    \draw (7.29,-16.88) node [below] {$c$};
+    \draw [black] (17,-2.8) -- (20.6,-2.8);
+    \fill [black] (20.6,-2.8) -- (19.8,-2.3) -- (19.8,-3.3);
+    \draw (18.8,-2.3) node [above] {$c$};
+    \draw [black] (25.8,-2.8) -- (29.1,-2.8);
+    \fill [black] (29.1,-2.8) -- (28.3,-2.3) -- (28.3,-3.3);
+    \draw (27.45,-2.3) node [above] {$b$};
+    \draw [black] (17,-10.6) -- (20.6,-10.6);
+    \fill [black] (20.6,-10.6) -- (19.8,-10.1) -- (19.8,-11.1);
+    \draw (18.8,-10.1) node [above] {$a$};
+    \draw [black] (17,-18.3) -- (20.6,-18.3);
+    \fill [black] (20.6,-18.3) -- (19.8,-17.8) -- (19.8,-18.8);
+    \draw (18.8,-17.8) node [above] {$b$};
+    \draw [black] (25.8,-18.3) -- (29.1,-18.3);
+    \fill [black] (29.1,-18.3) -- (28.3,-17.8) -- (28.3,-18.8);
+    \draw (27.45,-17.8) node [above] {$b$};
+    \end{tikzpicture}
+    \end{center}
+
+Добавим в полученный словарь слово $ab$. Для этого запишем слово на ленту и запустим автомат. Далее, когда автомат не сможет сделать переход, допишем недостающие состояния (префиксы) и добавим переходы так, чтобы в конце работы автомат смог принять новое слово. Т. е. для слова $ab$ перейдём в состояние <<$a$>>, а далее добавим новое принимающее состояние <<$ab$>> и переход в него по букве $b$:
+
+\begin{center}
+    \begin{tikzpicture}[scale=0.2]
+    \tikzstyle{every node}+=[inner sep=0pt]
+    \draw [black] (5.4,-18.2) circle (2.6);
+    \draw (5.4,-18.2) node {$\epsilon$};
+    \draw [black] (14.4,-10.4) circle (2.6);
+    \draw (14.4,-10.4) node {$a$};
+    \draw [black] (14.4,-18.2) circle (2.6);
+    \draw (14.4,-18.2) node {$b$};
+    \draw [black] (14.4,-18.2) circle (2);
+    \draw [black] (14.4,-25.9) circle (2.6);
+    \draw (14.4,-25.9) node {$c$};
+    \draw [black] (14.4,-25.9) circle (2);
+    \draw [black] (23.2,-10.4) circle (2.6);
+    \draw (23.2,-10.4) node {$ac$};
+    \draw [black] (23.2,-10.4) circle (2);
+    \draw [black] (31.7,-10.4) circle (2.6);
+    \draw (31.7,-10.4) node {$acb$};
+    \draw [black] (31.7,-10.4) circle (2);
+    \draw [black] (23.2,-18.2) circle (2.6);
+    \draw (23.2,-18.2) node {$ba$};
+    \draw [black] (23.2,-18.2) circle (2);
+    \draw [black] (23.2,-25.9) circle (2.6);
+    \draw (23.2,-25.9) node {$cb$};
+    \draw [black] (31.7,-25.9) circle (2.6);
+    \draw (31.7,-25.9) node {$cbb$};
+    \draw [black] (31.7,-25.9) circle (2);
+    \draw [black] (23.2,-2.8) circle (2.6);
+    \draw (23.2,-2.8) node {$ab$};
+    \draw [black] (23.2,-2.8) circle (2);
+    \draw [black] (0.2,-18.2) -- (2.8,-18.2);
+    \fill [black] (2.8,-18.2) -- (2,-17.7) -- (2,-18.7);
+    \draw [black] (6.371,-15.795) arc (150.99991:110.82886:10.617);
+    \fill [black] (11.88,-11.02) -- (10.96,-10.84) -- (11.31,-11.77);
+    \draw (7.75,-12.43) node [above] {$a$};
+    \draw [black] (8,-18.2) -- (11.8,-18.2);
+    \fill [black] (11.8,-18.2) -- (11,-17.7) -- (11,-18.7);
+    \draw (9.9,-17.7) node [above] {$b$};
+    \draw [black] (11.815,-25.761) arc (-102.22355:-158.8741:8.151);
+    \fill [black] (11.81,-25.76) -- (11.14,-25.1) -- (10.93,-26.08);
+    \draw (7.29,-24.48) node [below] {$c$};
+    \draw [black] (17,-10.4) -- (20.6,-10.4);
+    \fill [black] (20.6,-10.4) -- (19.8,-9.9) -- (19.8,-10.9);
+    \draw (18.8,-9.9) node [above] {$c$};
+    \draw [black] (25.8,-10.4) -- (29.1,-10.4);
+    \fill [black] (29.1,-10.4) -- (28.3,-9.9) -- (28.3,-10.9);
+    \draw (27.45,-9.9) node [above] {$b$};
+    \draw [black] (17,-18.2) -- (20.6,-18.2);
+    \fill [black] (20.6,-18.2) -- (19.8,-17.7) -- (19.8,-18.7);
+    \draw (18.8,-17.7) node [above] {$a$};
+    \draw [black] (17,-25.9) -- (20.6,-25.9);
+    \fill [black] (20.6,-25.9) -- (19.8,-25.4) -- (19.8,-26.4);
+    \draw (18.8,-25.4) node [above] {$b$};
+    \draw [black] (25.8,-25.9) -- (29.1,-25.9);
+    \fill [black] (29.1,-25.9) -- (28.3,-25.4) -- (28.3,-26.4);
+    \draw (27.45,-25.4) node [above] {$b$};
+    \draw [black] (14.553,-7.82) arc (-194.08122:-264.28861:6.975);
+    \fill [black] (20.62,-2.58) -- (19.78,-2.16) -- (19.88,-3.15);
+    \draw (15.75,-3.75) node [above] {$b$};
+    \end{tikzpicture}
+    \end{center}
+
+\newpage
+Теперь удалим слово $ac$ из словаря. Для этого достаточно сделать его непринимающим:
+
+\begin{center}
+    \begin{tikzpicture}[scale=0.2]
+    \tikzstyle{every node}+=[inner sep=0pt]
+    \draw [black] (5.4,-18.2) circle (2.6);
+    \draw (5.4,-18.2) node {$\epsilon$};
+    \draw [black] (14.4,-10.4) circle (2.6);
+    \draw (14.4,-10.4) node {$a$};
+    \draw [black] (14.4,-18.2) circle (2.6);
+    \draw (14.4,-18.2) node {$b$};
+    \draw [black] (14.4,-18.2) circle (2);
+    \draw [black] (14.4,-25.9) circle (2.6);
+    \draw (14.4,-25.9) node {$c$};
+    \draw [black] (14.4,-25.9) circle (2);
+    \draw [black] (23.2,-10.4) circle (2.6);
+    \draw (23.2,-10.4) node {$ac$};
+    \draw [black] (31.7,-10.4) circle (2.6);
+    \draw (31.7,-10.4) node {$acb$};
+    \draw [black] (31.7,-10.4) circle (2);
+    \draw [black] (23.2,-18.2) circle (2.6);
+    \draw (23.2,-18.2) node {$ba$};
+    \draw [black] (23.2,-18.2) circle (2);
+    \draw [black] (23.2,-25.9) circle (2.6);
+    \draw (23.2,-25.9) node {$cb$};
+    \draw [black] (31.7,-25.9) circle (2.6);
+    \draw (31.7,-25.9) node {$cbb$};
+    \draw [black] (31.7,-25.9) circle (2);
+    \draw [black] (23.2,-2.8) circle (2.6);
+    \draw (23.2,-2.8) node {$ab$};
+    \draw [black] (23.2,-2.8) circle (2);
+    \draw [black] (0.2,-18.2) -- (2.8,-18.2);
+    \fill [black] (2.8,-18.2) -- (2,-17.7) -- (2,-18.7);
+    \draw [black] (6.371,-15.795) arc (150.99991:110.82886:10.617);
+    \fill [black] (11.88,-11.02) -- (10.96,-10.84) -- (11.31,-11.77);
+    \draw (7.75,-12.43) node [above] {$a$};
+    \draw [black] (8,-18.2) -- (11.8,-18.2);
+    \fill [black] (11.8,-18.2) -- (11,-17.7) -- (11,-18.7);
+    \draw (9.9,-17.7) node [above] {$b$};
+    \draw [black] (11.815,-25.761) arc (-102.22355:-158.8741:8.151);
+    \fill [black] (11.81,-25.76) -- (11.14,-25.1) -- (10.93,-26.08);
+    \draw (7.29,-24.48) node [below] {$c$};
+    \draw [black] (17,-10.4) -- (20.6,-10.4);
+    \fill [black] (20.6,-10.4) -- (19.8,-9.9) -- (19.8,-10.9);
+    \draw (18.8,-9.9) node [above] {$c$};
+    \draw [black] (25.8,-10.4) -- (29.1,-10.4);
+    \fill [black] (29.1,-10.4) -- (28.3,-9.9) -- (28.3,-10.9);
+    \draw (27.45,-9.9) node [above] {$b$};
+    \draw [black] (17,-18.2) -- (20.6,-18.2);
+    \fill [black] (20.6,-18.2) -- (19.8,-17.7) -- (19.8,-18.7);
+    \draw (18.8,-17.7) node [above] {$a$};
+    \draw [black] (17,-25.9) -- (20.6,-25.9);
+    \fill [black] (20.6,-25.9) -- (19.8,-25.4) -- (19.8,-26.4);
+    \draw (18.8,-25.4) node [above] {$b$};
+    \draw [black] (25.8,-25.9) -- (29.1,-25.9);
+    \fill [black] (29.1,-25.9) -- (28.3,-25.4) -- (28.3,-26.4);
+    \draw (27.45,-25.4) node [above] {$b$};
+    \draw [black] (14.553,-7.82) arc (-194.08122:-264.28861:6.975);
+    \fill [black] (20.62,-2.58) -- (19.78,-2.16) -- (19.88,-3.15);
+    \draw (15.75,-3.75) node [above] {$b$};
+    \end{tikzpicture}
+    \end{center} \qed
+
+    \section*{Задача 3}
+
+    Построить для словаря $S = \{ac, acb, b, ba, c, cbb\}$ автомат Ахо-Корасик. Посчитайте с его помощью количество различных вхождений слов из словаря $S$ в слово $acbacbb$ в качестве подслов.
+    
+    \bigskip
+    
+    \noindent \textbf{Решение.} \bigskip
+
+    Построим автомат Ахо-Корасик:
+
+    \begin{figure}[h!]
+        \centering
+            \begin{center}
+        \includegraphics[width = 250pt]{image/picture3.png}
+            \end{center}
+    \end{figure}
+
+    Теперь необходимо найти количество различных вхождений слов из словаря $S$ в слово $acbacbb$ в качестве подслов. Для этого воспользуемся следующим алгоритмом: запишем слово на ленту и запустим получившийся автомат Ахо-Корасика. Заведём счетчик $s$. Когда автомат попадает в принимающее состояние прямым переходом, увеличиваем счетчик на единицу: $s \leftarrow s+1$. Также будем проверять ссылки из очередного принимающего состояния, когда автомат будет переходить в это состояние: если по ссылкам можно добраться до какого-либо принимающего состояния, то увеличиваем счётчик на единицу (то состояние, куда пришли) и увеличиваем счётчик на число принимающих состояний, встретившихся на пути к подсчитанному состоянию. При этом, если перешли в принимающее состояние по ссылке, то этот переход не учитываем (он был учтен при прямом переходе). А также при подсчёте не учитываем и <<серые>> состояния, т.~к. эти суффиксы не содержатся в словаре.
+    \newpage
+    Конфигурации автомата приведены в таблице:
+
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|}
+        \hline
+        Состояние  & \begin{tabular}[c]{@{}c@{}}Необработанная \\ часть входа\end{tabular} & $+k$ \\ \hline
+        $\epsilon$ & $acbacbb$                                                               & 0    \\ \hline
+        $a$          & $cbacbb$                                                                & 0    \\ \hline
+        $\textcolor{red}{ac}$         & $bacbb$                                                                 & 2   \\ \hline
+        $\textcolor{red}{acb}$        & $acbb$                                                                  & 2   \\ \hline
+        $cb$         & $acbb$                                                                  & 0!   \\ \hline
+        $\textcolor{red}{b}$          & $acbb$                                                                  & 0!   \\ \hline
+        $\textcolor{red}{ba}$         & $cbb$                                                                  & 1   \\ \hline
+        $a$          & $cbb$                                                                   & 0!   \\ \hline
+        $\textcolor{red}{ac}$         & $bb$                                                                    & 2   \\ \hline
+        $\textcolor{red}{acb}$        & $b$                                                                     & 2   \\ \hline
+        $cb$         & $b$                                                                     & 0!   \\ \hline
+        $\textcolor{red}{cbb}$        & $\epsilon$                                                            & 2   \\ \hline
+        \end{tabular}
+        \end{table}
+
+    Итак, с помощью алгоритма получили последовательность различных вхождений (11): $$ac, acb, c, b, ba, ac, acb, c, cbb, b, b.$$ 
+    \qed
+
+    \section*{Задача 4}
+    
+    Построить НКА, принимающий язык $L_3$, состоящий из слов в алфавите $\{a,b\}$, у которых третий от конца сивмол равен $a$. Затем, используя алгоритм, простроить эквивалентный полный ДКА.
+
+    \bigskip
+
+\noindent \textbf{Решение.} \bigskip
+
+    Требуется построить автомат, принимающий язык, заданный РВ $R$: $$R = \Sigma^*a(a\;|\;b)(a\;|\;b).$$
+
+    Это язык слов, содержащих суффиксы $aaa, aab, aba, abb$. \medskip
+
+    Пусть $S = \{aaa, aab, aba, abb\}$ --- словарь. Тогда построим автомат Ахо-Корасик:
+
+    \begin{figure}[h!]
+        \centering
+            \begin{center}
+        \includegraphics[width = 250pt]{image/picture4.png}
+            \end{center}
+    \end{figure}
+
+    \newpage
+    Теперь построим эквивалентный полный ДКА:
+
+    \begin{figure}[h!]
+        \centering
+            \begin{center}
+        \includegraphics[width = 250pt]{image/picture5.png}
+            \end{center}
+    \end{figure} 
+    \qed
+
+\end{document}
