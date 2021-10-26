@@ -1,0 +1,628 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{amsfonts, amssymb, amsmath, latexsym}
+\usepackage{nicefrac}
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage[colorinlistoftodos,bordercolor=orange,backgroundcolor=orange!20,linecolor=orange,textsize=scriptsize]{todonotes}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}       % hyperlinks
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{nameref}
+\usepackage{booktabs}       % professional-quality tables
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{xcolor, colortbl}
+\usepackage{etoolbox}
+
+% \graphicspath{ {./} }
+
+\usepackage[verbose=true,letterpaper]{geometry}
+
+\newgeometry{
+    textheight=9.5in,
+    textwidth=6in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+\usepackage{epigraph}
+
+%
+
+\newcommand{\argmin}{\mathop{\arg\!\min}}
+\newcommand{\argmax}{\mathop{\arg\!\max}}
+
+\newcommand{\Var}{\mathbb{V}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\makebold}[1]{\boldsymbol{#1}}
+\newcommand{\mean}[1]{\overline{#1}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\partfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\term}[1]{\textbf{#1}}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lf}{\left\{}
+\newcommand{\rf}{\right\}}
+\newcommand{\ls}{\left[}
+\newcommand{\rs}{\right]}
+\newcommand{\lv}{\left|}
+\newcommand{\rv}{\right|}
+
+\newcommand*{\affaddr}[1]{#1} % No op here. Customize it for different styles.
+\newcommand*{\affmark}[1][*]{\textsuperscript{#1}}
+
+
+\usepackage{subcaption}
+%\usepackage[font={small}]{caption}
+
+\usepackage{amsthm}
+\usepackage{tikz}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+
+\newtheorem{exercise}{Задача}[section]
+
+\newtheorem*{solution}{Решение}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{0em}{2.1em}}
+\makeatother
+
+% \setlength\epigraphwidth{.8\textwidth}
+\setlength\epigraphrule{0pt}
+
+\title{ТРЯП. Домашнее задание № 7}
+\author{Шарапов Денис, Б05-005}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Задача 1}
+
+Перенесена в следующее домашнее задание.
+
+\section*{Задача 2}
+
+Решить уравнения с регулярными коэффициентами. 
+
+\begin{enumerate}
+    \item $X = ((110)^* + 111^*)X$.
+    \item $X = (00 + 01 + 10 + 11)X + (0 + 1 + \varepsilon)$.
+    \item $\begin{cases}
+        Q_0 = 0Q_0 + 1Q_1 + \varepsilon,\\
+        Q_1 = 1Q_0 + 0Q_2, \\
+        Q_2 = 0Q_1 + 1Q_2.
+      \end{cases}$
+\end{enumerate}
+
+\noindent \textbf{Решение.}
+
+\begin{enumerate}
+    \item Случай строки $$X_i = \alpha_{ii}X_i$$ является частным случаем строки $$X_i = \alpha_{ii}X_i + \gamma_i$$ для $\gamma_i = \varnothing$. Поэтому $X_i = \varnothing$.
+    \item Решим уравнение $$X = (00 + 01 + 10 + 11)X + (0 + 1 + \varepsilon).$$ Для этого воспользуемся строкой $$X_i = \alpha_{ii}X_i + \gamma_i,$$ из которой следует $$X_i = (00+01+10+11)^*(0+1+\varepsilon).$$
+    \item Приведём последовательность действий для решения системы уравнений 
+    
+    \begin{equation*}
+    \begin{cases}
+        Q_0 = 0Q_0 + 1Q_1 + \varepsilon,\\
+        Q_1 = 1Q_0 + 0Q_2, \\
+        Q_2 = 0Q_1 + 1Q_2.
+      \end{cases} \;
+    \begin{cases}
+        Q_0 = 0^*(1Q_1 + \varepsilon),\\
+        Q_1 = 1Q_0 + 0Q_2, \\
+        Q_2 = 0Q_1 + 1Q_2.
+    \end{cases}
+    \begin{cases}
+        Q_0 = 0^*(1Q_1 + \varepsilon),\\
+        Q_1 = (10^*1)^*(10^*+0Q_2), \\
+        Q_2 = 0Q_1 + 1Q_2.
+    \end{cases}
+    \end{equation*}
+
+    \begin{equation*}
+        \begin{cases}
+            Q_0 = 0^*(1Q_1 + \varepsilon),\\
+            Q_1 = (10^*1)^*(10^*+0Q_2), \\
+            Q_2 = \left( 0(10^*1)^*0 + 1)Q_2 + 0(10^*1)^*10^*1 \right).
+        \end{cases}
+        \begin{cases}
+            Q_0 = 0^*(1Q_1 + \varepsilon),\\
+            Q_1 = (10^*1)^*(10^*+0Q_2), \\
+            Q_2 = (0(10^*1)^*0+1)^*0(10^*1)^*10^*.
+        \end{cases}
+    \end{equation*}
+\end{enumerate} \qed
+
+\section*{Задача 3}
+
+Выполнить задания (по пунктам).
+
+\bigskip
+
+\noindent \textbf{Решение.} \bigskip
+
+Автомат $\mathcal{A}_1$ задан диаграммой:
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{center}
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,225); %set diagram left start at 0, and has height of 225
+
+%Shape: Circle [id:dp3788656202112841] 
+\draw   (244,127.01) .. controls (244,116.51) and (252.51,108) .. (263.01,108) .. controls (273.51,108) and (282.02,116.51) .. (282.02,127.01) .. controls (282.02,137.51) and (273.51,146.02) .. (263.01,146.02) .. controls (252.51,146.02) and (244,137.51) .. (244,127.01) -- cycle ;
+%Straight Lines [id:da3531049105116568] 
+\draw    (222.02,127.01) -- (241,127.01) ;
+\draw [shift={(244,127.01)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Shape: Circle [id:dp8755657407216839] 
+\draw   (315.02,127.01) .. controls (315.02,116.51) and (323.53,108) .. (334.03,108) .. controls (344.52,108) and (353.03,116.51) .. (353.03,127.01) .. controls (353.03,137.51) and (344.52,146.02) .. (334.03,146.02) .. controls (323.53,146.02) and (315.02,137.51) .. (315.02,127.01) -- cycle ;
+%Straight Lines [id:da5773564216074432] 
+\draw    (282.02,127.01) -- (312.02,127.01) ;
+\draw [shift={(315.02,127.01)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Shape: Circle [id:dp21115815838886354] 
+\draw   (387.02,128.01) .. controls (387.02,117.51) and (395.53,109) .. (406.03,109) .. controls (416.52,109) and (425.03,117.51) .. (425.03,128.01) .. controls (425.03,138.51) and (416.52,147.02) .. (406.03,147.02) .. controls (395.53,147.02) and (387.02,138.51) .. (387.02,128.01) -- cycle ;
+%Straight Lines [id:da6549413877804706] 
+\draw    (354.02,128.01) -- (384.02,128.01) ;
+\draw [shift={(387.02,128.01)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Shape: Circle [id:dp0018158773625442937] 
+\draw   (458.02,128.01) .. controls (458.02,117.51) and (466.53,109) .. (477.03,109) .. controls (487.52,109) and (496.03,117.51) .. (496.03,128.01) .. controls (496.03,138.51) and (487.52,147.02) .. (477.03,147.02) .. controls (466.53,147.02) and (458.02,138.51) .. (458.02,128.01) -- cycle ;
+%Straight Lines [id:da4986038767341274] 
+\draw    (425.02,128.01) -- (455.02,128.01) ;
+\draw [shift={(458.02,128.01)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Shape: Circle [id:dp6903003857763006] 
+\draw   (460.34,128.01) .. controls (460.34,118.79) and (467.81,111.32) .. (477.03,111.32) .. controls (486.24,111.32) and (493.72,118.79) .. (493.72,128.01) .. controls (493.72,137.23) and (486.24,144.7) .. (477.03,144.7) .. controls (467.81,144.7) and (460.34,137.23) .. (460.34,128.01) -- cycle ;
+%Curve Lines [id:da7584684031769633] 
+\draw    (249.99,113) .. controls (221.89,81.36) and (265.27,74.76) .. (263.32,105.08) ;
+\draw [shift={(263.01,108)}, rotate = 278.47] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Curve Lines [id:da9759342748681743] 
+\draw    (491.02,114.38) .. controls (519.29,84.16) and (481.97,71.99) .. (477.32,106.27) ;
+\draw [shift={(477.03,109)}, rotate = 274.55] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+
+% Text Node
+\draw (254.99,122) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{0}$};
+% Text Node
+\draw (326.99,122) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{1}$};
+% Text Node
+\draw (398.99,122) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{2}$};
+% Text Node
+\draw (469.99,123) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{3}$};
+% Text Node
+\draw (227.99,68) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle a,b$};
+% Text Node
+\draw (291.99,112) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle a$};
+% Text Node
+\draw (362.99,112) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle a$};
+% Text Node
+\draw (434.99,112) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle a$};
+% Text Node
+\draw (499.99,73) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle a,b$};
+% Text Node
+\draw (177,117) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \mathcal{A} :$};
+
+
+\end{tikzpicture}
+
+\end{center}
+
+Определим регулярное выражение (РВ) для $L(\mathcal{A})$. Для этого по диаграмме запишем систему
+\begin{equation*}
+    \begin{cases}
+        R_{q_0} = aR_{q_0} + bR_{q_0} + aR_{q_1},\\
+        R_{q_1} = aR_{q_2},\\
+        R_{q_2} = aR_{q_3},\\
+        R_{q_3} = aR_{q_3} + bR_{q_3} + \varepsilon,
+    \end{cases}
+\end{equation*}
+
+которая после преобразований имеет вид 
+
+\begin{equation*}
+    \begin{cases}
+        R_{q_0} = (a+b)^*aaa(a+b)^*,\\
+        R_{q_1} = aa(a+b)^*,\\
+        R_{q_2} = a(a+b)^*,\\
+        R_{q_3} = (a+b)^*.
+    \end{cases}
+\end{equation*}
+
+Для построения НКА по РВ приведём последовательность автоматов:
+
+\begin{center}
+
+
+
+    \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+    \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+    %uncomment if require: \path (0,603); %set diagram left start at 0, and has height of 603
+    
+    %Shape: Circle [id:dp3788656202112841] 
+    \draw   (127,86.01) .. controls (127,75.51) and (135.51,67) .. (146.01,67) .. controls (156.51,67) and (165.02,75.51) .. (165.02,86.01) .. controls (165.02,96.51) and (156.51,105.02) .. (146.01,105.02) .. controls (135.51,105.02) and (127,96.51) .. (127,86.01) -- cycle ;
+    %Straight Lines [id:da3531049105116568] 
+    \draw    (105.02,86.01) -- (124,86.01) ;
+    \draw [shift={(127,86.01)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Straight Lines [id:da5773564216074432] 
+    \draw    (165.02,86.01) -- (195.02,86.01) ;
+    \draw [shift={(198.02,86.01)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Shape: Circle [id:dp0018158773625442937] 
+    \draw   (199.02,86.01) .. controls (199.02,75.51) and (207.53,67) .. (218.03,67) .. controls (228.52,67) and (237.03,75.51) .. (237.03,86.01) .. controls (237.03,96.51) and (228.52,105.02) .. (218.03,105.02) .. controls (207.53,105.02) and (199.02,96.51) .. (199.02,86.01) -- cycle ;
+    %Shape: Circle [id:dp6903003857763006] 
+    \draw   (201.34,86.01) .. controls (201.34,76.79) and (208.81,69.32) .. (218.03,69.32) .. controls (227.24,69.32) and (234.72,76.79) .. (234.72,86.01) .. controls (234.72,95.23) and (227.24,102.7) .. (218.03,102.7) .. controls (208.81,102.7) and (201.34,95.23) .. (201.34,86.01) -- cycle ;
+    %Shape: Circle [id:dp5785344370559204] 
+    \draw   (321,86.01) .. controls (321,75.51) and (329.51,67) .. (340.01,67) .. controls (350.51,67) and (359.02,75.51) .. (359.02,86.01) .. controls (359.02,96.51) and (350.51,105.02) .. (340.01,105.02) .. controls (329.51,105.02) and (321,96.51) .. (321,86.01) -- cycle ;
+    %Straight Lines [id:da7942895291400163] 
+    \draw    (299.02,86.01) -- (318,86.01) ;
+    \draw [shift={(321,86.01)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Straight Lines [id:da8236091796215508] 
+    \draw    (359.02,86.01) -- (389.02,86.01) ;
+    \draw [shift={(392.02,86.01)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Shape: Circle [id:dp11168885468426804] 
+    \draw   (393.02,86.01) .. controls (393.02,75.51) and (401.53,67) .. (412.03,67) .. controls (422.52,67) and (431.03,75.51) .. (431.03,86.01) .. controls (431.03,96.51) and (422.52,105.02) .. (412.03,105.02) .. controls (401.53,105.02) and (393.02,96.51) .. (393.02,86.01) -- cycle ;
+    %Shape: Circle [id:dp503870285440674] 
+    \draw   (395.34,86.01) .. controls (395.34,76.79) and (402.81,69.32) .. (412.03,69.32) .. controls (421.24,69.32) and (428.72,76.79) .. (428.72,86.01) .. controls (428.72,95.23) and (421.24,102.7) .. (412.03,102.7) .. controls (402.81,102.7) and (395.34,95.23) .. (395.34,86.01) -- cycle ;
+    %Shape: Circle [id:dp46397367877320694] 
+    \draw   (126,224.01) .. controls (126,213.51) and (134.51,205) .. (145.01,205) .. controls (155.51,205) and (164.02,213.51) .. (164.02,224.01) .. controls (164.02,234.51) and (155.51,243.02) .. (145.01,243.02) .. controls (134.51,243.02) and (126,234.51) .. (126,224.01) -- cycle ;
+    %Straight Lines [id:da8081337392527714] 
+    \draw    (104.02,224.01) -- (123,224.01) ;
+    \draw [shift={(126,224.01)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Straight Lines [id:da8111832499763489] 
+    \draw    (160.02,211.01) -- (212.66,169.5) ;
+    \draw [shift={(215.02,167.64)}, rotate = 501.74] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Straight Lines [id:da37165061487404394] 
+    \draw    (162.02,233.01) -- (212.39,261.53) ;
+    \draw [shift={(215,263.01)}, rotate = 209.52] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Shape: Circle [id:dp24541733069363403] 
+    \draw   (214,162.01) .. controls (214,151.51) and (222.51,143) .. (233.01,143) .. controls (243.51,143) and (252.02,151.51) .. (252.02,162.01) .. controls (252.02,172.51) and (243.51,181.02) .. (233.01,181.02) .. controls (222.51,181.02) and (214,172.51) .. (214,162.01) -- cycle ;
+    %Straight Lines [id:da24396561811270034] 
+    \draw    (253.02,163.01) -- (283.02,163.01) ;
+    \draw [shift={(286.02,163.01)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Shape: Circle [id:dp1016621608545456] 
+    \draw   (285,163.01) .. controls (285,152.51) and (293.51,144) .. (304.01,144) .. controls (314.51,144) and (323.02,152.51) .. (323.02,163.01) .. controls (323.02,173.51) and (314.51,182.02) .. (304.01,182.02) .. controls (293.51,182.02) and (285,173.51) .. (285,163.01) -- cycle ;
+    %Shape: Circle [id:dp867123662504842] 
+    \draw   (215,263.01) .. controls (215,252.51) and (223.51,244) .. (234.01,244) .. controls (244.51,244) and (253.02,252.51) .. (253.02,263.01) .. controls (253.02,273.51) and (244.51,282.02) .. (234.01,282.02) .. controls (223.51,282.02) and (215,273.51) .. (215,263.01) -- cycle ;
+    %Straight Lines [id:da9950520202979365] 
+    \draw    (253,264.01) -- (283,264.01) ;
+    \draw [shift={(286,264.01)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Shape: Circle [id:dp9377184898151711] 
+    \draw   (286,264.01) .. controls (286,253.51) and (294.51,245) .. (305.01,245) .. controls (315.51,245) and (324.02,253.51) .. (324.02,264.01) .. controls (324.02,274.51) and (315.51,283.02) .. (305.01,283.02) .. controls (294.51,283.02) and (286,274.51) .. (286,264.01) -- cycle ;
+    %Shape: Circle [id:dp3755725688290201] 
+    \draw   (358.02,214.01) .. controls (358.02,203.51) and (366.53,195) .. (377.03,195) .. controls (387.52,195) and (396.03,203.51) .. (396.03,214.01) .. controls (396.03,224.51) and (387.52,233.02) .. (377.03,233.02) .. controls (366.53,233.02) and (358.02,224.51) .. (358.02,214.01) -- cycle ;
+    %Shape: Circle [id:dp3077752020869551] 
+    \draw   (360.34,214.01) .. controls (360.34,204.79) and (367.81,197.32) .. (377.03,197.32) .. controls (386.24,197.32) and (393.72,204.79) .. (393.72,214.01) .. controls (393.72,223.23) and (386.24,230.7) .. (377.03,230.7) .. controls (367.81,230.7) and (360.34,223.23) .. (360.34,214.01) -- cycle ;
+    %Straight Lines [id:da5223143932870962] 
+    \draw    (323.02,163.01) -- (368.56,194.74) ;
+    \draw [shift={(371.02,196.46)}, rotate = 214.87] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Straight Lines [id:da00310277693609029] 
+    \draw    (324.02,264.01) -- (366.56,234.18) ;
+    \draw [shift={(369.02,232.46)}, rotate = 504.97] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    
+    % Text Node
+    \draw (137.99,81) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{0}$};
+    % Text Node
+    \draw (210.99,81) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{1}$};
+    % Text Node
+    \draw (175,70) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle a$};
+    % Text Node
+    \draw (331.99,81) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{0}$};
+    % Text Node
+    \draw (404.99,81) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{1}$};
+    % Text Node
+    \draw (369,70) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle b$};
+    % Text Node
+    \draw (136.99,219) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{0}$};
+    % Text Node
+    \draw (224.99,157) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{1}$};
+    % Text Node
+    \draw (263,147) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle a$};
+    % Text Node
+    \draw (296.99,157) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{2}$};
+    % Text Node
+    \draw (225.99,258) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{3}$};
+    % Text Node
+    \draw (264,248) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle a$};
+    % Text Node
+    \draw (296.99,259) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{4}$};
+    % Text Node
+    \draw (369.99,209) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q_{5}$};
+    % Text Node
+    \draw (68,78) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle a:$};
+    % Text Node
+    \draw (180,174) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \varepsilon $};
+    % Text Node
+    \draw (187,232) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \varepsilon $};
+    % Text Node
+    \draw (346,165) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \varepsilon $};
+    % Text Node
+    \draw (340,232) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle \varepsilon $};
+    % Text Node
+    \draw (269,78) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle b:$};
+    % Text Node
+    \draw (49,215) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle a+b:$};
+    
+    
+    \end{tikzpicture}
+
+\end{center}
+
+
+\begin{figure}[h!]
+    \centering
+        \begin{center}
+    \includegraphics[width = 400pt]{image/picture1.png}
+        \end{center}
+\end{figure}
+
+\newpage
+
+Приведём таблицу перевода НКА---ДКА для НКА $\mathcal{A}_2$:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    $Q$    & Состояния             & $a$    & $b$   \\ \hline
+    $\rightarrow Q_0$  & 0,1,2,4,7             & $Q_1$  & $Q_2$ \\ \hline
+    $Q_1$  & 3,6,7,8,              & $Q_3$  & ---   \\ \hline
+    $Q_2$  & 1,2,4,5,6,7           & $Q_4$  & $Q_2$ \\ \hline
+    $Q_3$  & 8,9                   & $Q_5$  & ---   \\ \hline
+    $Q_4$  & 1,2,3,4,6,7,8         & $Q_6$  & $Q_2$ \\ \hline
+    $Q_5$  & 9,10,11,12,14         & $Q_7$  & $Q_8$ \\ \hline
+    $Q_6$  & 1,2,3,4,6,7,8,9       & $Q_9$  & $Q_2$ \\ \hline
+    $\textcolor{red}{Q_7}$  & 10,11,12,13,14,16,17  & $Q_{10}$ & $Q_8$ \\ \hline
+    $\textcolor{red}{Q_8}$  & 11,12,14,15,16,17     & $Q_{10}$ & $Q_8$ \\ \hline
+    $Q_9$  & 1,2,3,4,6,7,8,9,10    & $Q_{11}$ & $Q_2$ \\ \hline
+    $\textcolor{red}{Q_{10}}$ & 11,12,13,14,16,17     & $Q_{10}$ & $Q_8$ \\ \hline
+    $\textcolor{red}{Q_{11}}$ & 1,2,3,4,6,7,8,9,10,17 & $Q_{12}$ & $Q_2$ \\ \hline
+    $Q_{12}$ & 3,8,9,10              & $Q_{13}$ & ---   \\ \hline
+    $Q_{13}$ & 9,10                  & $Q_{14}$ & ---   \\ \hline
+    $Q_{14}$ & 10,11,12,14           & $Q_{10}$ & $Q_8$ \\ \hline
+    \end{tabular}
+    \end{table}
+
+Приведём таблицу перевода НКА---ДКА для $\mathcal{A}_1$:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    $Q$   & Состояния & $a$   & $b$   \\ \hline
+    $\rightarrow Q_0$ & 0         & $Q_1$ & $Q_0$ \\ \hline
+    $Q_1$ & 0,1       & $Q_2$ & $Q_0$ \\ \hline
+    $Q_2$ & 0,1,2     & $Q_3$ & $Q_0$ \\ \hline
+    $\textcolor{red}{Q_3}$ & 0,1,2,3   & $Q_3$ & $Q_4$ \\ \hline
+    $\textcolor{red}{Q_4}$ & 0,3       & $Q_5$ & $Q_4$ \\ \hline
+    $\textcolor{red}{Q_5}$ & 0,1,3     & $Q_3$ & $Q_4$ \\ \hline
+    \end{tabular}
+    \end{table}
+
+    По таблице для $\mathcal{A}_1$ строим автомат $\mathcal{D}_1$:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (5.4,-7.2) circle (2.4);
+\draw (5.4,-7.2) node {$Q_0$};
+\draw [black] (13.3,-7.4) circle (2.4);
+\draw (13.3,-7.4) node {$Q_1$};
+\draw [black] (20.9,-7.4) circle (2.4);
+\draw (20.9,-7.4) node {$Q_2$};
+\draw [black] (28.9,-7.4) circle (2.4);
+\draw (28.9,-7.4) node {$Q_3$};
+\draw [black] (28.9,-7.4) circle (1.8);
+\draw [black] (36.7,-7.4) circle (2.4);
+\draw (36.7,-7.4) node {$Q_4$};
+\draw [black] (36.7,-7.4) circle (1.8);
+\draw [black] (44.4,-7.4) circle (2.4);
+\draw (44.4,-7.4) node {$Q_5$};
+\draw [black] (44.4,-7.4) circle (1.8);
+\draw [black] (0.2,-7.2) -- (3,-7.2);
+\fill [black] (3,-7.2) -- (2.2,-6.7) -- (2.2,-7.7);
+\draw [black] (6.709,-5.229) arc (129.63337:47.4662:4.098);
+\fill [black] (12.09,-5.37) -- (11.84,-4.46) -- (11.17,-5.19);
+\draw (9.44,-3.77) node [above] {$a$};
+\draw [black] (3.5,-5.749) arc (260.37533:-27.62467:1.8);
+\draw (2.01,-1.86) node [above] {$b$};
+\fill [black] (5.4,-4.81) -- (6.02,-4.1) -- (5.04,-3.94);
+\draw [black] (14.272,-5.249) arc (137.69659:42.30341:3.823);
+\fill [black] (19.93,-5.25) -- (19.76,-4.32) -- (19.02,-4.99);
+\draw (17.1,-3.5) node [above] {$a$};
+\draw [black] (12.109,-9.443) arc (-47.28449:-135.61594:4.036);
+\fill [black] (6.49,-9.3) -- (6.69,-10.22) -- (7.4,-9.52);
+\draw (9.26,-11.04) node [below] {$b$};
+\draw [black] (21.887,-5.251) arc (138.29861:41.70139:4.036);
+\fill [black] (27.91,-5.25) -- (27.75,-4.32) -- (27.01,-4.99);
+\draw (24.9,-3.4) node [above] {$a$};
+\draw [black] (20.833,-9.79) arc (-10.39642:-171.0821:7.825);
+\fill [black] (5.41,-9.59) -- (5.04,-10.46) -- (6.02,-10.3);
+\draw (13.03,-16.71) node [below] {$b$};
+\draw [black] (27.955,-9.596) arc (4.43979:-283.56021:1.8);
+\draw (24.24,-12.35) node [left] {$a$};
+\fill [black] (26.58,-7.99) -- (25.75,-7.55) -- (25.82,-8.55);
+\draw [black] (30.023,-5.32) arc (134.33371:45.66629:3.974);
+\fill [black] (35.58,-5.32) -- (35.35,-4.4) -- (34.66,-5.12);
+\draw (32.8,-3.69) node [above] {$b$};
+\draw [black] (37.803,-5.311) arc (134.59443:45.40557:3.913);
+\fill [black] (43.3,-5.31) -- (43.08,-4.39) -- (42.38,-5.11);
+\draw (40.55,-3.68) node [above] {$a$};
+\draw [black] (37.167,-9.745) arc (39.00658:-248.99342:1.8);
+\draw (34.54,-13.18) node [below] {$b$};
+\fill [black] (35.12,-9.2) -- (34.19,-9.31) -- (34.82,-10.09);
+\draw [black] (44.612,-9.782) arc (-3.54242:-176.45758:7.977);
+\fill [black] (28.69,-9.78) -- (28.24,-10.61) -- (29.24,-10.55);
+\draw (36.65,-17.77) node [below] {$a$};
+\draw [black] (42.877,-9.212) arc (-56.40429:-123.59571:4.205);
+\fill [black] (38.22,-9.21) -- (38.61,-10.07) -- (39.17,-9.24);
+\draw (40.55,-10.41) node [below] {$b$};
+\end{tikzpicture}
+\end{center}
+
+Для полученного РВ построим таблицу, содержащую followpos($i$):
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    $i$   & followpos($i$) \\ \hline
+    $1_a$ & $1_a2_b3_a$    \\ \hline
+    $2_b$ & $1_a2_b3_a$    \\ \hline
+    $3_a$ & $4_a$          \\ \hline
+    $4_a$ & $5_a$          \\ \hline
+    $5_a$ & $6_a7_b8_{\#}$    \\ \hline
+    $6_a$ & $6_a7_b8_{\#}$    \\ \hline
+    $7_b$ & $6_a7_b8_{\#}$    \\ \hline
+    \end{tabular}
+    \end{table}
+
+
+\newpage    
+По таблице строим автомат $\mathcal{D}_2$:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (5.8,-8.1) circle (2.6);
+\draw (5.8,-8.1) node {$Q_0$};
+\draw [black] (15.8,-8.1) circle (2.6);
+\draw (15.8,-8.1) node {$Q_1$};
+\draw [black] (25.6,-8.1) circle (2.6);
+\draw (25.6,-8.1) node {$Q_2$};
+\draw [black] (35.5,-8.1) circle (2.6);
+\draw (35.5,-8.1) node {$Q_3$};
+\draw [black] (35.5,-8.1) circle (2);
+\draw [black] (45.3,-8.1) circle (2.6);
+\draw (45.3,-8.1) node {$Q_4$};
+\draw [black] (45.3,-8.1) circle (2);
+\draw [black] (55,-8.1) circle (2.6);
+\draw (55,-8.1) node {$Q_5$};
+\draw [black] (55,-8.1) circle (2);
+\draw [black] (0.2,-8.1) -- (3.2,-8.1);
+\fill [black] (3.2,-8.1) -- (2.4,-7.6) -- (2.4,-8.6);
+\draw [black] (8.4,-8.1) -- (13.2,-8.1);
+\fill [black] (13.2,-8.1) -- (12.4,-7.6) -- (12.4,-8.6);
+\draw (10.8,-8.6) node [below] {$a$};
+\draw [black] (18.4,-8.1) -- (23,-8.1);
+\fill [black] (23,-8.1) -- (22.2,-7.6) -- (22.2,-8.6);
+\draw (20.7,-8.6) node [below] {$a$};
+\draw [black] (28.2,-8.1) -- (32.9,-8.1);
+\fill [black] (32.9,-8.1) -- (32.1,-7.6) -- (32.1,-8.6);
+\draw (30.55,-8.6) node [below] {$a$};
+\draw [black] (38.1,-8.1) -- (42.7,-8.1);
+\fill [black] (42.7,-8.1) -- (41.9,-7.6) -- (41.9,-8.6);
+\draw (40.4,-8.6) node [below] {$b$};
+\draw [black] (47.9,-8.1) -- (52.4,-8.1);
+\fill [black] (52.4,-8.1) -- (51.6,-7.6) -- (51.6,-8.6);
+\draw (50.15,-8.6) node [below] {$a$};
+\draw [black] (3.514,-6.883) arc (269.716:-18.284:1.95);
+\draw (1.38,-2.85) node [above] {$b$};
+\fill [black] (5.37,-5.55) -- (5.88,-4.75) -- (4.88,-4.74);
+\draw [black] (6.968,-5.808) arc (138.44611:41.55389:5.121);
+\fill [black] (6.97,-5.81) -- (7.87,-5.54) -- (7.12,-4.88);
+\draw (10.8,-3.58) node [above] {$b$};
+\draw [black] (23.996,-10.139) arc (-44.58759:-135.41241:11.648);
+\fill [black] (7.4,-10.14) -- (7.61,-11.06) -- (8.32,-10.36);
+\draw (15.7,-14.11) node [below] {$b$};
+\draw [black] (33.678,-6.259) arc (252.43495:-35.56505:1.95);
+\draw (32.81,-2.02) node [above] {$a$};
+\fill [black] (35.85,-5.53) -- (36.57,-4.92) -- (35.62,-4.62);
+\draw [black] (43.545,-6.195) arc (250.38954:-37.61046:1.95);
+\draw (42.82,-1.94) node [above] {$b$};
+\fill [black] (45.74,-5.55) -- (46.48,-4.96) -- (45.54,-4.63);
+\draw [black] (43.545,-6.195) arc (250.38954:-37.61046:1.95);
+\fill [black] (45.74,-5.55) -- (46.48,-4.96) -- (45.54,-4.63);
+\draw [black] (46.858,-6.051) arc (128.62239:51.37761:5.274);
+\fill [black] (46.86,-6.05) -- (47.8,-5.94) -- (47.17,-5.16);
+\draw (50.15,-4.4) node [above] {$b$};
+\draw [black] (53.921,-10.458) arc (-31.89565:-148.10435:10.212);
+\fill [black] (36.58,-10.46) -- (36.58,-11.4) -- (37.43,-10.87);
+\draw (45.25,-15.77) node [below] {$a$};
+\end{tikzpicture}
+\end{center}
+
+Минимизируем автомат $\mathcal{D}_1$:
+
+\begin{figure}[h!]
+    \centering
+        \begin{center}
+    \includegraphics[width = 200pt]{image/picture2.png}
+        \end{center}
+\end{figure}
+
+Теперь построим минимальный полный ДКА по $\mathcal{D}_1$:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (5.3,-7.7) circle (2.5);
+\draw (5.3,-7.7) node {$q_0$};
+\draw [black] (17.2,-8) circle (2.5);
+\draw (17.2,-8) node {$q_1$};
+\draw [black] (29.8,-8) circle (2.5);
+\draw (29.8,-8) node {$q_2$};
+\draw [black] (41.5,-8) circle (2.5);
+\draw (41.5,-8) node {$q_3$};
+\draw [black] (41.5,-8) circle (1.9);
+\draw [black] (0.2,-7.7) -- (2.8,-7.7);
+\fill [black] (2.8,-7.7) -- (2,-7.2) -- (2,-8.2);
+\draw [black] (3.475,-6.006) arc (254.85446:-33.14554:1.875);
+\draw (2.36,-1.92) node [above] {$b$};
+\fill [black] (5.53,-5.22) -- (6.23,-4.58) -- (5.26,-4.32);
+\draw [black] (7.8,-7.76) -- (14.7,-7.94);
+\fill [black] (14.7,-7.94) -- (13.91,-7.42) -- (13.89,-8.42);
+\draw (11.24,-8.37) node [below] {$a$};
+\draw [black] (19.7,-8) -- (27.3,-8);
+\fill [black] (27.3,-8) -- (26.5,-7.5) -- (26.5,-8.5);
+\draw (23.5,-8.5) node [below] {$a$};
+\draw [black] (32.3,-8) -- (39,-8);
+\fill [black] (39,-8) -- (38.2,-7.5) -- (38.2,-8.5);
+\draw (35.65,-8.5) node [below] {$a$};
+\draw [black] (6.965,-5.854) arc (127.55827:49.55348:6.886);
+\fill [black] (6.96,-5.85) -- (7.9,-5.76) -- (7.29,-4.97);
+\draw (11.35,-3.9) node [above] {$b$};
+\draw [black] (28.127,-9.854) arc (-46.76447:-134.63862:15.277);
+\fill [black] (6.93,-9.59) -- (7.15,-10.51) -- (7.85,-9.8);
+\draw (17.47,-14.51) node [below] {$b$};
+\draw [black] (40.398,-5.767) arc (234:-54:1.875);
+\draw (41.5,-1.88) node [above] {$a,b$};
+\fill [black] (42.6,-5.77) -- (43.48,-5.41) -- (42.67,-4.83);
+\end{tikzpicture}
+\end{center}
+
+Построим КМП-автомат, ищущий вхождение образца $aaa$ в текст:
+
+\begin{figure}[h!]
+    \centering
+        \begin{center}
+    \includegraphics[width = 200pt]{image/picture3.png}
+        \end{center}
+\end{figure} \qed
+
+\end{document}
