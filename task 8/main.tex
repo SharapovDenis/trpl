@@ -1,0 +1,494 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{amsfonts, amssymb, amsmath, latexsym}
+\usepackage{nicefrac}
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage[colorinlistoftodos,bordercolor=orange,backgroundcolor=orange!20,linecolor=orange,textsize=scriptsize]{todonotes}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}       % hyperlinks
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{nameref}
+\usepackage{booktabs}       % professional-quality tables
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{xcolor, colortbl}
+\usepackage{etoolbox}
+
+% \graphicspath{ {./} }
+
+\usepackage[verbose=true,letterpaper]{geometry}
+
+\newgeometry{
+    textheight=9.5in,
+    textwidth=6in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+\usepackage{epigraph}
+
+%
+
+\newcommand{\argmin}{\mathop{\arg\!\min}}
+\newcommand{\argmax}{\mathop{\arg\!\max}}
+
+\newcommand{\Var}{\mathbb{V}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\makebold}[1]{\boldsymbol{#1}}
+\newcommand{\mean}[1]{\overline{#1}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\partfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\term}[1]{\textbf{#1}}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lf}{\left\{}
+\newcommand{\rf}{\right\}}
+\newcommand{\ls}{\left[}
+\newcommand{\rs}{\right]}
+\newcommand{\lv}{\left|}
+\newcommand{\rv}{\right|}
+
+\newcommand*{\affaddr}[1]{#1} % No op here. Customize it for different styles.
+\newcommand*{\affmark}[1][*]{\textsuperscript{#1}}
+
+
+\usepackage{subcaption}
+%\usepackage[font={small}]{caption}
+
+\usepackage{amsthm}
+\usepackage{tikz}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+
+\newtheorem{exercise}{Задача}[section]
+
+\newtheorem*{solution}{Решение}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{0em}{2.1em}}
+\makeatother
+
+% \setlength\epigraphwidth{.8\textwidth}
+\setlength\epigraphrule{0pt}
+
+\title{ТРЯП. Домашнее задание № 8}
+\author{Шарапов Денис, Б05-005}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Задача 1}
+
+$L$ --- язык, состоящий из всех слов в алфавите $\{0, 1\}$, которые содержат чётное число нулей и нечётное число единиц. Выполнить следующие задания:
+
+\begin{enumerate}
+    \item Построить эквивалентную праволинейную грамматику. Будет ли она однозначной?
+    \item Построить регулярное выражение для языка $L^R$.
+\end{enumerate}
+
+\noindent \textbf{Решение.}
+
+\begin{enumerate}
+    \item Построим автомат, распознающий язык всех слов, которые содержат чётное число нулей. Далее построим автомат, распознающий язык всех слов, которые содержат нечётное число единиц. После чего пересечём эти автоматы и получим  следующий автомат (задача 5 из домашнего задания № 2):
+    
+    \begin{center}
+    \begin{tikzpicture}[scale=0.2]
+    \tikzstyle{every node}+=[inner sep=0pt]
+    \draw [black] (5.4,-11.1) circle (2.2);
+    \draw (5.4,-11.1) node {$A$};
+    \draw [black] (21.8,-11.1) circle (2.2);
+    \draw (21.8,-11.1) node {$D$};
+    \draw [black] (13.7,-2.4) circle (2.2);
+    \draw (13.7,-2.4) node {$B$};
+    \draw [black] (13.7,-2.4) circle (1.6);
+    \draw [black] (13.7,-19.5) circle (2.2);
+    \draw (13.7,-19.5) node {$C$};
+    \draw [black] (5.63,-8.918) arc (-193.44618:-253.85805:8.496);
+    \fill [black] (11.53,-2.73) -- (10.62,-2.47) -- (10.9,-3.44);
+    \draw (7.22,-3.56) node [left] {$1$};
+    \draw [black] (13.058,-4.501) arc (-22.57869:-64.72553:11.262);
+    \fill [black] (7.47,-10.36) -- (8.41,-10.47) -- (7.98,-9.57);
+    \draw (11.34,-9.42) node [right] {$1$};
+    \draw [black] (15.876,-2.675) arc (74.96065:10.94853:8.037);
+    \fill [black] (21.68,-8.91) -- (22.02,-8.03) -- (21.04,-8.22);
+    \draw (20.21,-3.5) node [right] {$0$};
+    \draw [black] (19.763,-10.278) arc (-117.34244:-156.74838:11.727);
+    \fill [black] (14.37,-4.49) -- (14.23,-5.42) -- (15.15,-5.03);
+    \draw (16.03,-9.32) node [left] {$0$};
+    \draw [black] (11.528,-19.191) arc (-105.60465:-165.08152:8.383);
+    \fill [black] (11.53,-19.19) -- (10.89,-18.49) -- (10.62,-19.46);
+    \draw (7.3,-18.48) node [left] {$0$};
+    \draw [black] (7.47,-11.835) arc (64.90276:24.41108:11.348);
+    \fill [black] (7.47,-11.83) -- (7.98,-12.63) -- (8.41,-11.72);
+    \draw (11.25,-12.66) node [right] {$0$};
+    \draw [black] (14.461,-17.439) arc (154.51154:117.57172:12.067);
+    \fill [black] (19.77,-11.94) -- (18.83,-11.86) -- (19.29,-12.75);
+    \draw (16.14,-12.78) node [left] {$1$};
+    \draw [black] (21.601,-13.284) arc (-13.06184:-74.85491:8.031);
+    \fill [black] (15.88,-19.22) -- (16.78,-19.5) -- (16.52,-18.53);
+    \draw (20.09,-18.51) node [right] {$1$};
+    \draw [black] (0.2,-11.1) -- (3.2,-11.1);
+    \fill [black] (3.2,-11.1) -- (2.4,-10.6) -- (2.4,-11.6);
+    \end{tikzpicture}
+    \end{center}
+
+        Теперь воспользуемся алгоритмом перевода НКА $\rightarrow$ ПГ. Пусть $G$ --- искомая праволинейная грамматика. Обозначим $G = (N, T, P, S)$, где:
+
+        \begin{itemize}
+            \item $N = \{A, B, C, D\}$ --- множество нетерминалов;
+            \item $S = A$ --- начальный символ грамматики;
+            \item $T = \{0, 1\}$ --- алфавит;
+            \item $P$ --- множество правил вывода.
+        \end{itemize}
+
+        Алгоритм: 
+
+        \begin{enumerate}
+            \item $(A \rightarrow \sigma B) \in P$, если $\delta (A, \sigma) = \{B\}, \;\sigma \in T$;
+            \item $(A \rightarrow \sigma) \in P$, если $\delta (A, \sigma) = \{B\}, \;\sigma \in T$ и $B \in F$ --- принимающее;
+            \item $(S \rightarrow \varepsilon) \in P$, если $q_0 \in F$.
+        \end{enumerate}
+
+        Тогда грамматика задаётся правилами: 
+        
+        \begin{itemize}
+            \item[] $A \rightarrow 0C \; | \; 1$,
+            \item[] $B \rightarrow 0D \; | \; 1A$,
+            \item[] $C \rightarrow 0A \; | \; 1D$,
+            \item[] $D \rightarrow 0 \; | \; 1C$.
+        \end{itemize}
+
+    Алгоритм построения грамматики строит $G$ буквально по переходам в автомате. Заметим, что автомат --- детерминированный конечный, т. е. в нём каждый переход определён однозначно (с помощью перехода можно получить конкретное слово и только его). Поэтому данная грамматика является однозначной.
+
+    \item Построим РВ для языка $L^R$. Для этого воспользуемся алгоритмом перевода автомата, распознающего язык $L$, в автомат, распознающий язык $L^R$:
+    
+    \begin{center}
+        \begin{tikzpicture}[scale=0.2]
+        \tikzstyle{every node}+=[inner sep=0pt]
+        \draw [black] (2.4,-13.4) circle (2.2);
+        \draw (2.4,-13.4) node {$A$};
+        \draw [black] (2.4,-13.4) circle (1.6);
+        \draw [black] (18.8,-13.4) circle (2.2);
+        \draw (18.8,-13.4) node {$D$};
+        \draw [black] (10.7,-4.7) circle (2.2);
+        \draw (10.7,-4.7) node {$B$};
+        \draw [black] (10.7,-21.8) circle (2.2);
+        \draw (10.7,-21.8) node {$C$};
+        \draw [black] (10.7,-0.2) -- (10.7,-2.5);
+        \fill [black] (10.7,-2.5) -- (11.2,-1.7) -- (10.2,-1.7);
+        \draw [black] (9.972,-6.773) arc (-24.51651:-62.78771:12.231);
+        \fill [black] (9.97,-6.77) -- (9.18,-7.29) -- (10.09,-7.71);
+        \draw (8.22,-11.61) node [right] {$1$};
+        \draw [black] (8.52,-22.016) arc (-93.59851:-177.08766:6.798);
+        \fill [black] (8.52,-22.02) -- (7.75,-21.47) -- (7.69,-22.47);
+        \draw (3.59,-21.48) node [left] {$0$};
+        \draw [black] (4.435,-14.228) arc (62.79904:26.51479:12.477);
+        \fill [black] (4.44,-14.23) -- (4.92,-15.04) -- (5.38,-14.15);
+        \draw (8.13,-15.08) node [right] {$0$};
+        \draw [black] (11.417,-19.724) arc (155.48743:116.59583:11.541);
+        \fill [black] (11.42,-19.72) -- (12.2,-19.2) -- (11.29,-18.79);
+        \draw (13.08,-15.03) node [left] {$1$};
+        \draw [black] (19.28,-15.536) arc (2.76746:-90.6842:6.36);
+        \fill [black] (19.28,-15.54) -- (18.82,-16.36) -- (19.82,-16.31);
+        \draw (18.03,-21.73) node [right] {$1$};
+        \draw [black] (12.858,-4.332) arc (89.94403:-4.03485:6.485);
+        \fill [black] (12.86,-4.33) -- (13.66,-4.83) -- (13.66,-3.83);
+        \draw (18.13,-4.93) node [right] {$0$};
+        \draw [black] (16.777,-12.543) arc (-118.1499:-155.94091:12.159);
+        \fill [black] (16.78,-12.54) -- (16.31,-11.72) -- (15.84,-12.61);
+        \draw (13.08,-11.57) node [left] {$0$};
+        \draw [black] (1.944,-11.258) arc (-177.49184:-269.81239:6.623);
+        \fill [black] (1.94,-11.26) -- (2.41,-10.44) -- (1.41,-10.48);
+        \draw (3.24,-4.93) node [left] {$1$};
+        \end{tikzpicture}
+        \end{center}
+
+
+Составляем систему:
+
+\begin{equation*}
+    \begin{cases}
+        R_{A} = 0R_C + 1R_B + \varepsilon,\\
+        R_{B} = 0R_D + 1R_A,\\
+        R_{C} = 0R_A + 1R_D,\\
+        R_{D} = 0R_B + 1R_C.
+    \end{cases}\;
+    \begin{cases}
+        R_{A} = 0(0R_A + 1R_D) + 1(0R_D + 1R_A) + \varepsilon,\\
+        R_{B} = 0R_D + 1R_A,\\
+        R_{C} = 0R_A + 1R_D,\\
+        R_{D} = 0R_B + 1R_C.
+    \end{cases}\;
+\end{equation*}
+
+\begin{equation*}
+    \begin{cases}
+        R_{A} = (00+11)^*((01+10)R_D + \varepsilon),\\
+        R_{B} = 0R_D + 1R_A,\\
+        R_{C} = 0R_A + 1R_D,\\
+        R_{D} = 0R_B + 1R_C.
+    \end{cases}\;
+    \begin{cases}
+        R_{A} = (00+11)^*((01+10)R_D + \varepsilon),\\
+        R_{B} = 0R_D + 1R_A,\\
+        R_{C} = 0R_A + 1R_D,\\
+        R_{D} = 0(0R_D + 1R_A) + 1(0R_A + 1R_D).
+    \end{cases}\;
+\end{equation*}
+
+\begin{equation*}
+    \begin{cases}
+        R_{A} = (00+11)^*((01+10)R_D + \varepsilon),\\
+        R_{B} = 0R_D + 1R_A,\\
+        R_{C} = 0R_A + 1R_D,\\
+        R_{D} = (00+11+(01+10)(00+11)^*(01+10))^*(01(00+11)^* + 10(00+11)^*).
+    \end{cases}\;
+\end{equation*}
+
+Откуда и получаем искомое РВ. \qed
+
+\end{enumerate}
+
+\section*{Задача 2}
+
+Покажите индукцией по длине слова, что КС-грамматика с правилами $$S \rightarrow SS \: | \; aSb \; | \; bSa \; | \; \varepsilon$$ порождает язык всех слов с равным числом символов $a$ и $b$. \bigskip
+
+\noindent \textbf{Решение.} \medskip
+
+Пусть $L$ --- язык всех слов с равным числов символов $a$ и $b$, $L(G)$ --- язык, порождаемый грамматикой $G$ из условия. \medskip
+
+\noindent \textbf{Утверждение.} $L(G) \subseteq L$. \medskip
+
+\noindent \textbf{Доказательство.} Выберем произвольное слово $w \in L(G)$. Докажем по индукции числа $n$ букв в слове $w$. \medskip 
+
+База индукции:
+
+\begin{itemize}
+    \item[1)] $n = 0: w = \varepsilon \in L$, выведенное из правила $S \rightarrow \varepsilon$
+    \item[2)] $n = 2$: $w = ab \in L$ или $w = ba \in L$, выведенные цепочками $S \rightarrow aSb \rightarrow ab$ или $S~\rightarrow~bSa~\rightarrow~ba$ соответственно.
+\end{itemize}
+
+Далее будем использовать натуральную константу $k \geq 2$. \medskip
+
+\textbf{Случай 1.} Индукция для правила вывода $S \rightarrow aSb$. \medskip
+
+Предположение индукции $n = 2k$: \medskip
+
+Пусть существует цепочка, выводящая слово $w \in L$ длиной $|w| = n$ применением правила $S \rightarrow \varepsilon$. \medskip
+
+Переход индукции $n = 2k + 2$: \medskip
+
+Применим $k$ раз правило вывода $S \rightarrow aSb$. По предположению индукции найдётся цепочка (просто предъявим её) такая, что из неё можно вывести слово длиной $n = 2k$: $$S \Rightarrow aSb \Rightarrow aaSbb \Rightarrow \ldots \Rightarrow a^kSb^k.$$ Применяем выбранное правило ещё раз: $$S \Rightarrow^* a^{k+1}Sb^{k+1} \Rightarrow a^{k+1}b^{k+1} \in L.$$
+
+\textbf{Случай 2.} Индукция для правила вывода $S \rightarrow bSa$ --- аналогично. \medskip
+
+\textbf{Случай 3.} Индукция для комбинации правил вывода $S \rightarrow aSb$ и $S \rightarrow bSa$. \medskip
+
+Предположение индукции $n = 2k$: \medskip 
+
+Пусть существует цепочка, выводящая слово $w \in L$ длиной $|w| = 2k$ применением правила $S \rightarrow \varepsilon$. \medskip
+
+Переход индукции $n = 2k + 2$: \medskip
+
+Воспользуемся уже доказанными утверждениями (случаи 1 и 2). Пусть без ограничения общности правила были применены в таком порядке (для другого порядка рассуждения аналогичны): сначала $m_1\geq 1$ раз применили правило $S \rightarrow aSb$, затем $m_2\geq 1$ раз применили правило $S \rightarrow bSa$, после чего $m_3 \geq 0$ раз применили правило $S \rightarrow aSb$ и т. д. по индукции числа чередований правил. Случай 1 утверждает, что после применения $m_1\geq 1$ раз первого правила выводится слово $v\in L$. Далее второе правило $S \rightarrow bSa$ изменит количество символов $a$ и $b$ в слове $v$ (текущее на данный момент) на одинаковое количество. Далее применяем случай~2 и по индукции числа чередований правил получим слово $w \in L$. \medskip
+
+\textbf{Случай 4.} Индукция для правила вывода $S \rightarrow SS$. \medskip
+
+Предположение индукции $n = 2^k$: \medskip 
+
+Пусть существует цепочка, выводящая слово $w \in L$ длиной $|w| = 2^k$ применением правила $S \rightarrow aSb \; | \; bSa \; | \; \varepsilon$. \medskip
+
+Переход индукции $n = 2^{k + 1}$: \medskip
+
+Применим $k$ раз правило вывода $S \rightarrow SS$: $$S \Rightarrow SS \Rightarrow SSSS \Rightarrow^* S^{2^k}.$$ 
+
+Делаем ещё один переход: $$S \Rightarrow^* S^{2^{k+1}}.$$
+
+По предложению индукции найдётся цепочка (предъявим её) выводящая слово $w\in L$ длиной $|w|_n$: используя доказанные случаи 1, 2, 3, 4, подставляем всевозможные комбинации правил 1 и 2 в вывод $$S \Rightarrow^* S^{2^k}$$ и получаем слово длиной $2^k$ при последней замене $S \rightarrow \varepsilon$. Теперь представим, что последней замены не было. Применяем правило $S \rightarrow SS$, после чего применяем комбинации правил 1 и 2, затем применяем правило $S \rightarrow \varepsilon$ и получаем слово длиной $n = 2^{k+1}$, т. к. при замене каждого терминального символа количество букв в слово изменяется ровно на единицу (<<удаляется>>~$S$, подставляется $ab$ или $ba$), а при последнем переходе индукции было использовано правило $S \rightarrow SS$, которое дало четное число терминалов $S$. \medskip
+
+\textbf{Случай 5.} Произвольная комбинация правил $S \rightarrow SS \: | \; aSb \; | \; bSa \; | \; \varepsilon$. Используются доказанные случаи 1, 2, 3, 4. \qed
+
+\medskip
+
+\noindent \textbf{Утверждение.} $L \subseteq L(G)$. \medskip
+
+\noindent \textbf{Доказательство.} Требуется доказать утверждение $$\forall w\in L \hookrightarrow w \in L(G).$$ Докажем по индукции числа $n$ букв в слове в $w \in L$. \medskip
+
+База индукции: 
+
+\begin{itemize}
+    \item[1)] $n = 0: w = \varepsilon \in L(G)$, выведенное из правила $S \rightarrow \varepsilon$
+    \item[2)] $n = 2$: $w = ab \in L(G)$ или $w = ba \in L(G)$, выведенные цепочками $S \rightarrow aSb \rightarrow ab$ или $S \rightarrow bSa \rightarrow ba$ соответственно.
+\end{itemize}
+
+Далее будем использовать натуральную константу $k \geq 2$. \medskip
+
+Предположение индукции $n = 2k$: пусть верно утверждение
+$$\forall w\in L : |w| = 2k \hookrightarrow w \in L(G).$$
+
+Переход индукции $n = 2k+2$: \medskip
+
+Используем утверждение индукции. Если произвольное слово $w\in L$ длиной $|w| = 2k$ лежит в языке $L(G)$, то его можно вывести последовательным применением правил. Пусть в цепочке вывода было сделано $m-1$ шагов так, что если сделать ещё один шаг $(m - 1) \rightarrow m$, то можно вывести слово $w$. Тогда на шаге $m$ применим одно из правил вывода (кроме $S \rightarrow \varepsilon)$. Т. к. мы рассматриваем произвольное слово $w \in L$, то будут учтены всевозможные комбинации подстановок правил (потому что в предположении индукции можно вывести произвольное слово из $L$ длины $2k$). После применения одного из правил и дальшейшего применения правила $S \rightarrow \varepsilon$ получим слово длиной $n =2k+2, 2k+4, 2k+6, 2k+8 \ldots$ в зависимости от предыстории (например, в выводе была длинная последовательность $SS$, расмотренная в прошлом утверждении). Используя доказанные случаи прошлого утверждения, получаем, что произвольное слово, выбранное в предположении индукции, не могло покинуть множество $L$ после применения правил. Переход индукции доказан. \qed
+
+\medskip
+
+Замечение: \medskip 
+
+\textit{Утверждение, данное в условии задачи, удобнее доказывать следующим образом: доказать сначала по индукции (того, что удобнее выбрать) включение $L \subseteq L(G)$, а затем, используя уже доказанное утверждение, по контрапозиции доказать обратное включение.}
+
+
+\section*{Задача 3}
+
+\begin{enumerate}
+    \item Показать, что язык палиндромов в произвольном алфавите ялвяется КС-языком.
+    \item Показать, что дополнение к языку палиндромов также является КС-языком.
+\end{enumerate}
+
+\noindent \textbf{Решение.}
+
+\begin{enumerate}
+    \item Покажем, что язык палиндромов в произвольном алфавите является КС-языком. Для этого достаточно привести грамматику $G = (N, T, P, S)$ в качестве примера. Пусть 
+    \begin{itemize}
+        \item $N = \{S\}$ --- множество нетерминалов;
+        \item $T = \{a_i\}_{i=1}^I$ --- конечный заданный алфавит;
+        \item $P = \{S \rightarrow a_i, \; S \rightarrow a_iSa_i \; S \rightarrow \varepsilon\} \quad \forall i \in \overline{1,I}$.
+    \end{itemize}
+
+    Тогда $G$ порождает язык \text{PAL}. \medskip
+
+    Следующие утверждения будем доказывать для $I = 2$ (для краткости). Тогда грамматика $G$ принимает вид 
+     \begin{itemize}
+        \item $N = \{S\}$;
+        \item $T = \{a, b\}$;
+        \item $P: S \rightarrow aSa \; | \; bSb \; | \; a \; | \; b \; | \; \varepsilon$.
+    \end{itemize}
+
+\noindent \textbf{Утверждение.} $L(G) \subseteq \text{PAL}$. \medskip
+
+\noindent \textbf{Доказательство.} Докажем по индукции числа $n$ букв в произвольно выбранном слове~$w \in L(G)$. \medskip
+
+База индукции: 
+
+\begin{itemize}
+    \item[1)] $n = 0$: $w=\varepsilon \in \text{PAL}$;
+    \item[2)] $n = 1$: $w=a \in \text{PAL}$ или $w=b \in \text{PAL}$;
+    \item[3)] $n = 2$: $w=aa \in \text{PAL}$ или $w=bb \in \text{PAL}$;  
+\end{itemize}
+
+Далее используем натуральную константу $k>2$. \medskip
+
+Предположение индукции $n=k$: \medskip
+
+Пусть верно утверждение $$\forall w \in L(G): \; |w|=k \hookrightarrow w \in \text{PAL}.$$ 
+Переход индукции $n=k+1$: \medskip
+
+Рассмотрим произвольное слово $w\in L(G)$ длиной $|w|=k$. Пусть без ограничения общости на предпоследнем шаге вывод слова $w$ имеет вид $$S \Rightarrow^* ava,$$ где $v$ содержит в себе последовательность применения правил $S \rightarrow aSa$ или $S \rightarrow bSb$. Далее применяется одно из правил, не содержащих справа терминала и по предположению индукции получается слово $w\in\text{PAL}$. Представим, что последнего перехода не было. Из рассматриваемого предпоследнего шага делаем переход по одному из правил, содержащих справа терминал. Затем делаем переход по правилу, не содержащему справа терминала ($a$ или $b$), и в силу того, что по предположению индукции на предыдущем шаге был получен палиндром, переход по данному правилу выведет слово $u \in \text{PAL}$. \medskip
+
+Переход индукции $n=k+2$: \medskip
+
+Аналогичные рассуждения, но только последние два перехода имеют вид $S \rightarrow aSa \rightarrow aa$. \qed
+
+\noindent \textbf{Утверждение.} $\text{PAL} \subseteq L(G)$. \medskip
+
+\noindent \textbf{Доказательство.} Приведём конструктивное доказательство. Построим грамматики $G'$ и $G''$ по произвольным словам из языка $\text{PAL}$. Для это рассмотрим два случая. \medskip
+
+\textbf{Случай 1.} Рассмотрим произвольное слово $w\in \text{PAL}$ нечётной длины. Тогда будем действовать следующему алгоритму: 
+\begin{enumerate}
+    \item Смотрим на первый и последний символы слова $w$ (они совпадают) и добавляем их в определенный <<класс>>, содержащий терминальный символ (например, слово $abbba$ добавляем в класс $aSa$, затем $bbb$ в класс $bSb$ и т. д.).
+    \item Повторяем процедуру, пока не получим на конце единственный символ (например, $abbba$ --- $bbb$ --- $b$). 
+\end{enumerate}
+
+Получили некоторый <<разбор>> слова $w$, который соответствует правилам $$S \rightarrow aSa \; | \; bSb \; | \; a \; | \; b$$ грамматики $G'$.
+
+\medskip
+
+\textbf{Случай 2.} Рассмотрим произвольное слово $w\in \text{PAL}$ чётной длины. Строим аналогичный алгоритм, как в случае 1, но только в пункте (b) получим на конце пустое слово. Тогда правила грамматики $G''$ имеют вид $$S \rightarrow aSa \; | \; bSb \; | \; \varepsilon.$$
+
+<<Объединяя>> $G'$ и $G''$, получим грамматику $G$. Утверждение доказано. \qed
+
+Осталось заменить в рассуждениях символы $a$ и $b$ на символы $a_i$ и получить утверждение для произвольного конечного алфавита.
+
+\item Пусть $R$ --- дополнение языка палиндромов. Приведём КС-грамматику $G$ для произвольного конечного алфавита $T$:
+
+\begin{itemize}
+    \item $N = \{S, A\}$;
+    \item $T = \{a_i\}_{i=2}^{I}$;
+    \item $S$ --- начальный терминал;
+    \item $P:$ 
+    $$S \rightarrow a_iSa_i \; | \; a_iBa_j \quad\forall i,j \in \overline{2,I}: \; i \neq j,$$ 
+    $$B \rightarrow a_iBa_j \; | \; a_i \; | \; \varepsilon \quad\forall i,j \in \overline{2,I}: \; i \neq j.$$
+\end{itemize}
+
+\noindent \textbf{Утверждение.} $L(G) \subseteq R$. \medskip
+
+\noindent \textbf{Доказательство.} Рассмотрим вывод произвольного слова $w \in L(G)$. Слово $w$ на концах имеет либо разные символы (правило $S \rightarrow a_iBa_j$), либо одинаковые (правило $S \rightarrow a_iSa_i$), но в выводе обязательно встретится последовательность символов, которая читается с конца и с начала по-разному, т. к. если слово $w$ было выведено, то существует конечная последовательность применения правил вывода (цепочка), следовательно должны применяться правила $B \rightarrow a_iBa_j \; | \; a_i \; | \; \varepsilon$, которые и нарушают палиндромность. \qed
+\medskip
+
+\noindent \textbf{Утверждение.} $R \subseteq L(G)$. \medskip
+
+\noindent \textbf{Доказательство.} Рассмотрим произвольное слово $w \in R$. Докажем по индукции $n$ длины вывода слова $w$. \medskip
+
+База индукции $n=2$:
+$$w=a_ia_ia_j \in L(G) \;\; \text{или} \;\; a_ia_j \in L(G), \;\text{где} \; i \neq j$$
+
+Предположение индукции $n=k$ ($k>2$ --- натуральное): \medskip
+
+Пусть существует вывод произвольного слова $v\in R$ из группы слов одинаковой длины за $k$ шагов. \medskip
+
+Переход индукции $n=k+1$: \medskip
+
+Докажем, что слово $w$, выведенное за $k+1$ шагов, принадлежит языку $R$. Возможно два случая.
+
+\medskip
+
+\textbf{Случай 1.} Слово $w$ может иметь вид $a_iua_i$, где $u \in R$. Тогда по предположению индукции существует вывод слова $v\in R$ за $k$ шагов: $$S \Rightarrow^k v,$$ следовательно, возьмём вывод $v$, сделаем ещё два шага и получим вывод слова $w$ (без ограничения общности была выбрана именно такая последовательность): $$S \Rightarrow^{k-1} xBy \Rightarrow xa_iBa_jy \Rightarrow xa_ia_jy = w \in R,$$ где $x, y$ --- некоторые слова, получившиеся при выводе, удовлетворяющие условиям случая~1. 
+
+\textbf{Замечание.} \textit{При выводе было известно, что после $k-1$ шага при подстановки вместо нетерминала $B$ любого символа (отличного от нетерминального) получалось слово $v\in R$. Поэтому на $k$ шаге вместо нетерминала $B$ было подставлено правило, содержащее терминал $B$, а дальше был подставлен произвольный символ (отличный от терминального).} \medskip
+
+\textbf{Случай 2.} Слово $w$ может иметь вид $a_iua_j$, где $u$ --- слово, получившиеся при выводе. Аналогино случаю 1 возьмём вывод слова $v$ из предложения индукции, затем сделаем ещё два шага и получим искомое слово $w\in R$. \medskip
+
+Таким образом, утверждение доказано. \qed
+
+\end{enumerate}
+
+\section*{Задача 4}
+
+Покажите, что дополнение языка $U = \{a^nb^nc^n \; | \; n = 0, 1, 2, \ldots\}$ является КС-языком.
+
+\section*{Задача 6}
+
+Построить ДМП-автомат, распознающий язык $D_2$, порожденный грамматикой:
+$$S \rightarrow SS \; | \; (S) \; | \; [S] \; | \; \varepsilon.$$
+
+\noindent \textbf{Решение.}
+
+
+
+
+\end{document}
