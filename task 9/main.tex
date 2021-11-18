@@ -1,0 +1,394 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{amsfonts, amssymb, amsmath, latexsym}
+\usepackage{nicefrac}
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage[colorinlistoftodos,bordercolor=orange,backgroundcolor=orange!20,linecolor=orange,textsize=scriptsize]{todonotes}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}       % hyperlinks
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{nameref}
+\usepackage{booktabs}       % professional-quality tables
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{xcolor, colortbl}
+\usepackage{etoolbox}
+
+% \graphicspath{ {./} }
+
+\usepackage[verbose=true,letterpaper]{geometry}
+
+\newgeometry{
+    textheight=9.5in,
+    textwidth=6in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+\usepackage{epigraph}
+
+%
+
+\newcommand{\argmin}{\mathop{\arg\!\min}}
+\newcommand{\argmax}{\mathop{\arg\!\max}}
+
+\newcommand{\Var}{\mathbb{V}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\makebold}[1]{\boldsymbol{#1}}
+\newcommand{\mean}[1]{\overline{#1}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\partfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\term}[1]{\textbf{#1}}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lf}{\left\{}
+\newcommand{\rf}{\right\}}
+\newcommand{\ls}{\left[}
+\newcommand{\rs}{\right]}
+\newcommand{\lv}{\left|}
+\newcommand{\rv}{\right|}
+
+\newcommand*{\affaddr}[1]{#1} % No op here. Customize it for different styles.
+\newcommand*{\affmark}[1][*]{\textsuperscript{#1}}
+
+
+\usepackage{subcaption}
+%\usepackage[font={small}]{caption}
+
+\usepackage{amsthm}
+\usepackage{tikz}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+
+\newtheorem{exercise}{Задача}[section]
+
+\newtheorem*{solution}{Решение}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{0em}{2.1em}}
+\makeatother
+
+% \setlength\epigraphwidth{.8\textwidth}
+\setlength\epigraphrule{0pt}
+
+\title{ТРЯП. Домашнее задание № 9}
+\author{Шарапов Денис, Б05-005}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Задача 1}
+
+Доказать, что класс КС-языков замкнут относительно операции пересечиния с регулярным языком. \bigskip
+
+\noindent \textbf{Решение.} \medskip
+
+Пусть $A$ --- КС-язык, $B$ --- регулярный язык. Пусть тогда $\mathcal{A}$ --- МП-автомат, допускающий язык $A$ по принимающему состоянию, $\mathcal{B}$ --- ДКА, построенный для языка $B$. Запишем описания автоматов.
+
+\begin{itemize}
+    \item[] $\mathcal{A} = \langle Q_{\mathcal{A}}, \; \Sigma, \; \Gamma, \; q^0_{\mathcal{A}}, \; \delta_{\mathcal{A}}, \; Z^0, \; F_{\mathcal{A}} \rangle $;
+    \item[] $\mathcal{B} = \langle Q_{\mathcal{B}}, \; \Sigma, \; q^0_{\mathcal{B}}, \; \delta_{\mathcal{B}}, \; F_{\mathcal{B}} \rangle$. 
+\end{itemize}
+
+Воспользуемся конструкцией пересечения (автомат $\mathcal{C}$):
+$$\mathcal{C} = \langle (Q_{\mathcal{A}} \times Q_{\mathcal{B}}), \; \Sigma, \; (q^0_{\mathcal{A}}, q^0_{\mathcal{B}}), \; \delta, \; Z^0, \; F  \rangle,$$ $$\delta((p, q), a, S) = (\delta_{\mathcal{A}}(p, a, S), \; \delta_{\mathcal{B}}(q, a)),$$ $$(p, q) \in F \Longleftrightarrow (p \in F_{\mathcal{A}}) \wedge (q \in F_{\mathcal{B}}).$$
+
+Построенный автомат принимает пересечение языков $A \cap B$: для того, чтобы он попал в принимающее состояние, необходимо, чтобы оба автомата попали в принимающее состояние (индукция по числу переходов). \qed
+
+\section*{Задача 2}
+
+Являются ли следующие языки КС-языками?
+
+\begin{itemize}
+    \item[a)] $SQ = \{ ww \; | \; w \in \{a, b\}^*\}$;
+    \item[б)] $\Sigma^* \;\backslash \; SQ$;
+    \item[в)] $\{ a^{3^n} \; | \; n > 0 \}$. 
+\end{itemize}
+
+\noindent \textbf{Решение.} \medskip
+
+\begin{itemize}
+    \item[a)] Нет. Докажем от противного. Воспользуемся леммой о накачке: 
+    $$L \in \text{CFL} \Rightarrow \exists p \geq 1 : \forall w \in L \; \exists x,y,z,u,v: w = xuyvz:$$
+    \begin{itemize}
+        \item[1)] $|uyv| \leq p$,
+        \item[2)] $|uv| \geq 1$,
+        \item[3)] $\forall i \geq 0 \hookrightarrow xu^iyv^iz \in L$. 
+    \end{itemize}  
+
+    Рассмотрим слово $w = a^pb^pa^pb^p$. Пусть выполняется лемма о начке. Тогда в силу первого утверждения слово $uyv$ либо состоит только из одного символа ($a$ или $b$), либо из последовательностей каждого из символов ($a^sb^t$ или $b^ta^s$). В первом случае выберем $i = 2$ и получим противоречие с третим утверждением (получится слово, не принадлежащее языку). Во втором случае выберем произвольное $i$ из утверждения 3 и получим слово длины $4p - (k + l) + ki + li$, где $|u| = k$, $|v| = l$. В силу определения языка $L$, в слове $w \in L$ должны совпадать символы на позициях $s_1$ и $s_2$: $$s_2 = k + \frac{4p + (k+l)(i-1)}{2},$$ где $s_1 = k$ --- позиция, с которой начинается слово $u$. В силу произвольности $i$ получаем противоречие, т. к. на рассматриваемой позиции может стоять произвольный символ (зависит от выбора $i$, потому что изменяется длина слова: например, достаточно взять $i$ так, чтобы $s_1 = k$  было меньше половины длины слова). \qed
+    
+    \item[б)] Да. Заметим, что все слова нечетной длины принадлежат заданному языку. Построим грамматику $G = \langle N, T, P, S \rangle$ с правилами: $$S \rightarrow AB \; | \; BA \; | \; A \; | \; B \; | \; \varepsilon,$$ $$A \rightarrow aAa \; | \; aAb \; | \; bAa \; | \; bAb \; | \; a,$$ $$B \rightarrow aBa \; | \; aBb \; | \; bBa \; | \;bBb \; | \; b.$$
+    
+    Правила $S \rightarrow A$ и $S \rightarrow B$ задают все слова нечетной длины (по индукции длины вывода или длины слова). \medskip
+
+    \textbf{Утверждение.} $L(G) \subseteq \Sigma^* \;\backslash \; SQ$: \medskip
+
+    Слова нечетной длины принадлежат языку $\Sigma^* \;\backslash \; SQ$.
+
+    По построению грамматики из неё выводятся слова вида $\mathcal{T}_1$ или $\mathcal{T}_2$, где $$\mathcal{T}_1 = T^n a T^nT^m b T^m,$$ $$\mathcal{T}_2 = T^n b T^nT^m a T^m$$ для некоторых натуральных $m$ и $n$. 
+    
+    Видно, что слова $u \in \mathcal{T}_1$ и $v \in \mathcal{T}_2$ лежат в языке $L(G)$, т. к. они имеют разные символы на <<симметричных>> позициях. \medskip
+
+    \textbf{Утверждение.} $\Sigma^* \;\backslash \; SQ \subseteq L(G)$: \medskip
+
+    По индукции длины вывода (или слова) получаем, что любое слово нечетной длины из языка $\Sigma^* \;\backslash \; SQ$ выводится грамматикой $G$.
+
+    Для вывода слов четной длины докажем от противного. Допустим слово $w \in \Sigma^* \;\backslash \; SQ$ не имеет вид $\mathcal{T}_1$ или $\mathcal{T}_2$. Тогда $$\forall i: \; 1 \leq i \leq n + m + 1 \hookrightarrow w[i] = w[n+m+i+1].$$ Но тогда $w \in SQ$ --- противоречие. Откуда заключаем, что $w \in L(G)$. \qed
+
+    \item[в)] Нет. От противного. Пусть выполняется лемма о накачке. Тогда найдётся такое $p \geq 1$ что, для произвольного слова из языка найдётся разбиение, удовлетворяющее трём условиям. Выберем слово $w = a^{3^p}$. Для него по предположению выполняются все три условия. В силу условия (1) верно неравенство $|uyv| \leq p$: Тогда выберем $i = 2$: $$|xuyvz| = 3^p < |xu^2yv^2z| \leq 3^p + p < 3^{p+1},$$ $$3^p < |xu^2yv^2z| < 3^{p+1},$$ откуда и получим противоречие. \qed
+
+\end{itemize}
+
+\section*{Задача 3}
+
+Для языка $$L = \{ w: w=xcy, \; x,y \in \{a, b\}^*, \; c \in T, \; |x| = |y| \}$$ 
+
+\begin{itemize}
+    \item[a)] построить КС-грамматику $G$, порождающую язык $L$;
+    \item[б)] построить недерминированный МА, эквивалентный этой грамматике;
+    \item[в)] продемонстрировать работу построенного МА на слове $acab$ (все варианты поведения).
+\end{itemize}
+
+\noindent \textbf{Решение.} \medskip
+
+\begin{itemize}
+    \item[а)]  $G = \langle N, T, P, S \rangle = \langle \{S\}, \; \{a, b, c\}, \; P, \; S \rangle$, где множество $P$ задается как $$S \rightarrow aSa \; | \; aSb \; | \; bSa \; | \; bSb \; | \; c.$$
+     
+    Язык, порожденный грамматикой $G$, обозначим за $R(G)$. \medskip
+
+    \textbf{Утверждение.} $R(G) \subseteq L$: \medskip
+
+    Рассмотрим произвольное слово $w \in R(G)$. По построению грамматики оно имеет структуру $$w = \{a, b\}^n \cdot c \cdot \{a, b\}^n,$$ что в точности является словом из $L$. Т. е. верно утверждение $$\forall w \in R(G) \hookrightarrow w \in L.$$ \qed
+
+    \textbf{Утверждение.} $L \subseteq R(G)$: \medskip
+
+    Докажем по индукции $n$ длины слова $x \sqsubseteq w \in L$. \medskip
+
+    База индукции $n = 0$: \medskip
+
+    Используем правило $S \rightarrow c$. \medskip
+
+    Предположение индукции $n = k$: \medskip
+
+    Пусть из грамматики $G$ выводимы все слова вида $u = \xi \cdot c \cdot \zeta$,  где $\xi, \zeta \in \{a, b\}^*, \; |\xi| = |\zeta|$. \medskip
+
+    Переход индукции $n = k+1$: \medskip
+
+    Рассмотрим вывод произвольного слова $u \in R(G)$ из предположения индукции: $$S \Rightarrow^* \xi \cdot S \cdot \zeta.$$ Если применить правило $S \rightarrow c$, то получится в точности слово $u$. Заметим, что на этом шаге верны включения $\xi, \zeta \in \{a, b\}^k$. Теперь воспользуемся одним из правил из множества $P$ (отличного от $S \rightarrow c$) и получим следующий шаг вывода $$S \Rightarrow^* \xi \cdot S \cdot \zeta \Rightarrow \alpha \cdot S \cdot \beta,$$ где $\alpha, \beta \in \{a, b\}^{k+1}$. Осталось применить последнее правило $S \rightarrow c$ и получить вывод произвольного слова $w \in L$: $$S \Rightarrow^* \xi \cdot S \cdot \zeta \Rightarrow \alpha \cdot S \cdot \beta \Rightarrow \alpha \cdot c \cdot \beta.$$ \qed
+
+    \item[б)] Воспользуемся алгоритмом КС-грамматика $G$ --- МП-автомат $M$. \medskip
+    
+    Описание МП-автомата $M = \langle Q, T, \Gamma, \delta, q_0, Z_0, F \rangle $:
+
+    \begin{itemize}
+        \item[1)] $Q = \{q\}$;
+        \item[2)] $T = \{a, b, c\}$;
+        \item[3)] $\Gamma = N \cup T$;
+        \item[4)] $q_0 = q$;
+        \item[5)] $Z_0 = S$;
+        \item[6)] $F = \varnothing$;
+    \end{itemize}
+
+    Описание функции $\delta: Q \times (T \cup \{\varepsilon\}) \times \Gamma \rightarrow
+ 2^{Q\times\Gamma^*}$: 
+ $$(S \rightarrow aSa) \in P \Rightarrow (q, aSa) \in \delta(q, \varepsilon, S),$$
+$$(S \rightarrow aSb) \in P \Rightarrow (q, aSb) \in \delta(q, \varepsilon, S),$$
+$$(S \rightarrow bSa) \in P \Rightarrow (q, bSa) \in \delta(q, \varepsilon, S),$$
+$$(S \rightarrow bSb) \in P \Rightarrow (q, bSb) \in \delta(q, \varepsilon, S),$$
+$$(S \rightarrow c) \in P \Rightarrow (q, c) \in \delta(q, \varepsilon, S),$$
+$$\delta(q, a, a) = \{(q, \varepsilon)\},\; \delta(q, b, b) = \{(q, \varepsilon)\}, \; \delta(q, c, c) = \{(q, \varepsilon)\}.$$
+
+Диаграмма:
+           
+\begin{center}
+
+    \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+    \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+    %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+    
+    %Shape: Circle [id:dp7979494161230842] 
+    \draw   (216.36,152.32) .. controls (216.36,143.31) and (223.67,136) .. (232.68,136) .. controls (241.69,136) and (249,143.31) .. (249,152.32) .. controls (249,161.33) and (241.69,168.64) .. (232.68,168.64) .. controls (223.67,168.64) and (216.36,161.33) .. (216.36,152.32) -- cycle ;
+    %Straight Lines [id:da8453501482487336] 
+    \draw    (249.31,103.43) -- (244.11,139.97) ;
+    %Straight Lines [id:da044130339932263674] 
+    \draw    (249.31,103.43) -- (278.19,124.92) ;
+    %Straight Lines [id:da6471965028846216] 
+    \draw    (278.19,124.92) -- (246.86,138.76) ;
+    \draw [shift={(244.11,139.97)}, rotate = 336.16999999999996] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Straight Lines [id:da9548989822014309] 
+    \draw    (282.51,161.95) -- (245.63,163.5) ;
+    %Straight Lines [id:da6406016285267724] 
+    \draw    (283.3,161.84) -- (267.43,194.15) ;
+    %Straight Lines [id:da044590158796131485] 
+    \draw    (266.64,194.26) -- (247.33,165.98) ;
+    \draw [shift={(245.63,163.5)}, rotate = 415.66999999999996] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Straight Lines [id:da6449321571529298] 
+    \draw    (217.18,204.27) -- (220.48,167.51) ;
+    %Straight Lines [id:da5103767127009171] 
+    \draw    (217.18,204.27) -- (187.23,184.29) ;
+    %Straight Lines [id:da15929878477907966] 
+    \draw    (187.23,184.29) -- (217.8,168.86) ;
+    \draw [shift={(220.48,167.51)}, rotate = 513.22] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Straight Lines [id:da5197024566090187] 
+    \draw    (182.99,142.15) -- (219.9,142.22) ;
+    %Straight Lines [id:da8025378439337931] 
+    \draw    (182.99,142.15) -- (200.27,110.56) ;
+    %Straight Lines [id:da25189328566937164] 
+    \draw    (200.27,110.56) -- (218.32,139.67) ;
+    \draw [shift={(219.9,142.22)}, rotate = 238.19] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Curve Lines [id:da24988736699145253] 
+    \draw    (239.33,169.26) .. controls (279.11,257.69) and (208.84,247.95) .. (230.6,171.05) ;
+    \draw [shift={(231.29,168.7)}, rotate = 466.81] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Straight Lines [id:da6955828541347708] 
+    \draw    (197.36,152.32) -- (213.36,152.32) ;
+    \draw [shift={(216.36,152.32)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    %Straight Lines [id:da6372070211102541] 
+    \draw    (207.91,107.13) -- (231.82,135.25) ;
+    %Straight Lines [id:da9630059467455228] 
+    \draw    (207.91,107.13) -- (243.15,99.76) ;
+    %Straight Lines [id:da064763935770354] 
+    \draw    (243.15,99.76) -- (232.73,132.39) ;
+    \draw [shift={(231.82,135.25)}, rotate = 287.71] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+    
+    % Text Node
+    \draw (228,146) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q$};
+    % Text Node
+    \draw (265.7,100.95) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-358.63] [align=left] {$\displaystyle \varepsilon ,\ S\ /\ aSb$};
+    % Text Node
+    \draw (278.42,176.96) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-359.03] [align=left] {$\displaystyle \varepsilon ,\ S\ /\ bSb$};
+    % Text Node
+    \draw (127,114.84) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-0.2] [align=left] {$\displaystyle \varepsilon ,\ S\ /\ aSa$};
+    % Text Node
+    \draw (146.19,199.08) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-359.29] [align=left] {$\displaystyle \varepsilon ,\ S\ /\ bSa$};
+    % Text Node
+    \draw (216.23,249.9) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-359.71] [align=left] {$\displaystyle b,\ b\ /\ \varepsilon $};
+    % Text Node
+    \draw (218.75,234.36) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-359.2] [align=left] {$\displaystyle a,\ a\ /\ \varepsilon $};
+    % Text Node
+    \draw (215.23,264.9) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-359.71] [align=left] {$\displaystyle c,\ c\ /\ \varepsilon $};
+    % Text Node
+    \draw (197.7,81.95) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-358.63] [align=left] {$\displaystyle \varepsilon ,\ S\ /\ c$};
+    
+    
+    \end{tikzpicture}
+    
+\end{center}
+
+\item[в)] Демонстрация работы на слове $w = acab$.
+
+
+
+\end{itemize}
+
+
+\section*{Задача 6}
+
+Язык $L$ задан КС-грамматикой с правилами:
+
+$$S \rightarrow aSa \: | \; aSb \: | \; bSa \: | \; bSb \: | \;a.$$
+
+\begin{enumerate}
+    \item Является $L$ ли регулярным языком?
+    \item Является ли дополнение $L$ регулярным языком?
+    \item Является ли $L$ КС-языком?
+    \item Является ли дополнение $L$ КС-языком?
+\end{enumerate}
+
+\noindent \textbf{Решение.} \medskip
+
+Язык $L$ аналогичен языку из задачи 3
+    $$L = \{ w: w=xay, \; x,y \in \{a, b\}^*, \; a \in T, \; |x| = |y| \}.$$
+
+    Чтобы получить его грамматику, заменим правило $S \rightarrow c$ на правило $S \rightarrow a$ в ответе на задачу 3: $$S \rightarrow aSa \; | \; aSb \; | \; bSa \; | \; bSb \; | \; a.$$
+
+\begin{enumerate}
+    \item $L \notin \text{REG}$, т. к. он имеет бесконечно много классов $L$-эквивалентности (к примеру, слова вида $b^{+}a$). 
+    \item Из первого пунтка следует, что $\Sigma^* \;\backslash\; L \notin \text{REG}$.
+    \item Да, является, т. к. он задан КС-грамматикой.
+    \item $T^* \; \backslash \; L = L_1 \cup L_2$, где $$L_1 = \{w : |w| = 2n, n\geq 0\},$$ $$L_2 = \{ w: w=xby, \; x,y \in \{a, b\}^*, \; b \in T, \; |x| = |y| \}.$$ Язык $L_2$ задаётся той же грамматикой, что и язык $L$, если заменить правило $S \rightarrow a$ на правило $S \rightarrow b$. Поэтому язык $L_2 \in \text{CFL}$. \medskip
+    
+    Язык $L_1$ задаётся той же грамматикой, что и язык $L$, если заменить правило $S \rightarrow a$ на правило $S \rightarrow \varepsilon$. Поэтому язык $L_1 \in \text{CFL}$. \medskip
+
+    КС-языки замкнуты относительно операции объединения, поэтому $T^* \; \backslash\; L \in \text{CFL}$.
+\end{enumerate}
+
+\bigskip
+
+\noindent \textbf{Ответ:} 1) $L \notin \text{REG}$; 2) $\Sigma^* \;\backslash\; L \notin \text{REG}$; 3) $L \in \text{CFL}$; 4) $T^* \; \backslash\; L \in \text{CFL}$.
+
+\section*{Задача 7}
+
+Язык $L$ задан КС-грамматикой с правилами: $$S \rightarrow aSb \; | \; A \; | \; B \; | \; \varepsilon, \quad A \rightarrow aAa \; | \; \varepsilon, \quad B \rightarrow bBb \; | \; \varepsilon.$$
+
+\begin{enumerate}
+    \item Является $L$ ли регулярным языком?
+    \item Является ли дополнение $L$ регулярным языком?
+    \item Является ли $L$ КС-языком?
+    \item Является ли дополнение $L$ КС-языком?
+\end{enumerate}
+
+\noindent \textbf{Решение.} \medskip
+
+Рассмотрим каждое правило грамматики в отдельности. После $k$ шагов (для некоторого $n$) применения привила 
+
+\begin{enumerate}
+    \item $S \rightarrow A$ получается слово $w = a^{n+2k}b^n$;
+    \item $S \rightarrow B$ получается слово $w = a^nb^{n+2k}$;
+    \item $S \rightarrow \varepsilon$ получается слово $a^nb^n$.
+\end{enumerate}
+
+В зависимости от чётности $n$ получим 4 случая: 
+
+\begin{itemize}
+    \item[a)] $n = 2q, \; q \geq 0$
+    \begin{itemize}
+        \item[1)] $w = a^{2(q+k)}b^{2q}$;
+        \item[2)] $w = a^{2q}b^{2(q+k)}$;   
+    \end{itemize}  
+    \item[б)] $n = 2q + 1, \; q\geq 0$
+    \begin{itemize}
+        \item[3)] $w = a^{2(q+k)}\cdot ab \cdot b^{2q}$;
+        \item[4)] $w = a^{2k}\cdot ab \cdot b^{2(q+k)}$;  
+    \end{itemize}  
+\end{itemize}
+
+Тогда можно записать РВ, задающее язык $L(G)$: $$R = (aa)^*(bb)^* \; | \; (aa)^*\cdot ab \cdot (bb)^*.$$
+
+\begin{enumerate}
+    \item Язык $L$ является регулярным, т. к. его задаёт регулярное выражение $R$.
+    \item Дополнение языка $L$ является регулярным, т. к. регулярные языки замкнуты относительно операции дополнения.
+    \item Язык $L$ является КС-языком, т. к. он задаётся грамматикой.
+    \item Да, является, поскольку дополнение языка $L$ является регулярным языком, значит является и КС-языком.
+\end{enumerate}
+
+\noindent \textbf{Ответ:} 1) $L \in \text{REG}$; 2) $\Sigma^* \;\backslash\; L \in \text{REG}$; 3) $L \in \text{CFL}$; 4) $\Sigma^* \; \backslash\; L \in \text{CFL}$.
+
+\end{document}
