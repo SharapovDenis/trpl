@@ -117,7 +117,7 @@
 \end{itemize}
 
 Воспользуемся конструкцией пересечения (автомат $\mathcal{C}$):
-$$\mathcal{C} = \langle (Q_{\mathcal{A}} \times Q_{\mathcal{B}}), \; \Sigma, \; (q^0_{\mathcal{A}}, q^0_{\mathcal{B}}), \; \delta, \; Z^0, \; F  \rangle,$$ $$\delta((p, q), a, S) = (\delta_{\mathcal{A}}(p, a, S), \; \delta_{\mathcal{B}}(q, a)),$$ $$(p, q) \in F \Longleftrightarrow (p \in F_{\mathcal{A}}) \wedge (q \in F_{\mathcal{B}}).$$
+$$\mathcal{C} = \langle (Q_{\mathcal{A}} \times Q_{\mathcal{B}}), \; \Sigma, \;\Gamma, \; (q^0_{\mathcal{A}}, q^0_{\mathcal{B}}), \; \delta, \; Z^0, \; (F_{\mathcal{A}} \times F_{\mathcal{B}})  \rangle,$$ $$\delta((p, q), a, S) = (\delta_{\mathcal{A}}(p, a, S), \; \delta_{\mathcal{B}}(q, a)),$$ $$(p, q) \in F_{\mathcal{C}} \Longleftrightarrow (p \in F_{\mathcal{A}}) \wedge (q \in F_{\mathcal{B}}).$$
 
 Построенный автомат принимает пересечение языков $A \cap B$: для того, чтобы он попал в принимающее состояние, необходимо, чтобы оба автомата попали в принимающее состояние (индукция по числу переходов). \qed
 
@@ -185,7 +185,7 @@ $$\mathcal{C} = \langle (Q_{\mathcal{A}} \times Q_{\mathcal{B}}), \; \Sigma, \; 
 
     \textbf{Утверждение.} $R(G) \subseteq L$: \medskip
 
-    Рассмотрим произвольное слово $w \in R(G)$. По построению грамматики оно имеет структуру $$w = \{a, b\}^n \cdot c \cdot \{a, b\}^n,$$ что в точности является словом из $L$. Т. е. верно утверждение $$\forall w \in R(G) \hookrightarrow w \in L.$$ \qed
+    Рассмотрим произвольное слово $w \in R(G)$. По построению грамматики оно имеет структуру $$w \in \mathcal{T} = \{a, b\}^n \cdot c \cdot \{a, b\}^n,$$ что в точности является словом из $L$. Т. е. верно утверждение $$\forall w \in R(G) \hookrightarrow w \in L.$$ \qed
 
     \textbf{Утверждение.} $L \subseteq R(G)$: \medskip
 
@@ -197,11 +197,11 @@ $$\mathcal{C} = \langle (Q_{\mathcal{A}} \times Q_{\mathcal{B}}), \; \Sigma, \; 
 
     Предположение индукции $n = k$: \medskip
 
-    Пусть из грамматики $G$ выводимы все слова вида $u = \xi \cdot c \cdot \zeta$,  где $\xi, \zeta \in \{a, b\}^*, \; |\xi| = |\zeta|$. \medskip
+    Пусть из грамматики $G$ выводимы все слова вида $u = \xi \cdot c \cdot \zeta$,  где $\xi, \zeta \in \{a, b\}^*, \; |\xi| = |\zeta| = k$. \medskip
 
     Переход индукции $n = k+1$: \medskip
 
-    Рассмотрим вывод произвольного слова $u \in R(G)$ из предположения индукции: $$S \Rightarrow^* \xi \cdot S \cdot \zeta.$$ Если применить правило $S \rightarrow c$, то получится в точности слово $u$. Заметим, что на этом шаге верны включения $\xi, \zeta \in \{a, b\}^k$. Теперь воспользуемся одним из правил из множества $P$ (отличного от $S \rightarrow c$) и получим следующий шаг вывода $$S \Rightarrow^* \xi \cdot S \cdot \zeta \Rightarrow \alpha \cdot S \cdot \beta,$$ где $\alpha, \beta \in \{a, b\}^{k+1}$. Осталось применить последнее правило $S \rightarrow c$ и получить вывод произвольного слова $w \in L$: $$S \Rightarrow^* \xi \cdot S \cdot \zeta \Rightarrow \alpha \cdot S \cdot \beta \Rightarrow \alpha \cdot c \cdot \beta.$$ \qed
+    Рассмотрим вывод произвольного слова $u \in L$ из предположения индукции: $$S \Rightarrow^* \xi \cdot S \cdot \zeta.$$ Если применить правило $S \rightarrow c$, то получится в точности слово $u$. Заметим, что на этом шаге верны включения $\xi, \zeta \in \{a, b\}^k$. Теперь воспользуемся одним из правил из множества~$P$ (отличного от $S \rightarrow c$) и получим следующий шаг вывода $$S \Rightarrow^* \xi \cdot S \cdot \zeta \Rightarrow \alpha \cdot S \cdot \beta,$$ где $\alpha, \beta \in \{a, b\}^{k+1}$. Осталось применить последнее правило $S \rightarrow c$ и получить вывод произвольного слова $w \in L$: $$S \Rightarrow^* \xi \cdot S \cdot \zeta \Rightarrow \alpha \cdot S \cdot \beta \Rightarrow \alpha \cdot c \cdot \beta.$$ \qed
 
     \item[б)] Воспользуемся алгоритмом КС-грамматика $G$ --- МП-автомат $M$. \medskip
     
@@ -302,12 +302,160 @@ $$\delta(q, a, a) = \{(q, \varepsilon)\},\; \delta(q, b, b) = \{(q, \varepsilon)
     
 \end{center}
 
-\item[в)] Демонстрация работы на слове $w = acab$.
+\item[в)] Демонстрация работы на слове $w = acab$. Демонстрация приведена на рисунке 1.
 
-
+\begin{figure}[t!]
+    \centering
+        \begin{center}
+    \includegraphics[width = 350pt]{image/picture3.1.png}
+        \end{center}
+        \caption{Демонстрация к задаче 3(в)}
+\end{figure}
 
 \end{itemize}
 
+\section*{Задача 5}
+
+Задана грамматика $G$ с правилами: 
+
+\begin{itemize}
+    \item[] $S \rightarrow AB \: | \; C,$
+    \item[] $A \rightarrow aE \: | \; a,$
+    \item[] $E \rightarrow aE \: | \; \varepsilon,$
+    \item[] $B \rightarrow bB \: | \; Bb \: | \; b,$
+    \item[] $C \rightarrow CD,$
+    \item[] $F \rightarrow ab,$
+    \item[] $D \rightarrow aba$.       
+\end{itemize}
+
+Задан автомат $M$:
+
+\begin{center}
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Circle [id:dp9846247302142705] 
+\draw   (236.36,113.32) .. controls (236.36,104.31) and (243.67,97) .. (252.68,97) .. controls (261.69,97) and (269,104.31) .. (269,113.32) .. controls (269,122.33) and (261.69,129.64) .. (252.68,129.64) .. controls (243.67,129.64) and (236.36,122.33) .. (236.36,113.32) -- cycle ;
+%Straight Lines [id:da9896513805995342] 
+\draw    (235.74,64.12) -- (253.39,96.53) ;
+%Straight Lines [id:da256284028674167] 
+\draw    (235.74,64.12) -- (271.74,64.12) ;
+%Straight Lines [id:da6261688603824083] 
+\draw    (271.74,64.12) -- (254.87,93.92) ;
+\draw [shift={(253.39,96.53)}, rotate = 299.51] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da5745722589782971] 
+\draw    (301.44,92.22) -- (269.94,111.47) ;
+%Straight Lines [id:da8161902295732841] 
+\draw    (302.07,91.74) -- (303.87,127.7) ;
+%Straight Lines [id:da9833405876323238] 
+\draw    (303.23,128.18) -- (272.62,112.82) ;
+\draw [shift={(269.94,111.47)}, rotate = 386.65] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Curve Lines [id:da004088478806878237] 
+\draw    (268.38,122.46) .. controls (337.38,190.59) and (268.32,206.85) .. (260.88,127.28) ;
+\draw [shift={(260.68,124.84)}, rotate = 445.67] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da5301896974814444] 
+\draw    (217.36,113.32) -- (233.36,113.32) ;
+\draw [shift={(236.36,113.32)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+%Straight Lines [id:da33784190519073554] 
+\draw    (242.19,164.7) -- (242.65,127.79) ;
+%Straight Lines [id:da5696577573002062] 
+\draw    (242.26,165.5) -- (210.86,147.88) ;
+%Straight Lines [id:da5123313984397331] 
+\draw    (210.79,147.09) -- (240.09,129.35) ;
+\draw [shift={(242.65,127.79)}, rotate = 508.8] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (7.14,-3.43) -- (0,0) -- (7.14,3.43) -- cycle    ;
+
+% Text Node
+\draw (248,107) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle q$};
+% Text Node
+\draw (224.7,47.95) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-358.63] [align=left] {$\displaystyle \varepsilon ,\ S\ /\ AB$};
+% Text Node
+\draw (271.52,204.29) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-359.29] [align=left] {$\displaystyle b,\ b\ /\ \varepsilon $};
+% Text Node
+\draw (275.4,186.64) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-358.82] [align=left] {$\displaystyle a,\ a\ /\ \varepsilon $};
+% Text Node
+\draw (306.42,94.97) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-359.03] [align=left] {$\displaystyle \varepsilon ,\ a\ /\ aA$};
+% Text Node
+\draw (311.42,113.97) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-359.03] [align=left] {$\displaystyle \varepsilon ,\ a\ /\ a$};
+% Text Node
+\draw (167.42,159.97) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-359.03] [align=left] {$\displaystyle \varepsilon ,\ B\ /\ bB$};
+% Text Node
+\draw (169.42,178.97) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,rotate=-359.03] [align=left] {$\displaystyle \varepsilon ,\ B\ /\ b$};
+
+
+\end{tikzpicture}
+
+\end{center}
+
+\begin{enumerate}
+    \item Эквивалентны ли грамматика $G$ и автомат $M$?
+    \item Однозначна ли грамматика $G$? Если нет, постройте эквивалентную ей однозначную грамматику.
+\end{enumerate}
+
+\noindent \textbf{Решение.} \medskip
+
+\begin{enumerate}
+    \item Для начала удалим бесполезные символы. Воспользуемся алгоритмами удаления бесплодных и недостижимых символов. \medskip
+    
+    После удаления бесплодных символов множество правил имеет вид:
+
+    \begin{itemize}
+        \item[] $S \rightarrow AB,$
+        \item[] $A \rightarrow aE \: | \; a,$
+        \item[] $E \rightarrow aE \: | \; \varepsilon,$
+        \item[] $B \rightarrow bB \: | \; Bb \: | \; b,$
+        \item[] $F \rightarrow ab,$
+        \item[] $D \rightarrow aba$.       
+    \end{itemize}
+
+    После удаления недостижимых символов множество правил имеет вид:
+
+    \begin{itemize}
+        \item[] $S \rightarrow AB,$
+        \item[] $A \rightarrow aE \: | \; a,$
+        \item[] $E \rightarrow aE \: | \; \varepsilon,$
+        \item[] $B \rightarrow bB \: | \; Bb \: | \; b,$     
+    \end{itemize}
+
+    Удалим $\varepsilon$-продукции:
+
+    \begin{itemize}
+        \item[] $S \rightarrow AB,$
+        \item[] $A \rightarrow aE \: | \; a,$
+        \item[] $E \rightarrow aE \: | \; a,$
+        \item[] $B \rightarrow bB \: | \; Bb \: | \; b.$     
+    \end{itemize}
+
+    Удалим цепную продукцию, содержащую $E$:
+
+    \begin{itemize}
+        \item[] $S \rightarrow AB,$
+        \item[] $A \rightarrow aA \: | \; a,$
+        \item[] $B \rightarrow bB \: | \; Bb \: | \; b.$     
+    \end{itemize}
+
+    Теперь видно, что язык, порождаемый заданной грамматикой $G$ эквивадентен языку, порождаемому автоматом $M$ (в последнем правиле порядок подстановки $bB$ или $Bb$ неважен). \qed
+
+    \item Грамматика не является однозначной: $$S \Rightarrow abB \Rightarrow abb,$$
+    $$S \Rightarrow aBb \Rightarrow abb.$$
+
+    Заметим, что язык, задаваемый грамматикой $G$, при выводе которого раскрывается только правый нетерминал $B$ эквивалентен языку, при выводе которого раскрывается только левый нетерминал $B$. В свою очередь, они оба эквивалентны языку, порождаемому грамматикой $G$ (этим утверждением и пользовались в пункте 1). Поэтому получаем окончательный вид грамматики:
+
+    \begin{itemize}
+        \item[] $S \rightarrow AB,$
+        \item[] $A \rightarrow aA \: | \; a,$
+        \item[] $B \rightarrow bB \: | \; b.$     
+    \end{itemize}
+
+    \qed
+
+    Замечание. \medskip
+
+    \textit{В решении задачи 5 нарушен порядок безопасного преобразования грамматик. В учебнике Д. Хопкрофта на странице 280 приведён порядок применения преобразований: 1)~удалить $\varepsilon$-продукции; 2) удалить цепные продукции; 3) удалить бесполезные символы. В общем случае, если нарушить порядок, в грамматике могут остаться удаляемые элементы. Но в данном случае грамматика осталась без удаляемых элементов (за исключением правила $S \rightarrow AB$).}
+
+\end{enumerate}
 
 \section*{Задача 6}
 
