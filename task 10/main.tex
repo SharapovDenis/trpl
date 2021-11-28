@@ -1,0 +1,292 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{amsfonts, amssymb, amsmath, latexsym}
+\usepackage{nicefrac}
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage[colorinlistoftodos,bordercolor=orange,backgroundcolor=orange!20,linecolor=orange,textsize=scriptsize]{todonotes}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}       % hyperlinks
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{nameref}
+\usepackage{booktabs}       % professional-quality tables
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{xcolor, colortbl}
+\usepackage{etoolbox}
+
+% \graphicspath{ {./} }
+
+\usepackage[verbose=true,letterpaper]{geometry}
+
+\newgeometry{
+    textheight=9.5in,
+    textwidth=6in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+\usepackage{epigraph}
+
+%
+
+\newcommand{\argmin}{\mathop{\arg\!\min}}
+\newcommand{\argmax}{\mathop{\arg\!\max}}
+
+\newcommand{\Var}{\mathbb{V}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\makebold}[1]{\boldsymbol{#1}}
+\newcommand{\mean}[1]{\overline{#1}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\partfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\term}[1]{\textbf{#1}}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lf}{\left\{}
+\newcommand{\rf}{\right\}}
+\newcommand{\ls}{\left[}
+\newcommand{\rs}{\right]}
+\newcommand{\lv}{\left|}
+\newcommand{\rv}{\right|}
+
+\newcommand*{\affaddr}[1]{#1} % No op here. Customize it for different styles.
+\newcommand*{\affmark}[1][*]{\textsuperscript{#1}}
+
+
+\usepackage{subcaption}
+%\usepackage[font={small}]{caption}
+
+\usepackage{amsthm}
+\usepackage{tikz}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+
+\newtheorem{exercise}{Задача}[section]
+
+\newtheorem*{solution}{Решение}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{0em}{2.1em}}
+\makeatother
+
+% \setlength\epigraphwidth{.8\textwidth}
+\setlength\epigraphrule{0pt}
+
+\title{ТРЯП. Домашнее задание № 10}
+\author{Шарапов Денис, Б05-005}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Задача 1}
+
+Теорема. \textit{КС-грамматика $G = \langle N, \Sigma, P, S \rangle$ является $LL(k)$-грамматикой тогда и только тогда, когда для двух различных правил $A\rightarrow \beta$ и $A\rightarrow \gamma$ из $P$ пересечение
+\begin{equation} \tag{*}
+    \text{FIRST}_k(\beta\alpha) \cap~\text{FIRST}_k(\gamma\alpha)
+    \
+\end{equation}
+пусто при всех таких $\omega A\alpha$, что $S \Rightarrow^*_l \omega A \alpha$.}
+
+\begin{itemize}
+    \item[\textbf{a})] Не является $LL(k)$-грамматикой при любом $k\in \mathbb{N}$.
+    \begin{enumerate}
+        \item $S \Rightarrow^*_l Aa^kb \Rightarrow_l a^{k+1}b, \;\; \omega = \varepsilon, \;\; \alpha = a^{k}b, \;\; \beta = a$,
+        \item $S \Rightarrow^*_l Aa^kb \Rightarrow_l Aa^{k+1}b, \;\; \omega = \varepsilon, \;\; \alpha = a^{k}b, \;\; \gamma = Aa$.
+    \end{enumerate}
+    При этом пересечение (*) не пусто при любом $k\in \mathbb{N}$.
+    \item[\textbf{б)}] Является $LL(k)$-грамматикой при $k > 1$.
+    \begin{enumerate}
+        \item $S \Rightarrow^*_l a^kAb \Rightarrow_l a^{k}\cdot a \cdot b, \;\; \omega = a^k, \;\; \alpha = b, \;\; \beta = a$,  
+        \item $S \Rightarrow^*_l a^kAb \Rightarrow_l a^{k}\cdot aA \cdot b, \;\; \omega = a^k, \;\; \alpha = b, \;\; \gamma = aA$.
+    \end{enumerate}
+    При этом пересечение (*) пусто при $k > 1$.
+    \item[\textbf{в)}] Не является $LL(k)$-грамматикой для любого $k \in \mathbb{N}$.
+    \begin{enumerate}
+        \item $S \Rightarrow^*_l aBBb \Rightarrow_l a\cdot ab\cdot Bb, \;\; \omega = a, \;\; \alpha = Bb, \;\; \beta = ab,$
+        \item $S \Rightarrow^*_l aBBb \Rightarrow_l a \cdot \varepsilon \cdot Bb, \;\; \omega = a, \;\; \alpha = Bb, \;\; \gamma = \varepsilon.$
+    \end{enumerate}
+    По индукции $k$ получаем, что пересечение (*) не пусто (при $k=1, \; k=2$ берём $B\rightarrow ab$ в обоих случаях; при $k>2$ , берём $B\rightarrow \varepsilon$ в первом случае и $B \rightarrow ab$ во втором): $$\text{FIRST}_k(abBb) \cap \text{FIRST}_k(Bb) \neq \varnothing.$$
+    Поэтому грамматика не является $LL(k)$ для любого $k \in \mathbb{N}$.
+    \item[\textbf{г)}] Не является $LL(k)$-грамматикой для любого $k \in \mathbb{N}$.
+    \begin{enumerate}
+        \item $S \Rightarrow^*_l a\cdot A\cdot aAbb \Rightarrow_l a\cdot AaAb \cdot aAbb, \;\; \omega = a, \;\; \alpha = aAbb, \;\; \beta = AaAb,$
+        \item $S \Rightarrow^*_l a\cdot A\cdot aAbb \Rightarrow_l a \cdot \varepsilon \cdot aAbb, \;\; \omega = a, \;\; \alpha = aAbb, \;\; \gamma = \varepsilon.$
+    \end{enumerate}
+    Заметим, что пересечение (*) содержит слово $w=a^k$. Поэтому грамматика не является $LL(k)$ для любого $k \in \mathbb{N}$.
+    \item[\textbf{д)}] $LL(k)$-грамматика для любого $k\in\mathbb{N}$.
+    \begin{enumerate}
+        \item $S \Rightarrow^*_l aa \cdot B \cdot B \Rightarrow_l aa \cdot aBB \cdot B, \;\; \omega = aa, \;\; \alpha = B, \;\; \beta = aBB,$
+        \item $S \Rightarrow^*_l aa \cdot B \cdot B \Rightarrow_l aa \cdot b \cdot B, \;\; \omega = aa, \;\; \alpha = B, \;\; \gamma = b.$
+    \end{enumerate}
+    Действительно, пересечение (*) пусто (и правило не содержит пустого слова). Поэтому эта грамматика является $LL(k)$-грамматикой.
+\end{itemize} \qed 
+
+\section*{Задача 2}
+
+Воспользуемся алгоритмом удаления правого ветвления и получим грамматику 
+$$S \rightarrow Ab, \quad A \rightarrow aA', \quad A' \rightarrow a \; | \; \varepsilon.$$
+
+Построим таблицы $\text{FIRST}$ и $\text{FOLLOW}$:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|ccc|ccc|}
+    \hline
+          & \multicolumn{3}{c|}{$\text{FIRST(X)}$}                                                      & \multicolumn{3}{c|}{$\text{FOLLOW(X)}$}                                       \\ \hline
+    X     & \multicolumn{1}{c|}{$S$}           & \multicolumn{1}{c|}{$A$}           & $A'$             & \multicolumn{1}{c|}{$S$} & \multicolumn{1}{c|}{$A$}           & $A'$          \\ \hline
+    $F_0$ & \multicolumn{1}{c|}{$\varnothing$} & \multicolumn{1}{c|}{$\varnothing$} & $\varnothing$    & \multicolumn{1}{c|}{\$}  & \multicolumn{1}{c|}{$\varnothing$} & $\varnothing$ \\ \hline
+    $F_1$ & \multicolumn{1}{c|}{$a$}           & \multicolumn{1}{c|}{$a$}           & $a, \varepsilon$ & \multicolumn{1}{c|}{\$}  & \multicolumn{1}{c|}{$b$}           & $\varnothing$ \\ \hline
+    $F_2$ & \multicolumn{1}{c|}{$a$}           & \multicolumn{1}{c|}{$a$}           & $a, \varepsilon$ & \multicolumn{1}{c|}{\$}  & \multicolumn{1}{c|}{$b$}           & $b$           \\ \hline
+    \end{tabular}
+    \end{table}
+
+Теперь воспользуемся алгоритмом построение анализатора:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+         & $a$                 & $b$                          & \$    \\ \hline
+    $S$  & $S \rightarrow Ab$  & error                        & error \\ \hline
+    $A$  & $A \rightarrow aA'$ & error                        & error \\ \hline
+    $A'$ & $A' \rightarrow a$  & $A' \rightarrow \varepsilon$ & error \\ \hline
+    \end{tabular}
+    \end{table}
+
+Получившаяся грамматика является $LL(1)$-грамматикой, т. к. в каждой ячейке записано не более одного правила. \qed
+
+\section*{Задача 3}
+
+Для начала воспользуемся алгоритмом удаления левой рекурсии:
+
+\begin{itemize}
+    \item[] $S \rightarrow baaA \; | \; babA$,
+    \item[] $A \rightarrow aA \; | \; bA \; | \; a \; | \; b$. 
+\end{itemize}
+
+Теперь удалим правое ветвление:
+
+\begin{itemize}
+    \item[] $S \rightarrow baS'$,
+    \item[] $S' \rightarrow aA \; | \; bA$,
+    \item[] $A \rightarrow aA \; | \; bA \; | \; \varepsilon$.  
+\end{itemize}
+
+Построим таблицу $\text{FIRST}$ и $\text{FOLLOW}$:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|ccc|ccc|}
+    \hline
+          & \multicolumn{3}{c|}{$\text{FIRST(X)}$}                                                        & \multicolumn{3}{c|}{$\text{FOLLOW(X)}$}                                       \\ \hline
+          & \multicolumn{1}{c|}{$S$}           & \multicolumn{1}{c|}{$S'$}          & $A$                 & \multicolumn{1}{c|}{$S$} & \multicolumn{1}{c|}{$S'$}          & $A$           \\ \hline
+    $F_0$ & \multicolumn{1}{c|}{$\varnothing$} & \multicolumn{1}{c|}{$\varnothing$} & $\varnothing$       & \multicolumn{1}{c|}{\$}  & \multicolumn{1}{c|}{$\varnothing$} & $\varnothing$ \\ \hline
+    $F_1$ & \multicolumn{1}{c|}{$b$}           & \multicolumn{1}{c|}{$a, b$}           & $a, b, \varepsilon$ & \multicolumn{1}{c|}{\$}  & \multicolumn{1}{c|}{\$}            & $\varnothing$ \\ \hline
+    $F_2$ & \multicolumn{1}{c|}{$b$}           & \multicolumn{1}{c|}{$a, b$}           & $a, b, \varepsilon$ & \multicolumn{1}{c|}{\$}  & \multicolumn{1}{c|}{\$}            & \$            \\ \hline
+    \end{tabular}
+    \end{table}
+
+Построим анализатор:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+         & $a$                 & $b$                  & \$    \\ \hline
+    $S$  & error               & $S \rightarrow baS'$ & error \\ \hline
+    $S'$ & $S' \rightarrow aA$ & $S' \rightarrow bA$  & error \\ \hline
+    $A$  & $A \rightarrow aA$  & $A \rightarrow bA$   & $A \rightarrow \varepsilon$    \\ \hline
+    \end{tabular}
+    \end{table}
+
+Работа анализатора на слове $baab$:
+
+$$S \Rightarrow baS' \Rightarrow ba\cdot aA \Rightarrow baab.$$
+
+\qed
+
+\section*{Задача 5}
+
+Заметим, что данная грамматика задаёт язык Дика, который задаётся правилами $$S \rightarrow (S)S \; | \; \varepsilon.$$ Привести исходную грамматику к такому виду можно с помощью алгоритмов удаления левой рекурсии и правого ветвления. \medskip
+
+Докажем, что данная граматика является $LL(1)$-грамматикой.
+
+\begin{enumerate}
+    \item $S \Rightarrow^*_l (S)S \Rightarrow_l (\; (S)S \; )S \;\; \omega = (, \;\; \alpha = )S, \;\; \beta = (S)S$,  
+    \item $S \Rightarrow^*_l (S)S \Rightarrow_l (\; \varepsilon \; )S, \;\; \omega = (, \;\; \alpha = )S, \;\; \gamma = \varepsilon$.
+\end{enumerate}
+При этом 
+\begin{equation}
+    \text{FIRST}_1\left[\;(S)S)S\;\right] \cap \text{FIRST}_1\left[\;)S\;\right] = \varnothing,
+\end{equation}
+
+\begin{equation}
+    \text{FIRST}_1\left[S\right] \cap \text{FOLLOW}_1\left[S\right] = \varnothing.
+\end{equation}
+
+Заметим, что непосредственно после $S$ в выводах грамматики может стоять только символ~<<)>>. Поэтому верно утверждение (2). \qed
+
+\section*{Задача 6}
+
+Определение. Если каждое правило грамматики имеет вид либо $A \rightarrow xB$, либо $A \rightarrow x$, где $A, B \in N$, $x \in T^*$, то её называют \textit{праволинейной}. \medskip
+
+Приведём пример праволинейной грамматики, которая не является $LL(1)$-грамматикой. Пусть $G = \langle \{S, A\}, \; \{a, b\}, \; P, \; S\rangle$, где $P$ определяется как $$S \rightarrow A, \quad A \rightarrow ab \; | \; a.$$
+
+Она не является $LL(1)$-грамматикой по критерию (нет правила с $\varepsilon$):
+
+$$\text{FIRST}_1(ab) \cap \text{FIRST}_1(a) = \{a\} \neq \varnothing.$$
+\qed
+
+\section*{Задача 7}
+
+Да, верно. Рассмотрим грамматику $G = \langle \{S, A, B\}, \; \{a, b, \$\}, \; P, \; S\rangle$, где $P$ определяется как
+$$S \rightarrow AB, \quad A \rightarrow \varepsilon, \quad B \rightarrow \varepsilon.$$
+
+Построим анализатор (таблицы $\text{FIRST}$ и $\text{FOLLOW}$ содержат только $\varepsilon$ и <<\$>> соответственно):
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+        & $a$   & $b$   & \$                          \\ \hline
+    $S$ & error & error & $S \rightarrow AB$          \\ \hline
+    $A$ & error & error & $A \rightarrow \varepsilon$ \\ \hline
+    $B$ & error & error & $B \rightarrow \varepsilon$ \\ \hline
+    \end{tabular}
+    \end{table}
+
+Каждой ячейке анализатора соответствует не более одного правила, следовательно, эта граматика является $LL(1)$-грамматикой. \qed
+
+\section*{Задача 8}
+
+Нет, неверно. Рассмотрим грамматику $G = \langle \{S, A, B\}, \; \{a, b, \$\}, \; P, \; S\rangle$, где $P$ определяется как
+$$S \rightarrow AB, \quad A \rightarrow \varepsilon, \quad B \rightarrow \varepsilon.$$
+
+Заметим, что $\text{FOLLOW}(A) \cap \text{FOLLOW}(B) = \{\$\}$. При этом грамматика $G$ является $LL(1)$-грамматикой (задача 7). \qed
+
+\end{document}
