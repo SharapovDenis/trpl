@@ -1,0 +1,153 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{amsfonts, amssymb, amsmath, latexsym}
+\usepackage{nicefrac}
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage[colorinlistoftodos,bordercolor=orange,backgroundcolor=orange!20,linecolor=orange,textsize=scriptsize]{todonotes}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}       % hyperlinks
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{nameref}
+\usepackage{booktabs}       % professional-quality tables
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{xcolor, colortbl}
+\usepackage{etoolbox}
+
+% \graphicspath{ {./} }
+
+\usepackage[verbose=true,letterpaper]{geometry}
+
+\newgeometry{
+    textheight=9.5in,
+    textwidth=6in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+\usepackage{epigraph}
+
+%
+
+\newcommand{\argmin}{\mathop{\arg\!\min}}
+\newcommand{\argmax}{\mathop{\arg\!\max}}
+
+\newcommand{\Var}{\mathbb{V}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\makebold}[1]{\boldsymbol{#1}}
+\newcommand{\mean}[1]{\overline{#1}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\partfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\term}[1]{\textbf{#1}}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lf}{\left\{}
+\newcommand{\rf}{\right\}}
+\newcommand{\ls}{\left[}
+\newcommand{\rs}{\right]}
+\newcommand{\lv}{\left|}
+\newcommand{\rv}{\right|}
+
+\newcommand*{\affaddr}[1]{#1} % No op here. Customize it for different styles.
+\newcommand*{\affmark}[1][*]{\textsuperscript{#1}}
+
+
+\usepackage{subcaption}
+%\usepackage[font={small}]{caption}
+
+\usepackage{amsthm}
+\usepackage{tikz}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+
+\newtheorem{exercise}{Задача}[section]
+
+\newtheorem*{solution}{Решение}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{0em}{2.1em}}
+\makeatother
+
+% \setlength\epigraphwidth{.8\textwidth}
+\setlength\epigraphrule{0pt}
+
+\title{ТРЯП. Домашнее задание № 11}
+\author{Шарапов Денис, Б05-005}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Задача 2}
+
+Для удобства запишем фрагмент кода между тегами <body> и </body>:
+
+\begin{verbatim}
+    <body>
+    |  <div>
+    |  |  1
+    |  |  <div>
+    |  |  |  2
+    |  |  |  <div>
+    |  |  |  |  3
+    |  |  |  |  <div>
+    |  |  |  |  |  4
+    |  |  |  |  </div>
+    |  |  |  </div>
+    |  |  |  <div>
+    |  |  |  |  5
+    |  |  |  </div>
+    |  |  </div>
+    |  |  <div>
+    |  |  |  6
+    |  |  </div>
+    |  </div>
+    </body>
+\end{verbatim}
+
+\noindent Страница, которой соответствует данный HTML-код, представлена на рисунке 1.
+
+\begin{figure}[h!]
+    \centering
+        \begin{center}
+    \includegraphics[width = 0.5\linewidth]{image/picture1.png}
+        \end{center}
+        \caption{Страница, заданная HTML-кодом}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+        \begin{center}
+    \includegraphics[width = \linewidth]{image/picture2.png}
+        \end{center}
+        \caption{Дерево HTML-документа}
+\end{figure}
+
+Построим дерево для приведенного HTML-кода. Для простоты будем считать, что грамматика, порождающая синтаксис HTML, состоит только из тегов, приведённых в коде. Обозначим правила грамматики словами, каждая буква которых находится в верхнем регистре. Дерево HTML-документа представлено на рисунке 2.
+
+\end{document}
